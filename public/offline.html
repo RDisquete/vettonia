@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sin conexión — Vettonia</title>
+  <link rel="icon" type="image/png" href="/vettonia-logo.png" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f0ede8;
+      color: #3a1a4a;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    img { width: 80px; height: 80px; margin-bottom: 1.5rem; opacity: 0.7; }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    h1 span {
+      color: #e85d6f;
+      text-shadow: 2px 2px 0 #3a1a4a;
+    }
+    p {
+      font-size: 0.85rem;
+      color: #666;
+      max-width: 280px;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+    button {
+      background: #3a1a4a;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover { background: #2a103a; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #1a1a1c; color: #e0d6e8; }
+      p { color: #999; }
+    }
+  </style>
+</head>
+<body>
+  <img src="/vettonia-logo.png" alt="Vettonia" />
+  <h1><span>Sin</span> conexión</h1>
+  <p>Parece que no hay internet. Vuelve a intentarlo cuando tengas señal.</p>
+  <button onclick="window.location.reload()">Reconectar</button>
+</body>
+</html>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /access
+Disallow: /upload
+Disallow: /admin
+
+Sitemap: https://vettoniafestival.com/sitemap.xml
