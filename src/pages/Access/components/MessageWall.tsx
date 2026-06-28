@@ -1,6 +1,14 @@
 import type { WallMessage } from '../../../types'
 import { SkeletonBox, SkeletonText } from '../../../components/Skeleton'
 
+function hashRange(id: string, seed: number): number {
+  let hash = seed
+  for (let i = 0; i < id.length; i++) {
+    hash = ((hash << 5) - hash + id.charCodeAt(i)) | 0
+  }
+  return (Math.abs(hash) % 200) / 100
+}
+
 interface Props {
   messages: WallMessage[]
   msgText: string
@@ -84,7 +92,7 @@ export default function MessageWall({ messages, msgText, msgAuthor, loading, onM
             {messages.map((msg) => (
               <div key={msg.id}
                 className="border-2 border-violeta/10 bg-white/70 p-4 relative group"
-                style={{ clipPath: `polygon(${Math.random() * 2}% 0, ${100 - Math.random() * 2}% 0, ${100 - Math.random() * 2}% 100%, ${Math.random() * 2}% 100%)` }}>
+                style={{ clipPath: `polygon(${hashRange(msg.id, 0)}% 0, ${100 - hashRange(msg.id, 1)}% 0, ${100 - hashRange(msg.id, 2)}% 100%, ${hashRange(msg.id, 3)}% 100%)` }}>
                 <p className="font-ui text-violeta text-sm leading-relaxed pr-6">&ldquo;{msg.text}&rdquo;</p>
                 <div className="flex items-center justify-between mt-2">
                   <div className="flex items-center gap-2">

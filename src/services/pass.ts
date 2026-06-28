@@ -2,15 +2,12 @@ import { supabase } from './supabase'
 import { HAS_SUPABASE } from './env'
 import { compressImage, blobToDataUrl } from '../lib/image'
 import { getItem, setItem, getRaw, setRaw } from '../lib/persistence'
-import type { PassInfo, PassTheme } from '../types'
+import type { PassInfo } from '../types'
 
 const INFO_KEY = 'pass_info'
 const PHOTO_KEY = 'pass_photo'
-const THEME_KEY = 'pass_theme'
 const COUNTER_KEY = 'pass_counter'
 const PIN_KEY = 'pass_pin'
-
-const THEMES: PassTheme[] = ['violeta', 'coral', 'arena', 'noche', 'oliva']
 
 export function nextPassNumber(): string {
   const raw = getRaw(COUNTER_KEY)
@@ -45,11 +42,6 @@ export async function initPassInfo(): Promise<void> {
         photo_url: null,
       }, { onConflict: 'number' })
     } catch {}
-  }
-
-  if (!getRaw(THEME_KEY)) {
-    const random = THEMES[Math.floor(Math.random() * THEMES.length)]
-    setRaw(THEME_KEY, random)
   }
 }
 
@@ -145,16 +137,6 @@ export async function setPassPhoto(file: File): Promise<string> {
   const dataUrl = await blobToDataUrl(compressed)
   setRaw(PHOTO_KEY, dataUrl)
   return dataUrl
-}
-
-export function getPassTheme(): PassTheme {
-  const raw = getRaw(THEME_KEY)
-  if (raw && ['violeta', 'coral', 'arena', 'noche', 'oliva'].includes(raw)) return raw as PassTheme
-  return 'violeta'
-}
-
-export function setPassTheme(theme: PassTheme): void {
-  setRaw(THEME_KEY, theme)
 }
 
 export function getPassPin(): string | null {

@@ -4,11 +4,11 @@ import { SolidBox, SolidDot, SolidLine, SolidRing } from '../components/Solids'
 import Footer from '../sections/Footer'
 import SEO from '../components/SEO'
 import JsonLd from '../components/JsonLd'
-import { getArtistBySlug } from '../data/lineup'
+import { allArtists } from '../data/lineup'
 
 export default function ArtistDetail() {
   const { slug } = useParams<{ slug: string }>()
-  const artist = slug ? getArtistBySlug(slug) : null
+  const artist = slug ? allArtists.find((a) => a.slug === slug) ?? null : null
 
   if (!artist) {
     return (

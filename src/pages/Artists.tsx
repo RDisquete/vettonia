@@ -4,28 +4,7 @@ import HamburgerNav from '../components/HamburgerNav'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
 import Footer from '../sections/Footer'
 import SEO from '../components/SEO'
-import { allArtists, allGenres, type Artist } from '../data/lineup'
-
-const genreColors: Record<string, string> = {
-  'Electrónica': 'bg-violeta text-white border-violeta',
-  'Indie Pop': 'bg-arena text-black border-piedra',
-  'Flamenco & Fusión': 'bg-coral text-white border-coral',
-  'Rock': 'bg-violeta text-white border-violeta',
-  'Punk & Garage': 'bg-coral text-white border-coral',
-  'Folk & Cantautor': 'bg-violeta/80 text-white border-violeta',
-  'Shoegaze & Dream': 'bg-violeta text-white border-violeta',
-  'World & Fusión': 'bg-coral/80 text-white border-coral',
-  'Hip Hop & Rap': 'bg-violeta text-white border-carbón',
-  'Metal & Stoner': 'bg-violeta text-white border-violeta',
-}
-
-const rotateSet = ['1deg', '-2deg', '1.5deg', '-1deg', '2.5deg', '-1.5deg', '0.5deg', '-0.5deg', '2deg', '-2.5deg', '1deg', '-1.5deg', '2deg', '-1deg', '0.8deg', '-1.8deg', '3deg', '-0.8deg', '1.2deg', '-2.2deg', '0.3deg', '-1.2deg', '2.8deg', '-0.3deg']
-const offsetSet = ['mt-0', '-mt-4 sm:-mt-8', 'mt-2', '-mt-2 sm:-mt-4', 'mt-4 sm:mt-6', '-mt-1', 'mt-3 sm:mt-5', '-mt-3 sm:-mt-6', 'mt-1', 'mt-0', '-mt-2', 'mt-4 sm:mt-8', '-mt-1', 'mt-2 sm:mt-4', 'mt-5 sm:mt-7', '-mt-5 sm:-mt-7', 'mt-0', 'mt-3', '-mt-3', 'mt-4 sm:mt-5', '-mt-1 sm:-mt-2', 'mt-2', 'mt-6 sm:mt-9', '-mt-2 sm:-mt-5']
-const aspectSet = ['3/4', '2/3', '3/5', '4/5', '3/4', '2/3', '3/4', '4/5', '3/4', '2/3', '3/5', '3/4', '4/5', '2/3', '3/4', '3/5', '3/4', '2/3', '3/4', '4/5', '3/4', '3/5', '2/3', '3/4']
-
-function pick<T>(arr: T[], i: number): T {
-  return arr[i % arr.length]
-}
+import { genreColors, rotateSet, offsetSet, aspectSet, pick, allArtists, allGenres, type Artist } from '../constants/lineup'
 
 export default function Artists() {
   const [genre, setGenre] = useState<string>('')

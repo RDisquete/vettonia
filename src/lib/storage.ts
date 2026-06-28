@@ -19,8 +19,6 @@ export {
   setPassName,
   getPassPhoto,
   setPassPhoto,
-  getPassTheme,
-  setPassTheme,
   initPassInfo,
   getPassPin,
   setPassPin,

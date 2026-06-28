@@ -1,0 +1,13 @@
+import { describe, it, expect, vi } from 'vitest'
+
+describe('supabase (lib)', () => {
+  it('is null when env vars are missing', async () => {
+    vi.stubEnv('VITE_SUPABASE_URL', '')
+    vi.stubEnv('VITE_SUPABASE_ANON_KEY', '')
+
+    const mod = await import('../supabase')
+    expect(mod.supabase).toBeNull()
+
+    vi.unstubAllEnvs()
+  })
+})

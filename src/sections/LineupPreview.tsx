@@ -3,15 +3,7 @@ import { useState } from 'react'
 import Reveal from '../components/Reveal'
 import ArtistModal from '../components/ArtistModal'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
-import { stages, type Artist } from '../data/lineup'
-
-const previewArtists = [
-  { time: '21:00', stage: stages[2].name, artist: stages[2].artists[0] },
-  { time: '22:30', stage: stages[0].name, artist: stages[0].artists[1] },
-  { time: '00:00', stage: stages[2].name, artist: stages[2].artists[2] },
-  { time: '01:30', stage: stages[2].name, artist: stages[2].artists[3] },
-  { time: '03:00', stage: stages[0].name, artist: stages[0].artists[4] },
-]
+import { previewArtists, type Artist } from '../constants/lineup'
 
 export default function LineupPreview() {
   const [selectedArtist, setSelectedArtist] = useState<{ artist: Artist; stage: string; time: string } | null>(null)

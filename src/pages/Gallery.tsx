@@ -192,7 +192,7 @@ export default function Gallery() {
             <div role="tablist" aria-label="Álbumes de fotos" className="flex gap-2 mt-6 mb-8">
               <button role="tab" id="tab-publico" aria-selected={tab === 'publico'}
                 aria-controls="tabpanel-publico"
-                onClick={() => setTab('publico')}
+                onClick={() => handleTab('publico')}
                 className={`font-heading text-sm font-bold tracking-[-0.02em] px-6 py-3 border-2 transition-all cursor-pointer ${
                   tab === 'publico'
                     ? 'bg-violeta text-white border-violeta'

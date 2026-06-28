@@ -12,7 +12,7 @@ import ErrorBoundary from '../components/ErrorBoundary'
 
 export default function Upload() {
   const navigate = useNavigate()
-  const [_unlocked, setUnlocked] = useState(isAlbumUnlocked)
+  const [, setUnlocked] = useState(isAlbumUnlocked)
   const [showCode, setShowCode] = useState(!isAlbumUnlocked)
   const [code, setCode] = useState('')
   const [codeError, setCodeError] = useState(false)

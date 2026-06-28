@@ -18,8 +18,6 @@ export {
   setPassName,
   getPassPhoto,
   setPassPhoto,
-  getPassTheme,
-  setPassTheme,
   initPassInfo,
   getPassPin,
   setPassPin,
@@ -54,4 +52,6 @@ export {
   publishAllArtists,
   seedFromStatic,
   getArtistBySlugFromService,
+  getStaticArtists,
+  getAllGenres,
 } from './lineup'

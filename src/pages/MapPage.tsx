@@ -6,7 +6,7 @@ import HamburgerNav from '../components/HamburgerNav'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
 import Footer from '../sections/Footer'
 import SEO from '../components/SEO'
-import { stages } from '../data/lineup'
+import { stageColors, stages } from '../constants/lineup'
 
 type Destino = {
   id: string
@@ -52,12 +52,6 @@ function tiempoTexto(m: number): string {
   const h = Math.floor(min / 60)
   const r = min % 60
   return `${h}h ${r}min andando`
-}
-
-const stageColors: Record<string, string> = {
-  'Escenario A': '#e85d6f',
-  'Escenario B': '#3a1a4a',
-  'Escenario C': '#7c3a9a',
 }
 
 function createIcon(color: string, isStage: boolean) {

@@ -1,43 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Reveal from '../components/Reveal'
 import ArtistModal from '../components/ArtistModal'
 import HamburgerNav from '../components/HamburgerNav'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
 import Footer from '../sections/Footer'
 import SEO from '../components/SEO'
-import { stages, type Artist } from '../data/lineup'
+import { stageConfig, type Artist } from '../constants/lineup'
+import { getPublishedStages } from '../services/lineup'
+import type { Stage } from '../data/lineup'
 
-const stageConfig = [
-  {
-    accent: 'from-coral/20 to-transparent',
-    border: 'border-coral/30',
-    tag: 'bg-coral text-white',
-    watermark: 'A',
-    color: 'text-coral',
-    bgActive: 'bg-coral text-white border-coral',
-    bgInactive: 'bg-transparent text-coral border-coral/40 hover:bg-coral/10',
-  },
-  {
-    accent: 'from-violeta/20 to-transparent',
-    border: 'border-violeta/30',
-    tag: 'bg-violeta text-white',
-    watermark: 'B',
-    color: 'text-violeta',
-    bgActive: 'bg-violeta text-white border-violeta',
-    bgInactive: 'bg-transparent text-violeta border-violeta/40 hover:bg-violeta/10',
-  },
-  {
-    accent: 'from-coral/15 to-transparent',
-    border: 'border-coral/25',
-    tag: 'bg-coral text-white',
-    watermark: 'C',
-    color: 'text-coral',
-    bgActive: 'bg-coral text-white border-coral',
-    bgInactive: 'bg-transparent text-coral border-coral/40 hover:bg-coral/10',
-  },
-]
-
-function StageBlock({ stage, si, cfg, onSelect }: { stage: typeof stages[0]; si: number; cfg: typeof stageConfig[0]; onSelect: (a: Artist) => void }) {
+function StageBlock({ stage, si, cfg, onSelect }: { stage: Stage; si: number; cfg: typeof stageConfig[0]; onSelect: (a: Artist) => void }) {
   return (
     <div className="relative">
       <div className="flex items-center gap-4 mb-8">
@@ -116,6 +88,11 @@ function StageBlock({ stage, si, cfg, onSelect }: { stage: typeof stages[0]; si:
 export default function Lineup() {
   const [mobileStage, setMobileStage] = useState(0)
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null)
+  const [stages, setStages] = useState<Stage[]>([])
+
+  useEffect(() => {
+    getPublishedStages().then(setStages)
+  }, [])
 
   return (
     <div className="flex flex-col min-h-svh bg-arena">

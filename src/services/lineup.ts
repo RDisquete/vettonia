@@ -1,6 +1,8 @@
 import { supabase } from './supabase'
 import { HAS_SUPABASE } from './env'
-import { stages as staticStages, allArtists as staticArtists, type Artist, type Stage } from '../data/lineup'
+import { stages as staticStages, allArtists as staticArtists, allGenres as staticGenres, type Artist, type Stage } from '../data/lineup'
+
+export { staticArtists as getStaticArtists, staticGenres as getAllGenres }
 
 const OVERRIDES_KEY = 'artist_overrides'
 
@@ -69,12 +71,27 @@ export async function getAllArtists(): Promise<(Artist & { published: boolean; u
     } catch {}
   }
   const overrides = getOverrides()
-  return staticArtists.map(a => ({
+  const staticMapped = staticArtists.map(a => ({
     ...a,
     ...(overrides[a.slug] || {}),
-    published: true,
+    published: (overrides[a.slug] as { published?: boolean })?.published ?? true,
     updatedAt: '',
   }))
+  const overrideOnlySlugs = Object.keys(overrides).filter(
+    slug => !staticArtists.find(a => a.slug === slug)
+  )
+  const overrideOnly = overrideOnlySlugs.map(slug => ({
+    slug,
+    name: overrides[slug].name ?? '',
+    bio: overrides[slug].bio ?? '',
+    stage: overrides[slug].stage ?? '',
+    time: overrides[slug].time ?? '',
+    image: overrides[slug].image ?? '',
+    genre: overrides[slug].genre ?? '',
+    published: (overrides[slug] as { published?: boolean })?.published ?? true,
+    updatedAt: '',
+  }))
+  return [...staticMapped, ...overrideOnly]
 }
 
 export async function getAdminStages(): Promise<{ name: string; artists: (Artist & { published: boolean })[] }[]> {
@@ -141,6 +158,9 @@ export async function publishArtist(slug: string, publish: boolean): Promise<voi
       return
     } catch {}
   }
+  const overrides = getOverrides()
+  overrides[slug] = { ...(overrides[slug] || {}), published: publish } as Partial<Artist>
+  saveOverrides(overrides)
 }
 
 export async function publishAllArtists(): Promise<number> {
@@ -202,7 +222,12 @@ export async function getArtistBySlugFromService(slug: string): Promise<Artist |
     } catch {}
   }
   const a = staticArtists.find(x => x.slug === slug)
-  if (!a) return undefined
   const overrides = getOverrides()
-  return overrides[slug] ? { ...a, ...overrides[slug] } : a
+  if (a) {
+    return overrides[slug] ? { ...a, ...overrides[slug] } : a
+  }
+  if (overrides[slug]) {
+    return overrides[slug] as Artist & { published?: boolean }
+  }
+  return undefined
 }

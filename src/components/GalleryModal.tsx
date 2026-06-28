@@ -54,7 +54,7 @@ const GalleryModal = memo(function GalleryModal({ images, initialIndex = 0, open
       onTouchStart={(e) => { touchX.current = e.touches[0].clientX }}
       onTouchEnd={(e) => {
         const delta = e.changedTouches[0].clientX - touchX.current
-        if (Math.abs(delta) > 50) delta > 0 ? prev() : next()
+        if (Math.abs(delta) > 50) { if (delta > 0) prev(); else next() }
       }}
     >
       <button ref={closeRef}
