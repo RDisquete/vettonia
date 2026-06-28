@@ -1,16 +1,30 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import ArtistModal from '../components/ArtistModal'
+import FavoriteButton from '../components/FavoriteButton'
 import HamburgerNav from '../components/HamburgerNav'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
 import Footer from '../sections/Footer'
 import SEO from '../components/SEO'
 import { genreColors, rotateSet, offsetSet, aspectSet, pick, allArtists, allGenres, type Artist } from '../constants/lineup'
+import { getFavorites, toggleFavorite } from '../services/favorites'
 
 export default function Artists() {
   const [genre, setGenre] = useState<string>('')
   const [genreOpen, setGenreOpen] = useState(false)
   const [selected, setSelected] = useState<Artist | null>(null)
+  const [favorites, setFavorites] = useState<Set<string>>(new Set())
   const filterRef = useRef<HTMLDivElement>(null)
+
+  const loadFavorites = useCallback(async () => {
+    setFavorites(await getFavorites())
+  }, [])
+
+  useEffect(() => { loadFavorites() }, [loadFavorites])
+
+  const handleToggleFav = useCallback(async (slug: string) => {
+    await toggleFavorite(slug)
+    await loadFavorites()
+  }, [loadFavorites])
 
   const filtered = useMemo(
     () => (genre ? allArtists.filter((a) => a.genre === genre) : allArtists),
@@ -141,7 +155,7 @@ export default function Artists() {
                   <button
                     key={a.slug}
                     onClick={() => setSelected(a)}
-                    className={`${pick(offsetSet, gi)} overflow-hidden border border-violeta/15 hover:border-coral/40 hover:bg-violeta transition-all group text-left cursor-pointer`}
+                    className={`${pick(offsetSet, gi)} overflow-hidden border border-violeta/15 hover:border-coral/40 hover:bg-violeta transition-all group text-left cursor-pointer relative`}
                     style={{ transform: `rotate(${pick(rotateSet, gi)})`, aspectRatio: pick(aspectSet, gi) }}
                   >
                     <div className="relative w-full h-full">
@@ -153,8 +167,13 @@ export default function Artists() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                           <div className="absolute inset-0 bg-linear-to-t from-violeta/85 via-violeta/20 to-transparent flex flex-col justify-end p-1.5 sm:p-2">
-                            <p className="font-heading text-white text-sm sm:text-lg font-bold tracking-[-0.02em] leading-tight drop-shadow-md">{a.name}</p>
+                            <div className="flex items-center gap-1">
+                              <p className="font-heading text-white text-sm sm:text-lg font-bold tracking-[-0.02em] leading-tight drop-shadow-md">{a.name}</p>
+                            </div>
                             <span className="font-mono text-white/70 text-[7px] sm:text-[9px] tracking-[0.15em] uppercase mt-1">{a.genre}</span>
+                      </div>
+                      <div className="absolute top-1.5 right-1.5 z-10">
+                        <FavoriteButton isFavorite={favorites.has(a.slug)} onToggle={() => handleToggleFav(a.slug)} overlay />
                       </div>
                     </div>
                   </button>
@@ -165,7 +184,12 @@ export default function Artists() {
       </div>
       <Footer />
 
-      <ArtistModal artist={selected} onClose={() => setSelected(null)} />
+      <ArtistModal
+        artist={selected}
+        onClose={() => setSelected(null)}
+        isFavorite={selected ? favorites.has(selected.slug) : false}
+        onToggleFav={selected ? () => handleToggleFav(selected.slug) : undefined}
+      />
     </div>
   )
 }

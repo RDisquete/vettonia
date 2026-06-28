@@ -205,6 +205,120 @@ En **Authentication → Settings**, asegúrate de que **Confirm email** está OF
 
 ---
 
+### 6.6 QR de pase — validación en puerta
+
+El pase digital genera un QR (`qrcode.react`) que codifica `{"v":1,"n":"Nombre","p":"VET-000001"}`. Para validar en puerta:
+
+1. Escanea el QR con cualquier lector
+2. Llama a `validatePassQR(content)` desde `src/services/qr.ts`
+3. El servicio busca el pase en Supabase (`passes` table por `number`) y verifica que el nombre coincida
+
+El endpoint de validación se puede exponer como función serverless o como ruta protegida en la app.
+
+---
+
+## Migration 4: Tabla de favoritos (itinerario personal)
+
+Ejecuta en el SQL Editor:
+
+```sql
+create table if not exists favorites (
+  id text primary key,
+  artist_slug text not null,
+  pass_number text not null,
+  created_at timestamptz not null default now()
+);
+
+alter table favorites enable row level security;
+
+create policy "Public read" on favorites for select using (true);
+create policy "Anonymous insert" on favorites for insert with check (true);
+create policy "Delete by id" on favorites for delete using (true);
+alter table favorites replica identity full;
+
+create index if not exists idx_favorites_pass on favorites(pass_number);
+create index if not exists idx_favorites_artist on favorites(artist_slug);
+```
+
+Este itinerario permite a los usuarios marcar artistas como favoritos (★) directamente desde el cartel o la lista de artistas. Los favoritos se muestran en una banda "Mi itinerario" en la página de lineup, con detección visual de solapamientos de horario entre distintos escenarios.
+
+---
+
+## Migration 5: Tabla de reacciones (❤️ 🔥 🎉) + Realtime
+
+Ejecuta en el SQL Editor:
+
+```sql
+create table if not exists reactions (
+  id text primary key,
+  photo_id text not null references photos(id) on delete cascade,
+  pass_number text not null,
+  type text not null check (type in ('❤️', '🔥', '🎉')),
+  created_at timestamptz not null default now()
+);
+
+alter table reactions enable row level security;
+
+create policy "Public read" on reactions for select using (true);
+create policy "Anonymous insert" on reactions for insert with check (true);
+create policy "Delete by id" on reactions for delete using (true);
+
+create index if not exists idx_reactions_photo on reactions(photo_id);
+create index if not exists idx_reactions_pass on reactions(pass_number);
+
+-- Realtime: necesario para que las fotos nuevas aparezcan en vivo
+-- Ve a Database → Replication y asegúrate de que la tabla `photos`
+-- tiene la replicación habilitada (INSERT).
+-- Esto permite que el frontend se suscriba vía Supabase Realtime
+-- y reciba las fotos nuevas al instante sin recargar.
+```
+
+Esta migración permite el álbum colaborativo en tiempo real: los usuarios ven las nuevas fotos aparecer con animación mientras navegan, sin necesidad de recargar la página. Cada foto se puede reaccionar con ❤️ 🔥 🎉 además del like existente.
+
+---
+
+## Migration 6: Encuestas y votaciones
+
+Ejecuta en el SQL Editor:
+
+```sql
+create table if not exists poll_votes (
+  id text primary key,
+  poll_id text not null,
+  option_id text not null,
+  pass_number text not null,
+  created_at timestamptz not null default now()
+);
+
+alter table poll_votes enable row level security;
+
+create policy "Public read" on poll_votes for select using (true);
+create policy "Anonymous insert" on poll_votes for insert with check (true);
+
+create index if not exists idx_poll_votes_poll on poll_votes(poll_id);
+create index if not exists idx_poll_votes_pass on poll_votes(pass_number);
+
+-- Unique constraint: one vote per pass per poll
+alter table poll_votes add constraint unique_vote_per_pass unique (poll_id, pass_number);
+
+-- Realtime: necesario para que los resultados se actualicen en vivo
+-- Ve a Database → Replication y activa la replicación de la tabla `poll_votes`
+
+-- Función auxiliar para obtener resultados agregados
+create or replace function get_poll_results(p_poll_id text)
+returns table (option_id text, vote_count bigint) as $$
+  select option_id, count(*)::bigint as vote_count
+  from poll_votes
+  where poll_id = p_poll_id
+  group by option_id
+  order by vote_count desc;
+$$ language sql stable;
+```
+
+Esta migración permite la encuesta "Mejor actuación de Vettonia 2026" con una votación por pase, ranking en tiempo real con barras de progreso animadas.
+
+---
+
 ## Migration 3: Añadir status a photos + tabla lineup_artists
 
 Ejecuta en el SQL Editor después de las migraciones anteriores:

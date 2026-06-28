@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import PageTransition from './components/PageTransition'
 import Toaster from './components/Toaster'
+import ReminderManager from './components/ReminderManager'
 import Home from './pages/Home'
 
 const Lineup = lazy(() => import('./pages/Lineup'))
@@ -57,6 +58,7 @@ function App() {
   return (
     <>
       <Toaster />
+      <ReminderManager />
       <ScrollToTop />
       <AnimatePresence mode="wait">
         <Suspense fallback={<PageLoader />}>

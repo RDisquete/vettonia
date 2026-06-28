@@ -1,191 +1,106 @@
-# 🏕️ Vettonia 2026 — Festival PWA
+🏕️ Vettonia 2026
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-19-61DAFB)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-8-646CFF)](https://vite.dev/)
-[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-3FCF8E)](https://supabase.com/)
-[![Tests](https://img.shields.io/badge/Tests-247_passing-4ade80)](https://vitest.dev/)
-[![PWA](https://img.shields.io/badge/PWA-ready-5A0FC8)](https://vite-pwa-org.netlify.app/)
+Vettonia 2026 es una Progressive Web App desarrollada para un festival de música celebrado en Extremadura.
 
-**Vettonia** es una web progresiva (PWA) para un festival de música real en la sierra de Madrid — 48 artistas, 3 escenarios, una experiencia digital completa. Construida desde cero como proyecto personal para demostrar dominio del stack moderno de frontend, arquitectura limpia y visión de producto.
+El objetivo del proyecto era crear una experiencia digital completa para asistentes y organización: consultar el cartel, descubrir artistas, acceder a información del recinto, gestionar pases, compartir fotografías y mantener una comunicación directa durante el evento.
 
-> 🎯 Este README es mi carta de presentación como desarrollador. No es un manual de instalación: es una muestra de cómo pienso, arquitecto y ejecuto.
+Más allá de la funcionalidad, este proyecto ha sido una oportunidad para trabajar aspectos que considero fundamentales en cualquier aplicación moderna: arquitectura, rendimiento, accesibilidad, testing y experiencia de usuario.
 
----
+⸻
 
-## 📦 Lo que encontrarás aquí
+¿Qué incluye?
 
-| Dimensión | Lo que demuestra |
-|-----------|------------------|
-| **Arquitectura** | Separación clara en capas (pages / services / components), single-responsibility, barrel exports, lazy loading |
-| **Datos** | Patrón **Supabase first, localStorage fallback** — 100% funcional offline. Cada servicio es async, tipado y testeado |
-| **Estado global cero** | Sin Redux, sin Zustand, sin contextos hinchados. Datos locales al componente con useState + useEffect, datos compartidos vía servicios |
-| **Testing real** | **247 tests, 67 archivos, 0 dependencias de mocking automágico.** Vitest + Testing Library con mocks explícitos. Cada componente y servicio tiene su test |
-| **UX** | Framer Motion para transiciones de página, skeleton loaders, skip-to-content, SEO por ruta con JSON-LD, lazy loading de imágenes |
-| **PWA real** | Service worker con Workbox, manifest, precaching de assets, runtime caching de fuentes y APIs, navegación offline |
-| **Admin funcional** | CRUD de artistas, aprobación de fotos, dashboard con métricas en vivo, bulk publish — todo sin framework de backend |
+* Cartel completo con artistas y escenarios
+* Fichas individuales de artistas
+* Mapa interactivo del recinto
+* Sistema de pases digitales
+* Galería colaborativa de fotografías
+* Muro de mensajes para asistentes
+* Panel de administración
+* Optimización SEO
+* Funcionalidad offline mediante PWA
 
----
+⸻
 
-## 🧠 Decisiones técnicas clave
+Enfoque técnico
 
-### ❌ No usar Redux / Zustand
-El estado de esta app es 90% URL-driven (react-router) y 10% local a componentes. Añadir un state manager global habría sido sobredimensionar. Los datos compartidos (usuario, pase, álbum) viven en localStorage y se accede a ellos mediante servicios, no contexto.
+He intentado mantener la aplicación lo más simple posible sin renunciar a una estructura sólida.
+La lógica de negocio está separada de la interfaz mediante una capa de servicios, los componentes se mantienen reutilizables y las rutas se cargan de forma diferida para mejorar el rendimiento inicial.
+La aplicación utiliza Supabase como backend principal para autenticación, almacenamiento y base de datos, pero también incorpora mecanismos de persistencia local para determinados escenarios donde la conectividad puede ser limitada.
+Mi objetivo no era utilizar muchas herramientas, sino elegir las necesarias y sacarles el máximo partido.
 
-### ❌ No usar React Query / SWR
-Cada página se monta, llama a un servicio async y renderiza. Con un festival no hay datos que invalidar en tiempo real (salvo el muro de mensajes, que usa refetch manual). Añadir una capa de caching habría sido abstracción innecesaria.
+⸻
 
-### ✅ Supabase sin Auth helpers
-La autenticación es ligera: código de álbum en sessionStorage, pase en localStorage, y Supabase Auth directo para admin. Sin abstracciones — `supabase.auth.signInWithPassword()` y listo.
-
-### ✅ Servicios que son solo funciones
-No hay clases, no hay instancias, no hay DI. Cada servicio es un archivo con funciones async exportadas. Predecible, testeable, sin magia.
-
-```ts
-// Patrón que se repite en cada servicio:
-export async function getPhotos(status?: PhotoStatus): Promise<UploadedPhoto[]> {
-  try {
-    const { data } = await supabase.from('photos').select('*').eq('status', status ?? 'approved')
-    return data ?? []
-  } catch {
-    return JSON.parse(localStorage.getItem('vettonia_photos') ?? '[]')
-  }
-}
-```
-
----
-
-## 🏗️ Arquitectura en una diapositiva
-
-```
 src/
-├── pages/          # 1 archivo = 1 ruta. Sin lógica de negocio.
-│   ├── Access/     # Split real: index.tsx + hooks.ts + components/
-│   └── admin/      # Dashboard, LineupManage, GalleryManage, Alerts
-├── services/       # Capa de datos async. Supabase → localStorage.
-│   ├── album.ts    # Fotos, likes, auth de álbum, estados (pending/approved)
-│   ├── lineup.ts   # CRUD de artistas, publish/draft, seed desde data/
-│   ├── pass.ts     # Pases, PIN, foto de perfil, tema visual
-│   ├── messages.ts # Muro de mensajes
-│   ├── stats.ts    # Métricas agregadas
-│   ├── alerts.ts   # Notificaciones push-like
-│   └── auth.ts     # Supabase Auth (admin + pases)
-├── components/     # 15 componentes UI puros. Sin efectos, sin servicios.
-├── sections/       # Secciones de landing (Hero, Footer, LineupPreview...)
-├── constants/      # Colores por género, colores por escenario, arrays visuales
-├── data/           # Datos estáticos del lineup (seed para Supabase)
-├── lib/            # Supabase client, compressImage, localStorage wrapper
-├── types/          # Artist, UploadedPhoto, WallMessage, PassInfo, Alert...
-└── hooks/          # useInView (interseccion observer)
-```
+├── pages/
+├── services/
+├── components/
+├── sections/
+├── hooks/
+├── lib/
+├── types/
+└── data/
 
-### Routing
 
-16 rutas, todas con `lazy()` + `<Suspense>` + `PageTransition` (framer-motion). Sin carga inicial masiva — cada página pesa ~2-5 KB gzipped.
+Cada carpeta tiene una responsabilidad clara:
 
----
+* pages contiene las rutas de la aplicación.
+* services centraliza el acceso a datos.
+* components agrupa elementos reutilizables de interfaz.
+* hooks encapsula lógica compartida.
+* types mantiene el tipado de dominio.
+* lib contiene utilidades y configuraciones comunes.
 
-## 🔐 Tres sistemas de autenticación distintos
+Esta organización me permite escalar funcionalidades sin que el proyecto se vuelva difícil de mantener
 
-| Sistema | Mecanismo | Persistencia |
-|---------|-----------|-------------|
-| **Álbum de fotos** | Código compartido (`VITE_ALBUM_CODE`) | sessionStorage |
-| **Pase personal** | Número `VET-XXXXXX` + PIN opcional (Supabase Auth) | localStorage + refresh token |
-| **Admin** | Email + contraseña (Supabase Auth) | Sesión persistente con auto-refresh |
+⸻
 
-Cada uno está aislado y resuelve un problema diferente sin compartir infraestructura de auth.
+Testing
 
----
+La aplicación cuenta con una batería completa de pruebas automatizadas utilizando Vitest y Testing Library.
 
-## 🧪 Testing real, no decorativo
+Los tests cubren:
 
-```
-npm run test      # 247 tests · 67 files · 0 flakes
-npx tsc --noEmit  # Strict mode · 0 errors
-npm run lint      # Flat config · 0 warnings
-npm run build     # ~30 segundos · PWA + imágenes optimizadas
-```
+* Componentes
+* Servicios
+* Navegación
+* Flujos de autenticación
+* Casos de error y estados de carga
 
-**Lo que testeo:**
-- Cada componente renderiza correctamente (estado vacío, carga, error, éxito)
-- Cada servicio funciona con Supabase y con localStorage (fallback cubierto)
-- Cada ruta navega correctamente (MemoryRouter + Routes)
-- Los hooks se comportan en montaje/desmontaje
-- El flujo completo de autenticación (pase, álbum, admin)
+Más que perseguir una cifra de cobertura, el objetivo es garantizar que las funcionalidades críticas sigan funcionando cuando el proyecto evolucione.
 
-**Lo que no testeo:**
-- Estilos visuales (css: false en vitest)
-- Integración real con Supabase (mocks en servicios)
+⸻
 
-Cada test es explícito — sin `vi.mock(..., {async factory})`, sin magia de hoisting, sin falsos positivos.
+Rendimiento
 
----
+Se han aplicado distintas optimizaciones para mantener tiempos de carga reducidos:
 
-## 📱 PWA real
+* Lazy loading por rutas
+* División automática de código
+* Optimización de imágenes
+* Precarga de recursos críticos
+* Estrategias de caché mediante Service Worker
+* Puntuaciones Lighthouse superiores a 95
 
-- **Service worker** generado con Workbox `generateSW`
-- **Precaching** de JS, CSS, HTML, imágenes estáticas
-- **Runtime caching** de Google Fonts (CacheFirst, 1 año) y Unsplash (CacheFirst, 1 semana)
-- **Manifest** con icons 192+512, standalone, portrait
-- **Offline fallback** — navigateFallback a index.html
-- **Post-build** — renombra `.webmanifest` → `.json` para compatibilidad iOS
+⸻
 
----
+Stack tecnológico
 
-## ⚡ Rendimiento
+* React 19
+* TypeScript
+* Vite
+* Tailwind CSS
+* Supabase
+* Vitest
+* Testing Library
+* Framer Motion
+* Leaflet
+* Workbox
 
-| Métrica | Resultado |
-|---------|-----------|
-| Lighthouse Performance | ~95+ |
-| First Contentful Paint | < 1.5s |
-| Total JS (gzipped) | ~40 KB |
-| Imágenes | Compresión automática con imagemin (mozjpeg q70, optipng l5) |
-| Code splitting | Por ruta (lazy + Suspense) |
-| Animaciones | GPU-accelerated (framer-motion, CSS transforms) |
+⸻
 
----
+Lo que representa este proyecto
 
-## 🛠️ El stack en detalle
-
-| Categoría | Tecnología | Por qué |
-|-----------|-----------|---------|
-| Framework | **React 19** | Estable, ecosistema maduro, mercado laboral |
-| Build | **Vite 8** | Instantáneo en dev, tree-shaking nativo |
-| Lenguaje | **TypeScript 6 strict** | `noUnusedLocals`, `noUnusedParameters`, `strict: true` |
-| Estilos | **Tailwind 4** | `@import "tailwindcss"`, `@theme`, sin config |
-| Backend | **Supabase** | Postgres + Storage + Auth, todo en uno, plan gratis generoso |
-| Testing | **Vitest 4 + Testing Library** | Rápido, nativo de Vite, sin Jest config |
-| PWA | **vite-plugin-pwa** | Workbox integration, zero config |
-| Mapas | **Leaflet + react-leaflet** | OpenStreetMap, sin API key, sin coste |
-| SEO | **react-helmet-async + JSON-LD** | Meta tags por ruta, schema.org para artistas |
-
----
-
-## 📸 Demo visual
-
-| | |
-|---|---|
-| **Landing** con Hero, countdown dinámico, marquee de artistas | **Cartel** con 3 escenarios, filtro por género |
-| **Artista individual** con foto, bio, horario, JSON-LD | **Mapa** interactivo del recinto con Leaflet |
-| **Área de pase** con álbum privado, muro de mensajes, perfil | **Admin** con dashboard, CRUD de lineup, moderación de fotos |
-| **Galería** pública con fotos aprobadas, modal lightbox | **Subida** de fotos con compresión canvas previa |
-| **PWA** instalable, offline, service worker | **SEO** etiquetas OG, Twitter Cards, JSON-LD por página |
-
----
-
-## 📬 Contacto
-
-Este proyecto es mi portfolio. Si buscas un desarrollador que:
-
-- Escribe código pensando en el que viene detrás
-- No añade librerías por moda
-- Testea lo que importa
-- Respeta el principio de mínimo poder
-- Sabe cuándo NO usar una abstracción
-
-[Hablemos.](mailto:tu-email@ejemplo.com)
-
----
-
-*Vettonia 2026 — 48 artistas, 3 escenarios, 0 frameworks innecesarios.*
+Vettonia no es un ejercicio ni una aplicación creada para seguir un tutorial.
+Es un proyecto construido alrededor de un caso de uso real donde he podido aplicar conocimientos de desarrollo frontend, arquitectura, testing, accesibilidad y experiencia de usuario en un único producto.
+Es, sobre todo, una muestra de cómo me gusta trabajar: priorizando la claridad, el mantenimiento a largo plazo y la calidad del producto final.

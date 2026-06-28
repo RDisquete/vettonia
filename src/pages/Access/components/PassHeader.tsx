@@ -11,6 +11,7 @@ const tabs: { key: Tab; label: string }[] = [
   { key: 'pase', label: 'Mi Pase' },
   { key: 'muro', label: 'Muro' },
   { key: 'contenido', label: 'Contenido' },
+  { key: 'logros', label: 'Logros' },
   { key: 'stats', label: 'Stats' },
 ]
 

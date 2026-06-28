@@ -10,6 +10,16 @@ vi.mock('../../components/HamburgerNav', () => ({ default: () => <nav>Nav</nav> 
 vi.mock('../../sections/Footer', () => ({ default: () => <footer>Footer</footer> }))
 vi.mock('../../components/SEO', () => ({ default: () => null }))
 vi.mock('../../components/GalleryModal', () => ({ default: () => null }))
+vi.mock('../../components/StoriesFeed', () => ({ default: () => null }))
+vi.mock('../../services/reactions', () => ({
+  getAllReactions: () => Promise.resolve({}),
+  getUserReactions: () => Promise.resolve({}),
+  toggleReaction: () => Promise.resolve(true),
+  REACTION_TYPES: ['❤️', '🔥', '🎉'],
+}))
+vi.mock('../../services/realtime', () => ({
+  subscribeToNewPhotos: () => () => {},
+}))
 vi.mock('../../components/Skeleton', () => ({ GallerySkeleton: () => <div>Skeleton</div> }))
 vi.mock('../../components/ErrorBoundary', () => ({ default: ({ children }: any) => <>{children}</> }))
 vi.mock('../../lib/storage', () => ({

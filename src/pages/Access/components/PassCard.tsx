@@ -1,4 +1,5 @@
 import { SolidBox, SolidDot, SolidLine, SolidTri } from '../../../components/Solids'
+import PassQR from './PassQR'
 
 interface Props {
   passPhoto: string | null
@@ -78,19 +79,24 @@ export default function PassCard({ passPhoto, passNumber, passName, loading }: P
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-violeta-claro rotate-45" />
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-[52%] z-15"
-             style={{ background: 'linear-gradient(transparent, rgba(20,5,30,0.85) 40%, rgba(20,5,30,0.95) 100%)' }} />
+        <div className="absolute bottom-0 left-0 right-0 h-[60%] z-15"
+             style={{ background: 'linear-gradient(transparent, rgba(20,5,30,0.85) 30%, rgba(20,5,30,0.95) 100%)' }} />
 
         <div className="absolute bottom-0 left-0 right-0 z-20 p-5 pb-6">
-          <div className="mb-2">
-            <span className="font-heading text-[clamp(2rem,5vw,3.5rem)] font-extrabold tracking-[-0.08em] leading-none block text-white drop-shadow-lg"
-                  style={{ textShadow: '4px 4px 0 #3a1a4a' }}>
-              VETTONIA
-            </span>
-            <span className="font-mono text-[8px] tracking-[0.5em] uppercase text-white/80 block mt-1">2026</span>
+          <div className="flex items-start justify-between">
+            <div>
+              <span className="font-heading text-[clamp(2rem,5vw,3.5rem)] font-extrabold tracking-[-0.08em] leading-none block text-white drop-shadow-lg"
+                    style={{ textShadow: '4px 4px 0 #3a1a4a' }}>
+                VETTONIA
+              </span>
+              <span className="font-mono text-[8px] tracking-[0.5em] uppercase text-white/80 block mt-1">2026</span>
+            </div>
+            <div className="-mt-1">
+              <PassQR passName={passName} passNumber={passNumber} />
+            </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-sm border-l-4 border-coral pl-4 pr-4 pt-3 pb-3">
+          <div className="bg-white/10 backdrop-blur-sm border-l-4 border-coral pl-4 pr-4 pt-3 pb-3 mt-3">
             <div className="flex items-end justify-between">
               <div>
                 <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/60">Titular</span>

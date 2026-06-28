@@ -1,52 +1,18 @@
-import { useState, useRef, useEffect, useCallback, memo } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import HamburgerNav from '../components/HamburgerNav'
 import GalleryModal from '../components/GalleryModal'
+import StoriesFeed from '../components/StoriesFeed'
 import Footer from '../sections/Footer'
 import SEO from '../components/SEO'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
-import { getPhotos, isAlbumUnlocked, lockAlbum, getLikedPhotos, toggleLike, authenticatePass, authenticatePassWithPin } from '../lib/storage'
-import type { UploadedPhoto } from '../types'
+import { getPhotos, isAlbumUnlocked, lockAlbum, authenticatePass, authenticatePassWithPin } from '../lib/storage'
+import { getAllReactions, getUserReactions, toggleReaction } from '../services/reactions'
+import { subscribeToNewPhotos } from '../services/realtime'
+import type { UploadedPhoto, ReactionType, PhotoReactionCount } from '../types'
 import { toast } from 'sonner'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { GallerySkeleton } from '../components/Skeleton'
-
-const PhotoCard = memo(function PhotoCard({ photo, likedPhotos, onLike, onClick }: { photo: UploadedPhoto; likedPhotos: string[]; onLike: () => void; onClick?: () => void }) {
-  const liked = likedPhotos.includes(photo.id)
-  return (
-    <div className="group relative overflow-hidden border border-violeta/10 bg-white/60 transition-all duration-300 hover:z-10 cursor-pointer"
-      style={{
-        transform: `rotate(${(Math.random() * 4 - 2).toFixed(1)}deg)`,
-        aspectRatio: '1/1',
-        clipPath: 'polygon(0 0, 97% 0, 100% 100%, 3% 100%)',
-      }}
-      onClick={onClick}>
-      <img
-        src={photo.dataUrl}
-        alt={photo.caption}
-        loading="lazy"
-        decoding="async"
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-      />
-      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
-        {photo.caption && (
-          <p className="font-ui text-white/95 text-[11px] sm:text-sm leading-tight italic">&ldquo;{photo.caption}&rdquo;</p>
-        )}
-        <div className="flex items-center gap-2 mt-1.5">
-          <span className="font-mono text-white/60 text-[7px] tracking-[0.2em] uppercase">{photo.author}</span>
-          <span className="text-white/30 text-[5px]">·</span>
-          <span className="font-mono text-white/30 text-[6px] tracking-[0.15em]">
-            {new Date(photo.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short' })}
-          </span>
-        </div>
-      </div>
-      <button onClick={onLike}
-        className={'absolute top-2 right-2 text-lg cursor-pointer transition-all duration-300 hover:scale-125 drop-shadow-lg ' + (liked ? 'opacity-100 scale-110' : 'opacity-0 group-hover:opacity-100')}>
-        <span className={liked ? 'text-coral' : 'text-white/80'}>{liked ? '\u2665' : '\u2661'}</span>
-      </button>
-    </div>
-  )
-})
 
 const publicPhotos = [
   { src: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80', rotate: '1deg', clip: '', obj: 'center' },
@@ -71,8 +37,6 @@ export default function Gallery() {
   const [tab, setTab] = useState<Tab>(initialTab)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalIndex, setModalIndex] = useState(0)
-  const [modalOpenPrivate, setModalOpenPrivate] = useState(false)
-  const [modalIndexPrivate, setModalIndexPrivate] = useState(0)
   const [uploaded, setUploaded] = useState<UploadedPhoto[]>([])
   const [unlocked, setUnlocked] = useState(isAlbumUnlocked)
   const [showCodeModal, setShowCodeModal] = useState(false)
@@ -80,21 +44,46 @@ export default function Gallery() {
   const [pinInput, setPinInput] = useState('')
   const [passError, setPassError] = useState(false)
   const [passLoading, setPassLoading] = useState(false)
-  const [likedPhotos, setLikedPhotos] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
+  const [reactionCounts, setReactionCounts] = useState<Record<string, PhotoReactionCount[]>>({})
+  const [userReactions, setUserReactions] = useState<Record<string, ReactionType[]>>({})
+  const [newPhotoIds, setNewPhotoIds] = useState<Set<string>>(new Set())
   const codeInputRef = useRef<HTMLInputElement>(null)
 
   const loadPhotos = useCallback(async () => {
     setLoading(true)
-    const [allPhotos, liked] = await Promise.all([getPhotos('approved'), getLikedPhotos()])
+    const [allPhotos, counts, userRxns] = await Promise.all([
+      getPhotos('approved'), getAllReactions(), getUserReactions(),
+    ])
     setUploaded(allPhotos)
-    setLikedPhotos(liked)
+    setReactionCounts(counts)
+    setUserReactions(userRxns)
     setLoading(false)
   }, [])
 
   useEffect(() => {
     loadPhotos()
   }, [loadPhotos])
+
+  useEffect(() => {
+    if (!unlocked) return
+    const unsub = subscribeToNewPhotos((photo) => {
+      if (photo.status !== 'approved') return
+      setUploaded(prev => [{
+        id: photo.id,
+        dataUrl: photo.dataUrl,
+        caption: photo.caption,
+        author: photo.author,
+        createdAt: photo.createdAt,
+        status: photo.status as UploadedPhoto['status'],
+      }, ...prev])
+      setNewPhotoIds(prev => new Set(prev).add(photo.id))
+      setTimeout(() => {
+        setNewPhotoIds(prev => { const next = new Set(prev); next.delete(photo.id); return next })
+      }, 5000)
+    })
+    return unsub
+  }, [unlocked])
 
   useEffect(() => {
     if (showCodeModal) codeInputRef.current?.focus()
@@ -107,6 +96,13 @@ export default function Gallery() {
     if (showCodeModal) window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [showCodeModal])
+
+  const handleToggleRxn = useCallback(async (photoId: string, type: ReactionType) => {
+    await toggleReaction(photoId, type)
+    const [counts, userRxns] = await Promise.all([getAllReactions(), getUserReactions()])
+    setReactionCounts(counts)
+    setUserReactions(userRxns)
+  }, [])
 
   const handleTab = (t: Tab) => {
     if (t === 'privado') {
@@ -289,27 +285,14 @@ export default function Gallery() {
                     </Link>
                   </div>
                 ) : (
-                  <div className="mt-6">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                      {uploaded.map((photo, i) =>
-                        <PhotoCard key={photo.id} photo={photo} likedPhotos={likedPhotos}
-                          onClick={() => { setModalIndexPrivate(i); setModalOpenPrivate(true) }}
-                          onLike={async () => { const wasLiked = likedPhotos.includes(photo.id); await toggleLike(photo.id); toast(wasLiked ? 'Like eliminado' : '¡Foto favorita!'); setLikedPhotos(await getLikedPhotos()) }} />
-                      )}
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
-                      <Link to="/upload"
-                        className="border-l-4 border-t-2 border-r-2 border-b-2 border-coral/50 pl-10 pr-6 pt-3 pb-3 hover:bg-coral hover:border-coral transition-all group"
-                        style={{ clipPath: 'polygon(4% 0, 100% 0, 96% 100%, 0 100%)' }}>
-                        <span className="font-mono text-coral text-[11px] tracking-[0.4em] uppercase group-hover:text-white group-hover:tracking-[0.6em] transition-all">
-                          + Subir tu foto
-                        </span>
-                      </Link>
-                      <span className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase">
-                        {uploaded.length} foto{uploaded.length !== 1 ? 's' : ''} · {new Set(uploaded.map(p => p.author)).size} valientes
-                      </span>
-                    </div>
+                  <div className="mt-4 -mx-5 sm:-mx-0">
+                    <StoriesFeed
+                      photos={uploaded}
+                      userReactions={userReactions}
+                      reactionCounts={reactionCounts}
+                      onToggleReaction={handleToggleRxn}
+                      newPhotoIds={newPhotoIds}
+                    />
                   </div>
                 )}
               </div>
@@ -326,15 +309,6 @@ export default function Gallery() {
           initialIndex={modalIndex}
           open={modalOpen}
           onClose={() => setModalOpen(false)}
-        />
-      )}
-
-      {tab === 'privado' && (
-        <GalleryModal
-          images={uploaded.map((p) => p.dataUrl)}
-          initialIndex={modalIndexPrivate}
-          open={modalOpenPrivate}
-          onClose={() => setModalOpenPrivate(false)}
         />
       )}
 

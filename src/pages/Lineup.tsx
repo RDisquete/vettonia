@@ -1,15 +1,53 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Reveal from '../components/Reveal'
 import ArtistModal from '../components/ArtistModal'
+import FavoriteButton from '../components/FavoriteButton'
+import PollWidget from '../components/PollWidget'
 import HamburgerNav from '../components/HamburgerNav'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
 import Footer from '../sections/Footer'
 import SEO from '../components/SEO'
 import { stageConfig, type Artist } from '../constants/lineup'
 import { getPublishedStages } from '../services/lineup'
+import { getFavorites, toggleFavorite } from '../services/favorites'
+import { trackStageView } from '../services/achievements'
 import type { Stage } from '../data/lineup'
 
-function StageBlock({ stage, si, cfg, onSelect }: { stage: Stage; si: number; cfg: typeof stageConfig[0]; onSelect: (a: Artist) => void }) {
+function timeToMinutes(t: string): number {
+  const [h, m] = t.split(':').map(Number)
+  return h * 60 + m
+}
+
+function getOverlappingFavorites(favSlugs: Set<string>, stages: Stage[]): Map<string, string[]> {
+  const favArtists = stages.flatMap(s => s.artists).filter(a => favSlugs.has(a.slug))
+  const overlapMap = new Map<string, string[]>()
+
+  for (let i = 0; i < favArtists.length; i++) {
+    for (let j = i + 1; j < favArtists.length; j++) {
+      const a = favArtists[i]
+      const b = favArtists[j]
+      const tA = timeToMinutes(a.time)
+      const tB = timeToMinutes(b.time)
+      if (Math.abs(tA - tB) < 60 && a.stage !== b.stage) {
+        if (!overlapMap.has(a.slug)) overlapMap.set(a.slug, [])
+        if (!overlapMap.has(b.slug)) overlapMap.set(b.slug, [])
+        overlapMap.get(a.slug)!.push(b.name)
+        overlapMap.get(b.slug)!.push(a.name)
+      }
+    }
+  }
+  return overlapMap
+}
+
+function StageBlock({ stage, si, cfg, favorites, overlaps, onToggleFav, onSelect }: {
+  stage: Stage
+  si: number
+  cfg: typeof stageConfig[0]
+  favorites: Set<string>
+  overlaps: Map<string, string[]>
+  onToggleFav: (slug: string) => void
+  onSelect: (a: Artist) => void
+}) {
   return (
     <div className="relative">
       <div className="flex items-center gap-4 mb-8">
@@ -66,11 +104,15 @@ function StageBlock({ stage, si, cfg, onSelect }: { stage: Stage; si: number; cf
             </div>
 
             <div className="flex-1 min-w-0 py-3 pr-3">
-              <span className="font-heading text-violeta text-sm sm:text-base font-bold tracking-[-0.02em] group-hover:text-white transition-colors truncate block">
+              <span className="font-heading text-violeta text-sm sm:text-base font-bold tracking-[-0.02em] group-hover:text-white transition-colors truncate block flex items-center gap-1.5">
                 {a.name}
+                <FavoriteButton isFavorite={favorites.has(a.slug)} onToggle={() => onToggleFav(a.slug)} />
               </span>
-              <span className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase group-hover:text-white/60 transition-colors">
+              <span className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase group-hover:text-white/60 transition-colors flex items-center gap-2">
                 {a.genre}
+                {overlaps.has(a.slug) && (
+                  <span className="text-coral/80 text-[6px] tracking-[0.2em] font-bold">⚠ SOLAPAMIENTO</span>
+                )}
               </span>
             </div>
 
@@ -89,10 +131,32 @@ export default function Lineup() {
   const [mobileStage, setMobileStage] = useState(0)
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null)
   const [stages, setStages] = useState<Stage[]>([])
+  const [favorites, setFavorites] = useState<Set<string>>(new Set())
+
+  const loadFavorites = useCallback(async () => {
+    setFavorites(await getFavorites())
+  }, [])
 
   useEffect(() => {
-    getPublishedStages().then(setStages)
+    getPublishedStages().then(s => {
+      setStages(s)
+      s.forEach(stage => trackStageView(stage.name))
+    })
   }, [])
+
+  useEffect(() => {
+    loadFavorites()
+  }, [loadFavorites])
+
+  const handleToggleFav = useCallback(async (slug: string) => {
+    await toggleFavorite(slug)
+    await loadFavorites()
+  }, [loadFavorites])
+
+  const allArtists = stages.flatMap(s => s.artists)
+  const favArtists = allArtists.filter(a => favorites.has(a.slug))
+  const overlaps = getOverlappingFavorites(favorites, stages)
+  const overlapCount = new Set([...overlaps.keys()]).size
 
   return (
     <div className="flex flex-col min-h-svh bg-arena">
@@ -145,6 +209,33 @@ export default function Lineup() {
             </h1>
             <span className="font-mono text-texto-suave text-[9px] tracking-[0.5em] uppercase block mt-1">48 artistas · 3 escenarios</span>
 
+            {favArtists.length > 0 && (
+              <div className="mt-8 mb-6 border-l-4 border-coral pl-4 bg-coral/5 py-3 pr-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-heading text-violeta text-lg font-extrabold tracking-[-0.04em]">★ Mi itinerario</span>
+                  <span className="font-mono text-texto-suave text-[8px] tracking-[0.3em] uppercase">({favArtists.length} artistas)</span>
+                </div>
+                <div className="flex flex-wrap gap-x-4 gap-y-1">
+                  {favArtists.sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time)).map(a => (
+                    <span key={a.slug} className="font-mono text-texto text-[9px] tracking-[0.15em] flex items-center gap-1">
+                      <span className="text-coral">★</span>
+                      <span>{a.time}</span>
+                      <span className="text-black/50">{a.stage}</span>
+                      <span className="font-bold">{a.name}</span>
+                      {overlaps.has(a.slug) && (
+                        <span className="text-coral text-[7px] tracking-[0.2em] font-bold ml-1">⚠</span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+                {overlapCount > 0 && (
+                  <p className="font-mono text-coral text-[8px] tracking-[0.2em] uppercase mt-2">
+                    ⚠ {overlapCount} artista{overlapCount > 1 ? 's' : ''} con solapamiento de horario
+                  </p>
+                )}
+              </div>
+            )}
+
             {/* mobile stage selector */}
             <div className="flex sm:hidden gap-2 mt-6 mb-8">
               {stageConfig.map((cfg, si) => (
@@ -174,7 +265,7 @@ export default function Lineup() {
                 if (si !== mobileStage) return null
                 return (
                   <Reveal as="pop" key={`m-${mobileStage}`}>
-                    <StageBlock stage={stage} si={si} cfg={cfg} onSelect={setSelectedArtist} />
+                    <StageBlock stage={stage} si={si} cfg={cfg} favorites={favorites} overlaps={overlaps} onToggleFav={handleToggleFav} onSelect={setSelectedArtist} />
                   </Reveal>
                 )
               })}
@@ -187,17 +278,32 @@ export default function Lineup() {
                 const anim = si === 0 ? 'rise' : si === 1 ? 'creep' : 'pop'
                 return (
                   <Reveal as={anim} delay={si * 100} key={stage.name}>
-                    <StageBlock stage={stage} si={si} cfg={cfg} onSelect={setSelectedArtist} />
+                    <StageBlock stage={stage} si={si} cfg={cfg} favorites={favorites} overlaps={overlaps} onToggleFav={handleToggleFav} onSelect={setSelectedArtist} />
                   </Reveal>
                 )
               })}
             </div>
           </Reveal>
         </section>
+
+        <section className="relative px-5 md:px-12 lg:px-20 pb-20">
+          <Reveal as="pop">
+            <div className="relative border-l-4 border-t-2 border-r-2 border-b-2 border-white/10 p-6 md:p-10"
+              style={{ clipPath: 'polygon(1.5% 0, 100% 0, 98.5% 100%, 0 100%)' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-violeta/5 via-transparent to-coral/5 pointer-events-none" />
+              <PollWidget />
+            </div>
+          </Reveal>
+        </section>
       </div>
       <Footer />
 
-      <ArtistModal artist={selectedArtist} onClose={() => setSelectedArtist(null)} />
+      <ArtistModal
+        artist={selectedArtist}
+        onClose={() => setSelectedArtist(null)}
+        isFavorite={selectedArtist ? favorites.has(selectedArtist.slug) : false}
+        onToggleFav={selectedArtist ? () => handleToggleFav(selectedArtist.slug) : undefined}
+      />
     </div>
   )
 }

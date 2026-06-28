@@ -1,6 +1,7 @@
 import { supabase } from './supabase'
 import { HAS_SUPABASE } from './env'
 import { getItem, setItem } from '../lib/persistence'
+import { incrementProgress } from './achievements'
 import type { WallMessage } from '../types'
 
 const MESSAGES_KEY = 'wall_messages'
@@ -56,6 +57,7 @@ export async function addMessage(text: string, author: string): Promise<WallMess
   const all = getItem<WallMessage[]>(MESSAGES_KEY, [])
   all.unshift(msg)
   setItem(MESSAGES_KEY, all)
+  incrementProgress('famoso')
   return msg
 }
 

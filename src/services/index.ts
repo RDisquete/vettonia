@@ -39,7 +39,28 @@ export {
   deleteAlert,
 } from './alerts'
 
+export { subscribeToNewPhotos } from './realtime'
+
 export type { Artist } from '../types'
+
+export {
+  encodePassQR,
+  decodePassQR,
+  validatePassQR,
+} from './qr'
+
+export {
+  getPhotoReactions,
+  getAllReactions,
+  getUserReactions,
+  toggleReaction,
+  REACTION_TYPES,
+} from './reactions'
+
+export {
+  getFavorites,
+  toggleFavorite,
+} from './favorites'
 
 export {
   getPublishedArtists,
@@ -55,3 +76,23 @@ export {
   getStaticArtists,
   getAllGenres,
 } from './lineup'
+
+export {
+  vote,
+  getResults,
+  hasUserVoted,
+  subscribeToPoll,
+  getActivePollId,
+  getPollOptions,
+} from './polls'
+
+export {
+  getAchievements,
+  refreshAchievements,
+  getProgress,
+  incrementProgress,
+  setProgress,
+  trackStageView,
+  isUnlocked,
+  ALL_ACHIEVEMENTS,
+} from './achievements'

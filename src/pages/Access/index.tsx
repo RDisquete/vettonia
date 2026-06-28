@@ -10,6 +10,7 @@ import PassCard from './components/PassCard'
 import PassPerks from './components/PassPerks'
 import MessageWall from './components/MessageWall'
 import ContentGrid from './components/ContentGrid'
+import AchievementGrid from '../../components/AchievementGrid'
 import PassStats from './components/PassStats'
 import { useAccess, usePass, useMessages, useStats } from './hooks'
 
@@ -159,6 +160,14 @@ export default function Access() {
         )}
 
         {tab === 'contenido' && <div role="tabpanel" id="tabpanel-contenido" aria-labelledby="tab-contenido"><ContentGrid /></div>}
+
+        {tab === 'logros' && (
+          <section role="tabpanel" id="tabpanel-logros" aria-labelledby="tab-logros" className="px-5 pb-20">
+            <div className="max-w-3xl mx-auto pt-6">
+              <AchievementGrid />
+            </div>
+          </section>
+        )}
 
         {tab === 'stats' && (
           <div role="tabpanel" id="tabpanel-stats" aria-labelledby="tab-stats">

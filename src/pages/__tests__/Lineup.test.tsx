@@ -15,6 +15,23 @@ vi.mock('../../sections/Footer', () => ({ default: () => <footer>Footer</footer>
 vi.mock('../../components/SEO', () => ({ default: () => null }))
 vi.mock('../../components/ArtistModal', () => ({ default: () => null }))
 vi.mock('../../components/Reveal', () => ({ default: ({ children }: any) => <>{children}</> }))
+vi.mock('../../components/FavoriteButton', () => ({ default: () => null }))
+vi.mock('../../services/favorites', () => ({
+  getFavorites: () => Promise.resolve(new Set()),
+  toggleFavorite: () => Promise.resolve(true),
+}))
+vi.mock('../../components/PollWidget', () => ({ default: () => null }))
+vi.mock('../../services/polls', () => ({
+  getActivePollId: () => 'test-poll',
+  getPollOptions: () => [],
+  getResults: () => Promise.resolve([]),
+  hasUserVoted: () => Promise.resolve(false),
+  vote: () => Promise.resolve(true),
+  subscribeToPoll: () => () => {},
+}))
+vi.mock('../../lib/storage', () => ({
+  getAuthenticatedPass: () => 'TEST-000001',
+}))
 vi.mock('../../services/lineup', () => ({
   getPublishedStages: () => Promise.resolve([
     { name: 'A', artists: [{ slug: 'a1', name: 'Artist 1', bio: '', stage: 'A', time: '20:00', image: '', genre: 'Rock' }] },

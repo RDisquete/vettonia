@@ -15,6 +15,7 @@ vi.mock('react-router-dom', () => ({
   Route: () => null,
   useLocation: () => ({ pathname: '/', search: '', hash: '', state: null }),
 }))
+vi.mock('../components/ReminderManager', () => ({ default: () => null }))
 vi.mock('../pages/Home', () => ({ default: () => <div>Home</div> }))
 vi.mock('../pages/Gallery', () => ({ default: () => <div>Gallery</div> }))
 

@@ -4,6 +4,7 @@ import { getItem, setItem, removeItem, setRaw, getRaw } from '../lib/persistence
 import { compressImage, blobToDataUrl } from '../lib/image'
 import { verifyPassPin } from './pass'
 import { signInPass, signUpPass } from './auth'
+import { incrementProgress } from './achievements'
 import type { PassInfo, UploadedPhoto } from '../types'
 
 const NOTIFY_ID = import.meta.env.VITE_FORMSPREE_NOTIFY
@@ -203,6 +204,7 @@ export async function uploadPhoto(
   const all = getItem<UploadedPhoto[]>(PHOTOS_KEY, [])
   all.unshift(photo)
   setItem(PHOTOS_KEY, all)
+  incrementProgress('fotografo')
   return photo
 }
 

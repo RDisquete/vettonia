@@ -9,7 +9,7 @@ import {
 import type { PassInfo, WallMessage, UploadedPhoto } from '../../types'
 import type { PassStats } from '../../services/stats'
 
-export type Tab = 'pase' | 'muro' | 'contenido' | 'stats'
+export type Tab = 'pase' | 'muro' | 'contenido' | 'logros' | 'stats'
 
 export function useAccess() {
   const [unlocked, setUnlocked] = useState(isAlbumUnlocked)

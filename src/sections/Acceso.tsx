@@ -32,7 +32,7 @@ export default function Acceso() {
     <section id="acceso" className="px-5 py-24 relative overflow-hidden scroll-mt-24 min-h-[70vh] flex items-center ">
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1777290734933-acaa88c57f6c?w=1600&h=900&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1600&h=900&fit=crop&auto=format"
           alt=""
           loading="lazy"
           decoding="async"

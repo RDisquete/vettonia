@@ -1,14 +1,17 @@
 import { useEffect, useRef } from 'react'
 import type { Artist } from '../types'
+import FavoriteButton from './FavoriteButton'
 
 interface ArtistModalProps {
   artist: Artist | null
   onClose: () => void
   stage?: string
   time?: string
+  isFavorite?: boolean
+  onToggleFav?: () => void
 }
 
-export default function ArtistModal({ artist, onClose, stage, time }: ArtistModalProps) {
+export default function ArtistModal({ artist, onClose, stage, time, isFavorite, onToggleFav }: ArtistModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -49,7 +52,12 @@ export default function ArtistModal({ artist, onClose, stage, time }: ArtistModa
               <span className="font-heading text-white text-xs font-bold tracking-[0.15em] uppercase bg-coral px-3 py-1.5">{time ?? artist.time}</span>
               <span className="font-mono text-texto text-[8px] tracking-[0.3em] uppercase bg-piedra/10 border border-piedra/20 px-2 py-1">{artist.genre}</span>
             </div>
-            <h2 className="font-heading text-violeta text-3xl sm:text-4xl font-extrabold tracking-[-0.06em] leading-tight">{artist.name}</h2>
+            <div className="flex items-center gap-2">
+              <h2 className="font-heading text-violeta text-3xl sm:text-4xl font-extrabold tracking-[-0.06em] leading-tight">{artist.name}</h2>
+              {onToggleFav && (
+                <FavoriteButton isFavorite={!!isFavorite} onToggle={onToggleFav} size="md" />
+              )}
+            </div>
             <p className="font-ui text-black/70 text-sm leading-relaxed mt-3">{artist.bio}</p>
           </div>
         </div>
