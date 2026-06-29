@@ -1,7 +1,25 @@
+import { useEffect, useState } from 'react'
 import Reveal from '../components/Reveal'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
+import { getPageContent } from '../services/content'
 
 export default function Manifiesto() {
+  const [c, setC] = useState<Record<string, string> | null>(null)
+
+  useEffect(() => {
+    getPageContent('manifiesto').then(setC)
+  }, [])
+
+  const line1 = c?.line1 ?? 'ESTO NO ES'
+  const line2 = c?.line2 ?? 'UN FESTIVAL.'
+  const line3 = c?.line3 ?? 'ES UN PLAN.'
+  const line4 = c?.line4 ?? 'EXTREMADURA 2026'
+  const subtext = c?.subtext ?? 'Tres días sin cobertura, 3 escenarios, +48 artistas y una sola misión: vivir el momento. Tú eres el protagonista.'
+  const stat1 = c?.stat1 ?? '3'
+  const stat1Label = c?.stat1Label ?? 'Escenarios'
+  const stat2 = c?.stat2 ?? '+48'
+  const stat2Label = c?.stat2Label ?? 'Artistas'
+
   return (
     <section id="manifiesto" className="relative overflow-hidden min-h-[80vh] flex items-center scroll-mt-24">
       <img
@@ -52,33 +70,32 @@ export default function Manifiesto() {
       <div className="absolute inset-y-[15%] left-[calc(8%+8px)] w-px bg-white/8 z-10" />
 
       <div className="absolute top-[12%] left-[5%] z-20">
-        <p className="font-heading text-white text-6xl sm:text-8xl font-bold leading-none drop-shadow-lg">3</p>
-        <p className="font-mono text-white/60 text-[9px] tracking-[0.4em] uppercase mt-1 drop-shadow">Escenarios</p>
+        <p className="font-heading text-white text-6xl sm:text-8xl font-bold leading-none drop-shadow-lg">{stat1}</p>
+        <p className="font-mono text-white/60 text-[9px] tracking-[0.4em] uppercase mt-1 drop-shadow">{stat1Label}</p>
       </div>
       <div className="absolute bottom-[12%] right-[5%] z-20">
-        <p className="font-heading text-white text-6xl sm:text-8xl font-bold leading-none text-right drop-shadow-lg">+48</p>
-        <p className="font-mono text-white/60 text-[9px] tracking-[0.4em] uppercase mt-1 drop-shadow text-right">Artistas</p>
+        <p className="font-heading text-white text-6xl sm:text-8xl font-bold leading-none text-right drop-shadow-lg">{stat2}</p>
+        <p className="font-mono text-white/60 text-[9px] tracking-[0.4em] uppercase mt-1 drop-shadow text-right">{stat2Label}</p>
       </div>
 
       <div className="relative z-10 w-full px-5 py-20">
         <Reveal as="pop">
         <div className="max-w-6xl mx-auto">
           <p className="font-heading text-white text-[clamp(2.8rem,9vw,8rem)] font-extrabold leading-[0.78] tracking-[-0.08em] drop-shadow-lg">
-            ESTO NO ES
+            {line1}
           </p>
           <p className="font-heading text-coral text-[clamp(2.2rem,7.5vw,6.5rem)] font-extrabold leading-[0.78] tracking-[-0.08em] ml-[15%] sm:ml-[30%] drop-shadow-lg">
-            UN FESTIVAL.
+            {line2}
           </p>
           <p className="font-heading text-white text-[clamp(2.8rem,9vw,8rem)] font-extrabold leading-[0.78] tracking-[-0.08em] mt-3 drop-shadow-lg">
-            ES UN PLAN.
+            {line3}
           </p>
           <p className="font-heading text-white/70 text-[clamp(1.4rem,4.5vw,3.5rem)] font-bold leading-[0.85] tracking-[-0.04em] ml-[25%] sm:ml-[45%] mt-1 max-w-3xl drop-shadow">
-            EXTREMADURA 2026
+            {line4}
           </p>
           <div className="mt-10 ml-[10%] sm:ml-[25%] max-w-md border-l-4 border-coral/50 pl-5 sm:pl-6">
             <p className="font-ui text-white/80 text-sm sm:text-base leading-relaxed drop-shadow">
-              Tres días sin cobertura, 3 escenarios, +48 artistas y una sola misión:
-              vivir el momento. Tú eres el protagonista.
+              {subtext}
             </p>
           </div>
         </div>

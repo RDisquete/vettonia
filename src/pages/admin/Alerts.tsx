@@ -3,10 +3,13 @@ import SEO from '../../components/SEO'
 
 const STORAGE_KEY = 'vettonia_alerts'
 
+type AlertType = 'info' | 'warning' | 'emergency'
+
 type Alert = {
   id: string
   title: string
   desc: string
+  type: AlertType
   active: boolean
   createdAt: string
 }
@@ -25,9 +28,9 @@ function saveAlerts(alerts: Alert[]) {
 }
 
 const defaults: Alert[] = [
-  { id: '1', title: 'TORMENTA', desc: 'Pinta mal el viernes por la tarde. Mejor prepararse.', active: true, createdAt: '2026-06-01' },
-  { id: '2', title: 'CAMBIO DE HORARIO', desc: 'El Escenario B abre 30 min más tarde el sábado.', active: true, createdAt: '2026-06-05' },
-  { id: '3', title: 'AGOTADO', desc: 'Los abonos de día para el domingo vuelan. Quedan pocos.', active: false, createdAt: '2026-06-10' },
+  { id: '1', title: 'TORMENTA', desc: 'Pinta mal el viernes por la tarde. Mejor prepararse.', type: 'warning', active: true, createdAt: '2026-06-01' },
+  { id: '2', title: 'CAMBIO DE HORARIO', desc: 'El Escenario B abre 30 min más tarde el sábado.', type: 'info', active: true, createdAt: '2026-06-05' },
+  { id: '3', title: 'AGOTADO', desc: 'Los abonos de día para el domingo vuelan. Quedan pocos.', type: 'warning', active: false, createdAt: '2026-06-10' },
 ]
 
 export default function Alerts() {
@@ -38,18 +41,20 @@ export default function Alerts() {
   const [showForm, setShowForm] = useState(false)
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
+  const [type, setType] = useState<AlertType>('info')
   const [editing, setEditing] = useState<string | null>(null)
 
   const handleSave = () => {
     if (!title.trim() || !desc.trim()) return
     let updated: Alert[]
     if (editing) {
-      updated = alerts.map((a) => a.id === editing ? { ...a, title: title.trim(), desc: desc.trim() } : a)
+      updated = alerts.map((a) => a.id === editing ? { ...a, title: title.trim(), desc: desc.trim(), type } : a)
     } else {
       const newAlert: Alert = {
         id: crypto.randomUUID(),
         title: title.trim(),
         desc: desc.trim(),
+        type,
         active: true,
         createdAt: new Date().toISOString(),
       }
@@ -59,6 +64,7 @@ export default function Alerts() {
     setAlerts(updated)
     setTitle('')
     setDesc('')
+    setType('info')
     setShowForm(false)
     setEditing(null)
   }
@@ -66,6 +72,7 @@ export default function Alerts() {
   const handleEdit = (a: Alert) => {
     setTitle(a.title)
     setDesc(a.desc)
+    setType(a.type)
     setEditing(a.id)
     setShowForm(true)
   }
@@ -106,6 +113,17 @@ export default function Alerts() {
           <textarea value={desc} onChange={(e) => setDesc(e.target.value)}
             className="font-ui text-texto text-sm bg-transparent border-2 border-violeta/20 px-3 py-2 w-full outline-none placeholder:text-black/30 resize-none h-16"
             placeholder="Descripción de la alerta..." />
+          <div className="flex gap-3 mt-3">
+            {(['info', 'warning', 'emergency'] as AlertType[]).map(t => (
+              <label key={t} className="flex items-center gap-1.5 cursor-pointer">
+                <input type="radio" name="alert-type" value={t} checked={type === t}
+                  onChange={() => setType(t)} className="accent-violeta" />
+                <span className={`font-mono text-[8px] tracking-[0.2em] uppercase ${
+                  t === 'emergency' ? 'text-coral' : t === 'warning' ? 'text-amber-600' : 'text-violeta'
+                }`}>{t}</span>
+              </label>
+            ))}
+          </div>
           <div className="flex gap-2 mt-3">
             <button onClick={handleSave}
               className="font-mono text-white text-[8px] tracking-[0.3em] uppercase bg-violeta px-4 py-2 cursor-pointer hover:bg-violeta/80 transition-colors">
@@ -132,6 +150,11 @@ export default function Alerts() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <p className="font-heading text-violeta text-sm font-bold tracking-[-0.02em]">{a.title}</p>
+                  <span className={`font-mono text-[7px] tracking-[0.2em] uppercase px-1.5 py-0.5 ${
+                    a.type === 'emergency' ? 'bg-coral/15 text-coral' :
+                    a.type === 'warning' ? 'bg-amber-100 text-amber-700' :
+                    'bg-violeta/10 text-violeta'
+                  }`}>{a.type}</span>
                   <span className={`font-mono text-[7px] tracking-[0.3em] uppercase ${a.active ? 'text-coral' : 'text-black/40'}`}>
                     {a.active ? 'Activa' : 'Inactiva'}
                   </span>

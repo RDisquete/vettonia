@@ -1,4 +1,6 @@
-import { useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect, useCallback, useState } from 'react'
+import { toPng, toBlob } from 'html-to-image'
+import { toast } from 'sonner'
 import Reveal from '../../components/Reveal'
 import HamburgerNav from '../../components/HamburgerNav'
 import Footer from '../../sections/Footer'
@@ -26,10 +28,51 @@ export default function Access() {
   const stats = useStats()
 
   const photoInputRef = useRef<HTMLInputElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [downloading, setDownloading] = useState(false)
+  const [sharing, setSharing] = useState(false)
+  const [showPhoto, setShowPhoto] = useState(true)
 
   const handlePhotoClick = useCallback(() => {
     photoInputRef.current?.click()
   }, [])
+
+  const handleDownload = useCallback(async () => {
+    if (!cardRef.current) return
+    setDownloading(true)
+    try {
+      const dataUrl = await toPng(cardRef.current, { quality: 1, pixelRatio: 3, skipFonts: true })
+      const link = document.createElement('a')
+      link.download = `Vettonia2026-${pass.passInfo.number || 'pase'}.png`
+      link.href = dataUrl
+      link.click()
+    } catch {
+      // fallback silencioso
+    } finally {
+      setDownloading(false)
+    }
+  }, [pass.passInfo.number])
+
+  const handleShare = useCallback(async () => {
+    if (!cardRef.current) return
+    setSharing(true)
+    try {
+      const blob = await toBlob(cardRef.current, { quality: 0.9, pixelRatio: 2, skipFonts: true })
+      if (!blob) return
+      const file = new File([blob], `Vettonia2026-${pass.passInfo.number || 'pase'}.png`, { type: 'image/png' })
+
+      if (navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file], title: 'Mi pase Vettonia 2026', text: '¡Este es mi pase!' })
+      } else {
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+        toast.success('Pase copiado al portapapeles')
+      }
+    } catch {
+      toast.error('No se pudo compartir el pase')
+    } finally {
+      setSharing(false)
+    }
+  }, [pass.passInfo.number])
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -69,26 +112,47 @@ export default function Access() {
           <section role="tabpanel" id="tabpanel-pase" aria-labelledby="tab-pase" className="px-5 pb-20">
             <div className="max-w-5xl mx-auto">
               <Reveal as="pop">
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 items-start">
-                  <div className="space-y-5">
-                    <PassCard
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+                  <div className="w-full max-w-xs lg:w-80 shrink-0">
+                    <PassCard ref={cardRef}
                       passPhoto={pass.passPhoto}
                       passNumber={pass.passInfo.number}
                       passName={pass.passInfo.name}
                       loading={pass.passLoading}
+                      hidePhoto={!showPhoto}
                     />
-                    <div className="flex flex-wrap gap-3">
+                  </div>
+                  <div className="space-y-5">
+                    <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3">
                       <input ref={photoInputRef} type="file" accept="image/*" onChange={pass.handlePhoto} className="hidden" />
                       <button onClick={handlePhotoClick}
-                        className="border-l-4 border-t-2 border-r-2 border-b-2 border-violeta/30 pl-6 pr-4 pt-2.5 pb-2.5 cursor-pointer hover:bg-violeta hover:text-white transition-all group">
+                        className="border-l-4 border-t-2 border-r-2 border-b-2 border-violeta/30 pl-4 pr-4 pt-2.5 pb-2.5 cursor-pointer hover:bg-violeta hover:text-white transition-all group text-center w-full sm:flex-1">
                         <span className="font-mono text-violeta text-[8px] tracking-[0.3em] uppercase group-hover:text-white">
                           {pass.passPhoto ? 'Cambiar foto' : 'Añadir foto'}
                         </span>
                       </button>
                       <button onClick={() => { pass.setNameInput(pass.passInfo.name); pass.setEditingName(true) }}
-                        className="border-l-4 border-t-2 border-r-2 border-b-2 border-violeta/30 pl-6 pr-4 pt-2.5 pb-2.5 cursor-pointer hover:bg-violeta hover:text-white transition-all group">
+                        className="border-l-4 border-t-2 border-r-2 border-b-2 border-violeta/30 pl-4 pr-4 pt-2.5 pb-2.5 cursor-pointer hover:bg-violeta hover:text-white transition-all group text-center w-full sm:flex-1">
                         <span className="font-mono text-violeta text-[8px] tracking-[0.3em] uppercase group-hover:text-white">
                           Editar nombre
+                        </span>
+                      </button>
+                      <button onClick={handleDownload} disabled={downloading}
+                        className="border-l-4 border-t-2 border-r-2 border-b-2 border-violeta/30 pl-4 pr-4 pt-2.5 pb-2.5 cursor-pointer hover:bg-violeta hover:text-white transition-all group disabled:opacity-40 disabled:cursor-not-allowed text-center w-full sm:flex-1">
+                        <span className="font-mono text-violeta text-[8px] tracking-[0.3em] uppercase group-hover:text-white">
+                          {downloading ? 'Generando...' : 'Descargar pase'}
+                        </span>
+                      </button>
+                      <button onClick={handleShare} disabled={sharing}
+                        className="border-l-4 border-t-2 border-r-2 border-b-2 border-violeta/30 pl-4 pr-4 pt-2.5 pb-2.5 cursor-pointer hover:bg-violeta hover:text-white transition-all group disabled:opacity-40 disabled:cursor-not-allowed text-center w-full sm:flex-1">
+                        <span className="font-mono text-violeta text-[8px] tracking-[0.3em] uppercase group-hover:text-white">
+                          {sharing ? 'Compartiendo...' : 'Compartir pase'}
+                        </span>
+                      </button>
+                      <button onClick={() => setShowPhoto(v => !v)}
+                        className="border-l-4 border-t-2 border-r-2 border-b-2 border-violeta/30 pl-4 pr-4 pt-2.5 pb-2.5 cursor-pointer hover:bg-violeta hover:text-white transition-all group text-center w-full sm:flex-1">
+                        <span className="font-mono text-violeta text-[8px] tracking-[0.3em] uppercase group-hover:text-white">
+                          {showPhoto ? 'Ocultar foto' : 'Mostrar foto'}
                         </span>
                       </button>
                     </div>
@@ -136,8 +200,8 @@ export default function Access() {
                         </button>
                       )}
                     </div>
+                    <PassPerks />
                   </div>
-                  <PassPerks />
                 </div>
               </Reveal>
             </div>

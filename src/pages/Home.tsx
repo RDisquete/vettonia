@@ -8,6 +8,7 @@ import SubeTuFoto from '../sections/SubeTuFoto'
 import Acceso from '../sections/Acceso'
 import Footer from '../sections/Footer'
 import HamburgerNav from '../components/HamburgerNav'
+import AlertBanner from '../components/AlertBanner'
 import SEO from '../components/SEO'
 import JsonLd from '../components/JsonLd'
 
@@ -33,6 +34,7 @@ export default function Home() {
       />
       <JsonLd data={eventSchema} />
       <HamburgerNav />
+      <AlertBanner />
       <div className="flex-1">
         <Hero />
         <LiveTicker />

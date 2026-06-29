@@ -60,8 +60,10 @@ export function usePass() {
   const handlePhoto = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0]
     if (!f) return
+    e.target.value = ''
     const url = await setPassPhoto(f)
     setPassPhotoState(url)
+    toast.success('Foto actualizada')
   }, [])
 
   const handleSaveName = useCallback(async () => {

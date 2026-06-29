@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import { SolidBox, SolidDot, SolidLine, SolidTri } from '../../../components/Solids'
 import PassQR from './PassQR'
 
@@ -6,9 +7,10 @@ interface Props {
   passNumber: string
   passName: string
   loading?: boolean
+  hidePhoto?: boolean
 }
 
-export default function PassCard({ passPhoto, passNumber, passName, loading }: Props) {
+const PassCard = forwardRef<HTMLDivElement, Props>(function PassCard({ passPhoto, passNumber, passName, loading, hidePhoto }, ref) {
   if (loading) {
     return (
       <div className="relative overflow-hidden border-[3px] border-violeta/20"
@@ -21,7 +23,7 @@ export default function PassCard({ passPhoto, passNumber, passName, loading }: P
   }
 
   return (
-    <div className="relative overflow-hidden border-[3px] border-violeta"
+    <div ref={ref} className="relative overflow-hidden border-[3px] border-violeta"
          style={{ clipPath: 'polygon(0 0, 100% 0, 97% 100%, 3% 100%)' }}>
       <div className="aspect-9/16 relative bg-violeta/95">
 
@@ -51,41 +53,43 @@ export default function PassCard({ passPhoto, passNumber, passName, loading }: P
 
         <div className="absolute inset-0 z-15 flex items-center justify-center pointer-events-none select-none -rotate-12 scale-125">
           <div className="leading-[0.5] text-center">
-            <span className="font-heading text-[clamp(7rem,24vw,16rem)] font-black tracking-[-0.15em] block text-white/70"
+            <span className="font-heading text-[7rem] font-black tracking-[-0.15em] block text-white/70"
                   style={{ textShadow: '5px 5px 0 #e85d6f, 8px 8px 0 rgba(0,0,0,0.25)' }}>
               Vett
             </span>
-            <span className="font-heading text-[clamp(5rem,18vw,12rem)] font-black tracking-[-0.15em] block -mt-1 text-white/70"
+            <span className="font-heading text-[5rem] font-black tracking-[-0.15em] block -mt-1 text-white/70"
                   style={{ textShadow: '5px 5px 0 #e85d6f, 8px 8px 0 rgba(0,0,0,0.25)' }}>
               on<span className="text-coral">i</span>a
             </span>
           </div>
         </div>
 
-        <div className="absolute z-20"
-             style={{ top: '6%', right: '8%', width: '38%', aspectRatio: '3/4' }}>
-          <div className="w-full h-full overflow-hidden border-2 border-white/30 shadow-lg"
-               style={{ clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)' }}>
-            <img
-              src={passPhoto || 'https://images.unsplash.com/photo-1768054180300-ab772bd09d0e?w=400&h=600&fit=crop&auto=format'}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover"
-            />
+        {!hidePhoto && (
+          <div className="absolute z-20"
+               style={{ top: '6%', right: '8%', width: '38%', aspectRatio: '3/4' }}>
+            <div className="w-full h-full overflow-hidden border-2 border-white/30 shadow-lg"
+                 style={{ clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)' }}>
+              <img
+                src={passPhoto || 'https://images.unsplash.com/photo-1768054180300-ab772bd09d0e?w=400&h=600&fit=crop&auto=format'}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-1 -left-1 w-5 h-5 bg-coral rotate-12"
+                 style={{ clipPath: 'polygon(50% 0, 100% 100%, 0 100%)' }} />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-violeta-claro rotate-45" />
           </div>
-          <div className="absolute -bottom-1 -left-1 w-5 h-5 bg-coral rotate-12"
-               style={{ clipPath: 'polygon(50% 0, 100% 100%, 0 100%)' }} />
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-violeta-claro rotate-45" />
-        </div>
+        )}
 
-        <div className="absolute bottom-0 left-0 right-0 h-[60%] z-15"
+        <div className="absolute bottom-0 left-0 right-0 h-[60%] z-40"
              style={{ background: 'linear-gradient(transparent, rgba(20,5,30,0.85) 30%, rgba(20,5,30,0.95) 100%)' }} />
 
-        <div className="absolute bottom-0 left-0 right-0 z-20 p-5 pb-6">
+        <div className="absolute bottom-0 left-0 right-0 z-40 p-5 pb-6">
           <div className="flex items-start justify-between">
             <div>
-              <span className="font-heading text-[clamp(2rem,5vw,3.5rem)] font-extrabold tracking-[-0.08em] leading-none block text-white drop-shadow-lg"
+              <span className="font-heading text-[2.25rem] font-extrabold tracking-[-0.08em] leading-none block text-white drop-shadow-lg"
                     style={{ textShadow: '4px 4px 0 #3a1a4a' }}>
                 VETTONIA
               </span>
@@ -100,13 +104,13 @@ export default function PassCard({ passPhoto, passNumber, passName, loading }: P
             <div className="flex items-end justify-between">
               <div>
                 <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/60">Titular</span>
-                <p className="font-heading text-xl sm:text-2xl font-extrabold tracking-[-0.04em] leading-tight text-white">
+                <p className="font-heading text-xl font-extrabold tracking-[-0.04em] leading-tight text-white">
                   {passName || 'Sin nombre'}
                 </p>
               </div>
               <div className="text-right">
                 <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/60">Nº de pase</span>
-                <p className="font-heading text-base sm:text-lg font-bold tracking-[-0.02em] text-white">{passNumber || '---'}</p>
+                <p className="font-heading text-base font-bold tracking-[-0.02em] text-white">{passNumber || '---'}</p>
               </div>
             </div>
           </div>
@@ -115,4 +119,6 @@ export default function PassCard({ passPhoto, passNumber, passName, loading }: P
       </div>
     </div>
   )
-}
+})
+
+export default PassCard

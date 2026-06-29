@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { SolidDot, SolidBox } from './Solids'
 import { getCurrentUser, signOut } from '../services/auth'
+import { DarkModeSwitch } from './DarkModeToggle'
 
 const baseLinks = [
   { label: 'Inicio', to: '/' },
@@ -11,7 +12,7 @@ const baseLinks = [
   { label: 'Mapa', to: '/map' },
   { label: 'Galería', to: '/gallery' },
   { label: 'Info', to: '/info' },
-  { label: 'Acceso', to: '/access' },
+  { label: 'Pase', to: '/access' },
   { label: 'Subir', to: '/upload' },
   { label: 'Contacto', to: '/contact' },
 ]
@@ -114,6 +115,9 @@ export default function HamburgerNav() {
                 </Link>
               )
             })}
+            <div className="mt-6 ml-0.5 border-t border-white/10 pt-4 w-full max-w-48">
+              <DarkModeSwitch onClose={() => setOpen(false)} />
+            </div>
           </nav>
 
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">

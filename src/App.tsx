@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 import PageTransition from './components/PageTransition'
 import Toaster from './components/Toaster'
 import ReminderManager from './components/ReminderManager'
+
 import Home from './pages/Home'
 
 const Lineup = lazy(() => import('./pages/Lineup'))
@@ -24,6 +25,7 @@ const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
 const LineupManage = lazy(() => import('./pages/admin/LineupManage'))
 const GalleryManage = lazy(() => import('./pages/admin/GalleryManage'))
 const Alerts = lazy(() => import('./pages/admin/Alerts'))
+const ContentManage = lazy(() => import('./pages/admin/ContentManage'))
 
 function PageLoader() {
   return (
@@ -80,6 +82,7 @@ function App() {
             <Route path="lineup" element={<LineupManage />} />
             <Route path="gallery" element={<GalleryManage />} />
             <Route path="alerts" element={<Alerts />} />
+            <Route path="content" element={<ContentManage />} />
           </Route>
           <Route path="*" element={<PageWrap key={location.pathname}><NotFound /></PageWrap>} />
         </Routes>

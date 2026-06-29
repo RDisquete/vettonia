@@ -86,6 +86,9 @@ export async function setPassName(name: string): Promise<void> {
 }
 
 export async function getPassPhoto(): Promise<string | null> {
+  const local = getRaw(PHOTO_KEY)
+  if (local) return local
+
   if (HAS_SUPABASE && supabase) {
     try {
       const info = getItem<PassInfo>(INFO_KEY, { name: '', number: '', createdAt: '' })
@@ -102,40 +105,41 @@ export async function getPassPhoto(): Promise<string | null> {
       }
     } catch {}
   }
-  return getRaw(PHOTO_KEY)
+
+  return null
 }
 
 export async function setPassPhoto(file: File): Promise<string> {
-  if (HAS_SUPABASE && supabase) {
-    try {
-      const info = getItem<PassInfo>(INFO_KEY, { name: '', number: '', createdAt: '' })
-      if (info.number) {
-        const ext = file.name.split('.').pop() || 'jpg'
-        const storagePath = `pass-photos/${info.number}.${ext}`
-        const { error: uploadError } = await supabase.storage
-          .from('photos')
-          .upload(storagePath, file, { upsert: true, contentType: file.type })
+  const compressed = await compressImage(file, 0.5, 800)
+  const dataUrl = await blobToDataUrl(compressed)
 
-        if (!uploadError) {
-          const { data: urlData } = supabase.storage
-            .from('photos')
-            .getPublicUrl(storagePath)
+  try {
+    const small = await compressImage(file, 0.3, 400)
+    const smallDataUrl = await blobToDataUrl(small)
+    setRaw(PHOTO_KEY, smallDataUrl)
+  } catch {
+    setRaw(PHOTO_KEY, dataUrl)
+  }
+
+  const sb = supabase
+  if (HAS_SUPABASE && sb) {
+    const info = getItem<PassInfo>(INFO_KEY, { name: '', number: '', createdAt: '' })
+    if (info.number) {
+      const ext = file.name.split('.').pop() || 'jpg'
+      const storagePath = `pass-photos/${info.number}.${ext}`
+      sb.storage.from('photos').upload(storagePath, file, { upsert: true, contentType: file.type })
+        .then(() => {
+          const { data: urlData } = sb.storage.from('photos').getPublicUrl(storagePath)
           if (urlData) {
-            await supabase.from('passes').upsert({
+            sb.from('passes').upsert({
               number: info.number,
               photo_url: urlData.publicUrl,
             }, { onConflict: 'number' })
-            setRaw(PHOTO_KEY, urlData.publicUrl)
-            return urlData.publicUrl
           }
-        }
-      }
-    } catch {}
+        })
+    }
   }
 
-  const compressed = await compressImage(file)
-  const dataUrl = await blobToDataUrl(compressed)
-  setRaw(PHOTO_KEY, dataUrl)
   return dataUrl
 }
 

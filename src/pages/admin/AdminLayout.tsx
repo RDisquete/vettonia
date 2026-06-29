@@ -9,6 +9,7 @@ const navItems = [
   { label: 'Cartel', path: '/admin/lineup' },
   { label: 'Galería', path: '/admin/gallery' },
   { label: 'Alertas', path: '/admin/alerts' },
+  { label: 'Contenido', path: '/admin/content' },
 ]
 
 function Login({ onLogin }: { onLogin: () => void }) {

@@ -1,8 +1,22 @@
+import { useEffect, useState } from 'react'
 import Reveal from '../components/Reveal'
 import GreenLayer from '../components/GreenLayer'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
+import { getPageContent } from '../services/content'
 
 export default function Hero() {
+  const [c, setC] = useState<Record<string, string> | null>(null)
+
+  useEffect(() => {
+    getPageContent('hero').then(setC)
+  }, [])
+
+  const title1 = c?.title1 ?? 'Vett'
+  const title2 = c?.title2 ?? 'onia'
+  const dates = c?.dates ?? '14 · 15 · 16'
+  const month = c?.month ?? 'agosto'
+  const location = c?.location ?? 'extremadura'
+
   return (
     <section id="inicio" className="h-svh relative flex flex-col justify-between overflow-hidden">
       <img
@@ -54,20 +68,22 @@ export default function Hero() {
       <Reveal as="pop" delay={200}>
       <div className="relative z-10 px-5 pb-8 text-right lg:max-w-lg lg:ml-auto">
         <h1 className="font-heading text-[clamp(6rem,30vw,22rem)] lg:text-[clamp(6rem,15vw,12rem)] font-bold leading-[0.6] tracking-[-0.15em] text-violeta select-none [text-shadow:6px_6px_0_#e85d6f]">
-          Vett
+          {title1}
         </h1>
         <h1 className="font-heading text-[clamp(4.5rem,24vw,18rem)] lg:text-[clamp(4.5rem,12vw,9rem)] font-bold leading-[0.6] tracking-[-0.15em] text-violeta select-none mt-[-0.12em] [text-shadow:5px_5px_0_#e85d6f]">
-          on<span className="text-coral">i</span>a
+          {title2.split('').map((ch, i) =>
+            ch === 'i' ? <span key={i} className="text-coral/70">{ch}</span> : ch
+          )}
         </h1>
         <div className="leading-none mt-4">
           <span className="font-heading text-[clamp(3rem,10vw,8rem)] lg:text-[clamp(3rem,7vw,4.5rem)] font-bold tracking-[-0.08em] text-coral block">
-            14 · 15 · 16
+            {dates}
           </span>
           <span className="font-heading text-[clamp(1.5rem,5vw,4rem)] lg:text-[clamp(1.5rem,3.5vw,2.5rem)] font-light tracking-[0.15em] text-coral block -mt-2">
-            agosto
+            {month}
           </span>
           <span className="font-mono text-[clamp(0.75rem,2vw,1.5rem)] lg:text-[clamp(0.75rem,1.5vw,1rem)] tracking-[0.5em] text-grey block mt-2 uppercase">
-            extremadura
+            {location}
           </span>
         </div>
       </div>

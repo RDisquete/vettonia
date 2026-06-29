@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { UploadedPhoto, ReactionType } from '../types'
 import { REACTION_TYPES } from '../services/reactions'
+import { shareImage } from '../lib/share'
 
 interface ReactionCount {
   type: ReactionType
@@ -32,7 +33,7 @@ function StoryCard({ photo, userReactions, reactionCounts, onToggleReaction, isN
       initial={isNew ? { scale: 0.85, opacity: 0 } : false}
       animate={isNew ? { scale: 1, opacity: 1 } : undefined}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-      className="relative w-full h-[90vh] sm:h-[85vh] flex-shrink-0 snap-start overflow-hidden bg-carbón"
+      className="relative w-full h-[90vh] sm:h-[85vh] shrink-0 snap-start overflow-hidden bg-carbón"
     >
       <img
         src={photo.dataUrl}
@@ -80,6 +81,22 @@ function StoryCard({ photo, userReactions, reactionCounts, onToggleReaction, isN
               </button>
             )
           })}
+          <button
+            onClick={async () => {
+              const blob = await (await fetch(photo.dataUrl)).blob()
+              if (blob) shareImage(blob, `vettonia-${photo.id}.jpg`, photo.caption || 'Foto en Vettonia 2026')
+            }}
+            className="ml-auto opacity-60 hover:opacity-100 transition-all cursor-pointer"
+            aria-label="Compartir foto"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+          </button>
         </div>
       </div>
 

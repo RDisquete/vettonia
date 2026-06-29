@@ -112,8 +112,8 @@ create policy "Delete by id" on messages for delete using (true);
 create policy "Delete by id" on likes for delete using (true);
 create policy "Delete by id" on alerts for delete using (true);
 
--- Actualización
-create policy "Update by id" on passes for update using (true);
+-- Actualización (WITH CHECK necesario para upsert funcione con anon key)
+create policy "Update by id" on passes for update using (true) with check (true);
 create policy "Update by id" on photos for update using (true);
 ```
 
@@ -151,6 +151,7 @@ Todo sigue funcionando aunque Supabase no esté configurado — los datos se gua
 | Los datos se guardan en localStorage | Credenciales vacías o incorrectas | Revisa `.env` |
 | Error 401 en consola | RLS bloqueando escritura | Ejecuta las políticas de inserción |
 | Error 404 en Storage | Bucket no creado | Crea bucket `photos` público |
+| **Error 403 en `POST /rest/v1/passes?on_conflict=number`** | **Falta la política `with check (true)` en passes** | **Ejecuta el script del Paso 4 completo, o al menos:**<br>`create policy "Anonymous insert" on passes for insert with check (true);`<br>`create policy "Update by id" on passes for update using (true) with check (true);` |
 | CORS errors | URLs incorrectas | Usa la URL exacta de Settings → API |
 
 ## Paso 6: Autenticación real
@@ -316,6 +317,40 @@ $$ language sql stable;
 ```
 
 Esta migración permite la encuesta "Mejor actuación de Vettonia 2026" con una votación por pase, ranking en tiempo real con barras de progreso animadas.
+
+---
+
+## Migration 7: Tabla page_content (gestión de textos del homepage)
+
+Ejecuta en el SQL Editor:
+
+```sql
+create table if not exists page_content (
+  page text not null,
+  key text not null,
+  value text not null default '',
+  updated_at timestamptz not null default now(),
+  primary key (page, key)
+);
+
+alter table page_content enable row level security;
+
+create policy "Public read" on page_content for select using (true);
+create policy "Anonymous insert" on page_content for insert with check (true);
+create policy "Anonymous update" on page_content for update using (true) with check (true);
+create policy "Delete by id" on page_content for delete using (true);
+```
+
+Esta tabla almacena los textos editables del homepage (Hero y Manifiesto). Cada fila es una clave-valor por página. Ejemplo:
+
+| page | key | value |
+|------|-----|-------|
+| hero | title1 | Vett |
+| hero | dates | 14 · 15 · 16 |
+| manifiesto | line1 | ESTO NO ES |
+| manifiesto | subtext | Tres días sin cobertura... |
+
+Para sembrar los valores por defecto tras crear la tabla, ve a `/admin/content` y haz clic en "Guardar cambios". Si no hay conexión a Supabase, los textos se guardan en localStorage y se muestran los valores por defecto del código.
 
 ---
 

@@ -1,7 +1,4 @@
-const MAX_DIM = 1920
-const QUALITY = 0.82
-
-export function compressImage(file: File): Promise<Blob> {
+export function compressImage(file: File, quality = 0.82, maxDim = 1920): Promise<Blob> {
   if (file.type === 'image/gif') return Promise.resolve(file)
   return new Promise((resolve) => {
     const img = new Image()
@@ -9,8 +6,8 @@ export function compressImage(file: File): Promise<Blob> {
     img.onload = () => {
       URL.revokeObjectURL(url)
       let { width, height } = img
-      if (width > MAX_DIM || height > MAX_DIM) {
-        const ratio = Math.min(MAX_DIM / width, MAX_DIM / height)
+      if (width > maxDim || height > maxDim) {
+        const ratio = Math.min(maxDim / width, maxDim / height)
         width = Math.round(width * ratio)
         height = Math.round(height * ratio)
       }
@@ -26,7 +23,7 @@ export function compressImage(file: File): Promise<Blob> {
           else resolve(file)
         },
         'image/jpeg',
-        QUALITY
+        quality
       )
     }
     img.onerror = () => resolve(file)
