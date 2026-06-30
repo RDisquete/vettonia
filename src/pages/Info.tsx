@@ -64,31 +64,31 @@ export default function Info() {
     <div className="flex flex-col min-h-svh bg-arena">
       <SEO
         title="Info"
-        description="Todo lo que necesitas saber sobre Vettonia 2026: fechas, horarios, ubicación, precios, normas y más."
+        description="Todo lo que necesitas saber sobre Vettonia 2027: fechas, horarios, ubicación, precios, normas y más."
         path="/info"
       />
       <HamburgerNav />
       <div className="flex-1">
         <section className="px-5 py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-violeta/3"
+          <div className="absolute inset-0 bg-violeta/12"
             style={{ clipPath: 'polygon(0 0, 35% 0, 20% 100%, 0 100%)' }} />
-          <div className="absolute inset-0 bg-coral/3"
+          <div className="absolute inset-0 bg-coral/12"
             style={{ clipPath: 'polygon(80% 0, 100% 0, 95% 100%, 65% 100%)' }} />
 
-          <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/3 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-5%] right-[-5%]">
+          <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/6 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-5%] right-[-5%]">
             INFO
           </span>
 
-          <SolidBox className="w-14 h-14 bg-coral/45 left-[4%] top-[5%] z-30 rotate-20" />
-          <SolidRing className="w-28 h-28 border-violeta/20 right-[-2%] top-[4%] z-30" />
-          <SolidDot className="w-8 h-8 bg-violeta/45 left-[12%] top-[38%] z-30" />
-          <SolidLine className="w-36 h-0.75 bg-coral/30 right-[12%] top-[48%] z-30 rotate-1" />
-          <SolidTri className="w-18 h-18 bg-coral/25 left-[55%] top-[8%] z-30 rotate-35" />
-          <SolidRing className="w-20 h-20 border-coral/25 right-[5%] top-[58%] z-30" />
-          <SolidBox className="w-10 h-10 bg-violeta/40 right-[30%] bottom-[18%] z-30 rotate-35" />
-          <SolidLine className="w-28 h-0.75 bg-violeta/25 left-[5%] top-[70%] z-30 -rotate-3" />
-          <SolidDot className="w-7 h-7 bg-coral/45 left-[35%] bottom-[8%] z-30" />
-          <SolidRing className="w-12 h-12 border-violeta/30 left-[8%] bottom-[12%] z-30" />
+          <SolidBox className="w-14 h-14 bg-coral/80 left-[4%] top-[5%] z-30 rotate-20" />
+          <SolidRing className="w-28 h-28 border-violeta/40 right-[-2%] top-[4%] z-30" />
+          <SolidDot className="w-8 h-8 bg-violeta/80 left-[12%] top-[38%] z-30" />
+          <SolidLine className="w-36 h-0.75 bg-coral/60 right-[12%] top-[48%] z-30 rotate-1" />
+          <SolidTri className="w-18 h-18 bg-coral/50 left-[55%] top-[8%] z-30 rotate-35" />
+          <SolidRing className="w-20 h-20 border-coral/50 right-[5%] top-[58%] z-30" />
+          <SolidBox className="w-10 h-10 bg-violeta/70 right-[30%] bottom-[18%] z-30 rotate-35" />
+          <SolidLine className="w-28 h-0.75 bg-violeta/50 left-[5%] top-[70%] z-30 -rotate-3" />
+          <SolidDot className="w-7 h-7 bg-coral/80 left-[35%] bottom-[8%] z-30" />
+          <SolidRing className="w-12 h-12 border-violeta/60 left-[8%] bottom-[12%] z-30" />
 
             <h1 className="font-heading text-violeta text-[clamp(3rem,8vw,6rem)] font-extrabold leading-none tracking-[-0.08em] [text-shadow:5px_5px_0_#e85d6f]">
               INFO

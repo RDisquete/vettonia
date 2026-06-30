@@ -27,7 +27,7 @@ export default function AchievementGrid() {
         className="mb-6"
       >
         <p className="font-mono text-texto-suave text-[9px] tracking-[0.5em] uppercase">Logros</p>
-        <h2 className="font-heading text-violeta text-3xl font-extrabold leading-[0.9] tracking-[-0.05em] mt-2">
+        <h2 className="font-heading text-violeta text-3xl font-extrabold leading-[0.9] tracking-tighter mt-2">
           Tus insignias
         </h2>
         <p className="font-mono text-[10px] tracking-[0.3em] text-black/40 mt-3">
@@ -76,7 +76,7 @@ export default function AchievementGrid() {
                 <div className="w-full mt-2.5">
                   <div className="h-1.5 bg-black/5 rounded-full overflow-hidden">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-violeta to-coral rounded-full"
+                      className="h-full bg-linear-to-r from-violeta to-coral rounded-full"
                       initial={{ width: 0 }}
                       animate={{ width: `${Math.min(100, (a.progress / a.target) * 100)}%` }}
                       transition={{ duration: 0.6, ease: 'easeOut' }}

@@ -111,7 +111,7 @@ export default function AdminLayout() {
     <div className="min-h-svh bg-arena flex flex-col">
       <div className="bg-carbón px-5 py-3 flex items-center justify-between relative overflow-hidden">
         <SolidDot className="w-2 h-2 bg-coral/80 left-[2%] top-1/2 -translate-y-1/2 z-30" />
-        <SolidBox className="w-3 h-3 bg-white/8 right-[5%] top-[20%] z-30" />
+        <SolidBox className="w-3 h-3 bg-white/15 right-[5%] top-[20%] z-30" />
         <div className="flex items-center gap-4 relative z-10">
           <Link to="/" className="font-mono text-coral text-[8px] tracking-[0.3em] uppercase hover:text-white/60 transition-colors">VETTONIA</Link>
           <span className="text-white/10 text-[8px]">/</span>

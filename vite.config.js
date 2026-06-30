@@ -25,9 +25,9 @@ export default defineConfig({
       devOptions: { enabled: false },
       includeAssets: ['hero.jpg', 'vettonia-logo.png', 'icons/*.png'],
       manifest: {
-        name: 'Vettonia 2026',
+        name: 'Vettonia 2027',
         short_name: 'Vettonia',
-        description: 'Música, arte y naturaleza. Festival único en la sierra de Madrid.',
+        description: 'Música, arte y naturaleza. Festival único en Extremadura.',
         theme_color: '#3a1a4a',
         background_color: '#f0ede8',
         display: 'standalone',

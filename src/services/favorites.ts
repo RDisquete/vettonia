@@ -25,7 +25,7 @@ export async function getFavorites(): Promise<Set<string>> {
         setProgress('melomano', slugs.length)
         return new Set(slugs)
       }
-    } catch {}
+    } catch (e) { console.warn('[favorites] getFavorites select', e) }
   }
 
   const cached = getItem<string[]>(FAVORITES_KEY, [])
@@ -46,7 +46,7 @@ export async function toggleFavorite(slug: string): Promise<boolean> {
           .delete()
           .eq('artist_slug', slug)
           .eq('pass_number', pass)
-      } catch {}
+      } catch (e) { console.warn('[favorites] toggleFavorite delete', e) }
     }
     const stored = getItem<string[]>(FAVORITES_KEY, [])
     const updated = stored.filter(s => s !== slug)
@@ -60,7 +60,7 @@ export async function toggleFavorite(slug: string): Promise<boolean> {
       await supabase
         .from('favorites')
         .insert({ id: crypto.randomUUID(), artist_slug: slug, pass_number: pass })
-    } catch {}
+    } catch (e) { console.warn('[favorites] toggleFavorite insert', e) }
   }
 
   const stored = getItem<string[]>(FAVORITES_KEY, [])

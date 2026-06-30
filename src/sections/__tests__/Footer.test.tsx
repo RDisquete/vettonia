@@ -26,6 +26,6 @@ describe('Footer', () => {
 
   it('renders the copyright year', () => {
     render(<MemoryRouter><Footer /></MemoryRouter>)
-    expect(screen.getByText('© 2026')).toBeInTheDocument()
+    expect(screen.getByText('© 2027')).toBeInTheDocument()
   })
 })

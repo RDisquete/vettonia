@@ -8,12 +8,12 @@ import { unsplashAutoFormat, unsplashSrcset } from '../lib/images'
 const photos = [
   { src: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80', rotate: '1deg', clip: '', obj: 'center' },
   { src: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80', rotate: '-2deg', clip: 'polygon(0 0, 100% 5%, 95% 95%, 0 100%)', obj: 'center 30%' },
-  { src: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&q=80', rotate: '2deg', clip: 'polygon(5% 0, 100% 0, 95% 100%, 0 95%)', obj: 'center 20%' },
+  { src: 'https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?w=400&q=80', rotate: '2deg', clip: 'polygon(5% 0, 100% 0, 95% 100%, 0 95%)', obj: 'center 20%' },
   { src: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&q=80', rotate: '-1.5deg', clip: '', obj: 'center' },
   { src: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&q=80', rotate: '1deg', clip: 'polygon(0 2%, 100% 0, 100% 100%, 0 98%)', obj: 'center 60%' },
-  { src: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=400&q=80', rotate: '-1deg', clip: '', obj: 'center 40%' },
+  { src: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400&q=80', rotate: '-1deg', clip: '', obj: 'center 40%' },
   { src: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&q=80', rotate: '2.5deg', clip: 'polygon(0 0, 100% 3%, 100% 97%, 0 100%)', obj: 'center' },
-  { src: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400&q=80', rotate: '-2deg', clip: 'polygon(3% 0, 100% 0, 97% 100%, 0 100%)', obj: 'center 70%' },
+  { src: 'https://images.unsplash.com/photo-1453090927415-5f45085b65c0?w=400&q=80', rotate: '-2deg', clip: 'polygon(3% 0, 100% 0, 97% 100%, 0 100%)', obj: 'center 70%' },
 ]
 
 function img(p: typeof photos[0]) {
@@ -35,38 +35,38 @@ export default function Galeria() {
 
   return (
     <section id="galeria" className="bg-arena-oscuro pt-20 pb-8 relative overflow-hidden scroll-mt-24">
-      <div className="absolute inset-0 bg-violeta/6"
+      <div className="absolute inset-0 bg-violeta/15"
         style={{ clipPath: 'polygon(0 0, 25% 0, 45% 100%, 20% 100%)' }} />
-      <div className="absolute inset-0 bg-coral/6"
+      <div className="absolute inset-0 bg-coral/12"
         style={{ clipPath: 'polygon(75% 0, 100% 0, 90% 100%, 60% 100%)' }} />
-      <div className="absolute inset-0 bg-violeta-claro/5"
+      <div className="absolute inset-0 bg-violeta-claro/10"
         style={{ clipPath: 'polygon(40% 0, 55% 0, 50% 100%, 35% 100%)' }} />
-      <div className="absolute inset-0 bg-coral-oscuro/4"
+      <div className="absolute inset-0 bg-coral-oscuro/8"
         style={{ clipPath: 'polygon(0 45%, 10% 30%, 20% 65%, 0 80%)' }} />
 
-      <div className="absolute inset-0 opacity-[0.05]"
+      <div className="absolute inset-0 opacity-[0.1]"
         style={{
           backgroundImage: 'radial-gradient(circle, #3a1a4a 1px, transparent 1px)',
           backgroundSize: '24px 24px',
         }} />
 
-      <span className="absolute font-heading text-[clamp(8rem,25vw,22rem)] font-extrabold text-violeta/3 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-5%] left-[-3%]">
+      <span className="absolute font-heading text-[clamp(8rem,25vw,22rem)] font-extrabold text-violeta/6 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-5%] left-[-3%]">
         FOTOS
       </span>
-      <span className="absolute font-heading text-[clamp(5rem,15vw,13rem)] font-extrabold text-coral/2 leading-none tracking-[-0.08em] select-none pointer-events-none top-[2%] right-[-3%] -rotate-6">
+      <span className="absolute font-heading text-[clamp(5rem,15vw,13rem)] font-extrabold text-coral/5 leading-none tracking-[-0.08em] select-none pointer-events-none top-[2%] right-[-3%] -rotate-6">
         MOMENTOS
       </span>
 
-      <SolidBox className="w-16 h-16 bg-coral/50 left-[10%] top-[6%] z-30 rotate-12" />
-      <SolidRing className="w-36 h-36 border-violeta/25 right-[-4%] top-[2%] z-30" />
-      <SolidDot className="w-10 h-10 bg-violeta/50 left-[28%] top-[28%] z-30" />
-      <SolidLine className="w-60 h-0.75 bg-coral/35 right-[4%] top-[40%] z-30 rotate-1" />
-      <SolidTri className="w-16 h-16 bg-coral/30 left-[55%] top-[10%] z-30 rotate-30" />
-      <SolidBox className="w-12 h-12 bg-violeta/40 right-[22%] bottom-[22%] z-30 rotate-60" />
-      <SolidRing className="w-28 h-28 border-coral/35 left-[1%] bottom-[12%] z-30" />
-      <SolidDot className="w-8 h-8 bg-coral/55 right-[10%] bottom-[6%] z-30" />
-      <SolidLine className="w-36 h-0.75 bg-violeta-claro/20 left-[5%] top-[62%] z-30 -rotate-2" />
-      <SolidRing className="w-14 h-14 border-violeta/30 right-[30%] top-[55%] z-30" />
+      <SolidBox className="w-20 h-20 bg-coral/65 left-[10%] top-[6%] z-30 rotate-12" />
+      <SolidRing className="w-44 h-44 border-violeta/35 right-[-4%] top-[2%] z-30" />
+      <SolidDot className="w-12 h-12 bg-violeta/65 left-[28%] top-[28%] z-30" />
+      <SolidLine className="w-64 h-1 bg-coral/45 right-[4%] top-[40%] z-30 rotate-1" />
+      <SolidTri className="w-20 h-20 bg-coral/45 left-[55%] top-[10%] z-30 rotate-30" />
+      <SolidBox className="w-14 h-14 bg-violeta/55 right-[22%] bottom-[22%] z-30 rotate-60" />
+      <SolidRing className="w-32 h-32 border-coral/45 left-[1%] bottom-[12%] z-30" />
+      <SolidDot className="w-10 h-10 bg-coral/70 right-[10%] bottom-[6%] z-30" />
+      <SolidLine className="w-44 h-1 bg-violeta-claro/30 left-[5%] top-[62%] z-30 -rotate-2" />
+      <SolidRing className="w-18 h-18 border-violeta/40 right-[30%] top-[55%] z-30" />
 
         <Reveal as="pop">
         <div className="relative z-10 max-w-5xl mx-auto">

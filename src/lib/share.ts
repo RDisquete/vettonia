@@ -1,16 +1,16 @@
 import { toast } from 'sonner'
 
-const FESTIVAL_DATE = new Date('2026-07-17T00:00:00')
-const FESTIVAL_NAME = 'Vettonia 2026'
+const FESTIVAL_DATE = new Date('2027-10-08T00:00:00')
+const FESTIVAL_NAME = 'Vettonia 2027'
 
 function getCountdown(): string {
   const now = new Date()
   const diff = FESTIVAL_DATE.getTime() - now.getTime()
-  if (diff <= 0) return '¡Vettonia 2026 ya está aquí! 🎶'
+  if (diff <= 0) return `¡${FESTIVAL_NAME} ya está aquí! 🎶`
   const days = Math.floor(diff / (1000 * 60 * 60 * 24))
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
-  if (days > 0) return `Quedan ${days} días para Vettonia 2026 🎶`
-  return `Quedan ${hours} horas para Vettonia 2026 🎶`
+  if (days > 0) return `Quedan ${days} días para ${FESTIVAL_NAME} 🎶`
+  return `Quedan ${hours} horas para ${FESTIVAL_NAME} 🎶`
 }
 
 function makeFile(blob: Blob, name: string): File {
@@ -32,7 +32,7 @@ export async function shareImage(blob: Blob, filename: string, title?: string) {
     try {
       await navigator.share({ files: [file], title, text: title })
       return
-    } catch {}
+    } catch { console.warn('[share] share cancelled by user') }
   }
   try {
     await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })])
@@ -52,7 +52,7 @@ export async function shareText(text: string) {
     try {
       await navigator.share({ text })
       return
-    } catch {}
+    } catch (e) { console.warn('[share] navigator.share cancelled by user', e) }
   }
   try {
     await navigator.clipboard.writeText(text)
@@ -63,6 +63,6 @@ export async function shareText(text: string) {
 }
 
 export function shareCountdown() {
-  const text = `${getCountdown()}\n\n¡Yo voy! ¿Y tú?\n\n#Vettonia2026 #Festival`
+  const text = `${getCountdown()}\n\n¡Yo voy! ¿Y tú?\n\n#Vettonia2027 #Festival`
   return shareText(text)
 }

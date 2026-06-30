@@ -104,7 +104,7 @@ function StageBlock({ stage, si, cfg, favorites, overlaps, onToggleFav, onSelect
             </div>
 
             <div className="flex-1 min-w-0 py-3 pr-3">
-              <span className="font-heading text-violeta text-sm sm:text-base font-bold tracking-[-0.02em] group-hover:text-white transition-colors truncate block flex items-center gap-1.5">
+              <span className="font-heading text-violeta text-sm sm:text-base font-bold tracking-[-0.02em] group-hover:text-white transition-colors truncate block items-center gap-1.5">
                 {a.name}
                 <FavoriteButton isFavorite={favorites.has(a.slug)} onToggle={() => onToggleFav(a.slug)} />
               </span>
@@ -162,7 +162,7 @@ export default function Lineup() {
     <div className="flex flex-col min-h-svh bg-arena">
       <SEO
         title="Cartel"
-        description="Descubre el cartel completo de Vettonia 2026. 48 artistas en 3 escenarios. Horarios y artistas del festival."
+        description="Descubre el cartel completo de Vettonia 2027. 48 artistas en 3 escenarios. Horarios y artistas del festival."
         path="/lineup"
       />
       <HamburgerNav />
@@ -170,38 +170,38 @@ export default function Lineup() {
         <section className="px-5 pt-20 pb-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-linear-to-b from-violeta/2 via-transparent to-coral/2" />
 
-          <div className="absolute inset-0 bg-violeta/8"
+          <div className="absolute inset-0 bg-violeta/15"
             style={{ clipPath: 'polygon(25% 0, 45% 0, 35% 100%, 15% 100%)' }} />
-          <div className="absolute inset-0 bg-coral/6"
+          <div className="absolute inset-0 bg-coral/15"
             style={{ clipPath: 'polygon(70% 0, 95% 0, 85% 100%, 60% 100%)' }} />
-          <div className="absolute inset-0 bg-violeta/4"
+          <div className="absolute inset-0 bg-violeta/12"
             style={{ clipPath: 'polygon(0 60%, 10% 45%, 20% 80%, 5% 100%)' }} />
 
-          <div className="absolute inset-0 opacity-[0.03]"
+          <div className="absolute inset-0 opacity-[0.08]"
             style={{
               backgroundImage: 'radial-gradient(circle, #3a1a4a 1px, transparent 1px)',
               backgroundSize: '32px 32px',
             }} />
 
-          <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/5 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-2%] right-[-5%]">
+          <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/10 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-2%] right-[-5%]">
             CARTEL
           </span>
-          <span className="absolute font-heading text-[clamp(6rem,20vw,18rem)] font-extrabold text-coral/3 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[5%] left-[-3%] rotate-12">
-            2026
+          <span className="absolute font-heading text-[clamp(6rem,20vw,18rem)] font-extrabold text-coral/6 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[5%] left-[-3%] rotate-12">
+2027
           </span>
-
-          <SolidBox className="w-20 h-20 bg-coral/35 left-[5%] top-[4%] z-30 rotate-15" />
-          <SolidRing className="w-40 h-40 border-violeta/20 right-[-6%] top-[2%] z-30" />
-          <SolidDot className="w-12 h-12 bg-violeta/35 left-[32%] top-[18%] z-30" />
-          <SolidLine className="w-64 h-0.75 bg-coral/25 right-[8%] top-[48%] z-30 -rotate-3" />
-          <SolidTri className="w-22 h-22 bg-coral/25 left-[60%] top-[8%] z-30 rotate-30" />
-          <SolidDot className="w-8 h-8 bg-coral/40 right-[18%] top-[30%] z-30" />
-          <SolidRing className="w-28 h-28 border-coral/20 left-[3%] top-[55%] z-30" />
-          <SolidBox className="w-14 h-14 bg-coral/30 right-[25%] bottom-[22%] z-30 rotate-40" />
-          <SolidLine className="w-44 h-0.75 bg-violeta/20 left-[35%] top-[72%] z-30 rotate-2" />
-          <SolidDot className="w-6 h-6 bg-violeta/40 left-[8%] bottom-[15%] z-30" />
-          <SolidRing className="w-16 h-16 border-violeta/20 right-[5%] bottom-[10%] z-30" />
-          <SolidBox className="w-10 h-10 bg-violeta/35 left-[25%] bottom-[5%] z-30 rotate-60" />
+ 
+          <SolidBox className="w-20 h-20 bg-coral/55 left-[5%] top-[4%] z-30 rotate-15" />
+          <SolidRing className="w-40 h-40 border-violeta/40 right-[-6%] top-[2%] z-30" />
+          <SolidDot className="w-12 h-12 bg-violeta/55 left-[32%] top-[18%] z-30" />
+          <SolidLine className="w-64 h-0.75 bg-coral/50 right-[8%] top-[48%] z-30 -rotate-3" />
+          <SolidTri className="w-22 h-22 bg-coral/50 left-[60%] top-[8%] z-30 rotate-30" />
+          <SolidDot className="w-8 h-8 bg-coral/60 right-[18%] top-[30%] z-30" />
+          <SolidRing className="w-28 h-28 border-coral/40 left-[3%] top-[55%] z-30" />
+          <SolidBox className="w-14 h-14 bg-coral/50 right-[25%] bottom-[22%] z-30 rotate-40" />
+          <SolidLine className="w-44 h-0.75 bg-violeta/40 left-[35%] top-[72%] z-30 rotate-2" />
+          <SolidDot className="w-6 h-6 bg-violeta/60 left-[8%] bottom-[15%] z-30" />
+          <SolidRing className="w-16 h-16 border-violeta/40 right-[5%] bottom-[10%] z-30" />
+          <SolidBox className="w-10 h-10 bg-violeta/55 left-[25%] bottom-[5%] z-30 rotate-60" />
 
           <Reveal as="pop" className="relative z-10 max-w-6xl mx-auto">
             <h1 className="font-heading text-violeta text-[clamp(3rem,8vw,6rem)] font-extrabold leading-none tracking-[-0.08em] [text-shadow:5px_5px_0_#e85d6f]">
@@ -290,7 +290,7 @@ export default function Lineup() {
           <Reveal as="pop">
             <div className="relative border-l-4 border-t-2 border-r-2 border-b-2 border-white/10 p-6 md:p-10"
               style={{ clipPath: 'polygon(1.5% 0, 100% 0, 98.5% 100%, 0 100%)' }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-violeta/5 via-transparent to-coral/5 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-br from-violeta/5 via-transparent to-coral/5 pointer-events-none" />
               <PollWidget />
             </div>
           </Reveal>

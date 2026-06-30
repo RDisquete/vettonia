@@ -27,15 +27,15 @@ const DEFAULT_CONTENT: PageContent = {
   hero: {
     title1: 'Vett',
     title2: 'onia',
-    dates: '14 · 15 · 16',
-    month: 'agosto',
+    dates: '8 · 9 · 10',
+    month: 'octubre',
     location: 'extremadura',
   },
   manifiesto: {
     line1: 'ESTO NO ES',
     line2: 'UN FESTIVAL.',
     line3: 'ES UN PLAN.',
-    line4: 'EXTREMADURA 2026',
+    line4: 'EXTREMADURA 2027',
     subtext: 'Tres días sin cobertura, 3 escenarios, +48 artistas y una sola misión: vivir el momento. Tú eres el protagonista.',
     stat1: '3',
     stat1Label: 'Escenarios',
@@ -61,7 +61,7 @@ export async function getPageContent(page: ContentPage): Promise<Record<string, 
         }
         return result
       }
-    } catch {}
+    } catch (e) { console.warn('[content] getPageContent select', e) }
   }
 
   return getItem<Record<string, string>>(`page_content_${page}`, {})

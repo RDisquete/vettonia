@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
-import { unlockAlbum } from '../lib/storage'
+import { unlockAlbum } from '../services/album'
 
 export default function Acceso() {
   const navigate = useNavigate()
@@ -42,40 +42,40 @@ export default function Acceso() {
         <div className="absolute inset-0 bg-linear-to-t from-violeta/40 via-transparent to-coral/20" />
       </div>
 
-      <div className="absolute inset-0 opacity-[0.04]"
+      <div className="absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage: 'radial-gradient(circle, #3a1a4a 1px, transparent 1px)',
           backgroundSize: '24px 24px',
         }} />
 
-      <div className="absolute inset-0 bg-coral/8"
+      <div className="absolute inset-0 bg-coral/15"
         style={{ clipPath: 'polygon(75% 0, 100% 0, 100% 100%, 55% 100%)' }} />
-      <div className="absolute inset-0 bg-violeta/6"
+      <div className="absolute inset-0 bg-violeta/15"
         style={{ clipPath: 'polygon(0 0, 25% 0, 40% 100%, 0 100%)' }} />
-      <div className="absolute inset-0 bg-coral-oscuro/6"
+      <div className="absolute inset-0 bg-coral-oscuro/12"
         style={{ clipPath: 'polygon(50% 0, 65% 0, 55% 100%, 40% 100%)' }} />
-      <div className="absolute inset-0 bg-violeta-claro/4"
+      <div className="absolute inset-0 bg-violeta-claro/10"
         style={{ clipPath: 'polygon(85% 0, 100% 0, 95% 100%, 70% 100%)' }} />
 
-      <span className="absolute font-heading text-[clamp(12rem,35vw,30rem)] font-extrabold text-violeta/4 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-5%] right-[-5%] rotate-6">
+      <span className="absolute font-heading text-[clamp(12rem,35vw,30rem)] font-extrabold         text-violeta/8 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-5%] right-[-5%] rotate-6">
         ENTRAR
       </span>
-      <span className="absolute font-heading text-[clamp(5rem,15vw,13rem)] font-extrabold text-coral/2 leading-none tracking-[-0.08em] select-none pointer-events-none top-[3%] left-[-3%] -rotate-8">
+      <span className="absolute font-heading text-[clamp(5rem,15vw,13rem)] font-extrabold         text-coral/5 leading-none tracking-[-0.08em] select-none pointer-events-none top-[3%] left-[-3%] -rotate-8">
         ACCESO
       </span>
 
-      <SolidBox className="w-16 h-16 bg-coral/45 left-[3%] top-[5%] z-30 rotate-20" />
-      <SolidTri className="w-20 h-20 bg-violeta/30 right-[10%] top-[6%] z-30 rotate-[-10deg]" />
-      <SolidRing className="w-40 h-40 border-coral/30 left-[-4%] top-[28%] z-30" />
-      <SolidDot className="w-10 h-10 bg-violeta/50 right-[5%] top-[38%] z-30" />
-      <SolidLine className="w-56 h-0.75 bg-coral-oscuro/30 left-[12%] top-[52%] z-30 rotate-[-5deg]" />
-      <SolidTri className="w-14 h-14 bg-coral/35 left-[52%] bottom-[18%] z-30 rotate-25" />
-      <SolidBox className="w-12 h-12 bg-violeta/40 right-[18%] bottom-[14%] z-30 rotate-[-15deg]" />
-      <SolidLine className="w-36 h-0.75 bg-violeta-claro/20 left-[45%] top-[72%] z-30 rotate-2" />
-      <SolidDot className="w-7 h-7 bg-coral/50 left-[28%] bottom-[5%] z-30" />
-      <SolidRing className="w-20 h-20 border-violeta/30 right-[35%] top-[62%] z-30" />
-      <SolidBox className="w-8 h-8 bg-coral-oscuro/30 left-[60%] top-[8%] z-30 rotate-30" />
-      <SolidDot className="w-5 h-5 bg-violeta/50 right-[50%] bottom-[8%] z-30" />
+      <SolidBox className="w-16 h-16 bg-coral/70 left-[3%] top-[5%] z-30 rotate-20" />
+      <SolidTri className="w-20 h-20 bg-violeta/55 right-[10%] top-[6%] z-30 rotate-[-10deg]" />
+      <SolidRing className="w-40 h-40 border-coral/50 left-[-4%] top-[28%] z-30" />
+      <SolidDot className="w-10 h-10 bg-violeta/75 right-[5%] top-[38%] z-30" />
+      <SolidLine className="w-56 h-0.75 bg-coral-oscuro/50 left-[12%] top-[52%] z-30 rotate-[-5deg]" />
+      <SolidTri className="w-14 h-14 bg-coral/60 left-[52%] bottom-[18%] z-30 rotate-25" />
+      <SolidBox className="w-12 h-12 bg-violeta/65 right-[18%] bottom-[14%] z-30 rotate-[-15deg]" />
+      <SolidLine className="w-36 h-0.75 bg-violeta-claro/35 left-[45%] top-[72%] z-30 rotate-2" />
+      <SolidDot className="w-7 h-7 bg-coral/80 left-[28%] bottom-[5%] z-30" />
+      <SolidRing className="w-20 h-20 border-violeta/50 right-[35%] top-[62%] z-30" />
+      <SolidBox className="w-8 h-8 bg-coral-oscuro/50 left-[60%] top-[8%] z-30 rotate-30" />
+      <SolidDot className="w-5 h-5 bg-violeta/75 right-[50%] bottom-[8%] z-30" />
 
       <Reveal as="pop" className="w-full">
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center max-w-5xl mx-auto">
@@ -86,7 +86,7 @@ export default function Acceso() {
             <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed mt-3 max-w-md">
               20.000 almas, un valle y tres días de locura. Para acceder a la zona privada, introduce tu clave personal.
               <span className="block mt-2 text-xs italic opacity-60">
-                (Usa "1234" para acceder a la demo)
+                (Usa "V4CC3SS25" para acceder a la demo)
               </span>
               ¿Sin código? <Link to="/contact" className="text-coral underline underline-offset-4 hover:text-violeta transition-colors">escríbenos</Link>.
             </p>
@@ -147,7 +147,7 @@ export default function Acceso() {
           <div className="hidden lg:flex flex-col items-start">
             <span className="font-heading text-[clamp(10rem,18vw,18rem)] font-extrabold text-violeta leading-[0.7] tracking-[-0.08em] select-none block"
               style={{ textShadow: '8px 8px 0 #e85d6f' }}>
-              2026
+              2027
             </span>
             <span className="font-mono text-texto-suave text-[10px] tracking-[0.6em] uppercase -mt-1 block text-right">
               Vettonia

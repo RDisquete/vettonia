@@ -23,9 +23,9 @@ describe('PassCard', () => {
     expect(screen.getByText('Sin nombre')).toBeInTheDocument()
   })
 
-  it('renders the year 2026', () => {
+  it('renders the year 2027', () => {
     render(<PassCard passPhoto={null} passNumber="VET-000003" passName="Test" />)
-    expect(screen.getByText('2026')).toBeInTheDocument()
+    expect(screen.getByText('2027')).toBeInTheDocument()
   })
 
   it('renders fallback Unsplash image when no photo', () => {

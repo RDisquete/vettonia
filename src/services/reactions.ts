@@ -26,7 +26,7 @@ export async function getPhotoReactions(photoId: string): Promise<PhotoReactionC
         }
         return REACTION_TYPES.map(type => ({ type, count: counts[type] || 0 }))
       }
-    } catch {}
+    } catch (e) { console.warn('[reactions] getPhotoReactions select', e) }
   }
 
   const all = getItem<PhotoReaction[]>(REACTIONS_KEY, [])
@@ -52,7 +52,7 @@ export async function getAllReactions(): Promise<Record<string, PhotoReactionCou
         }
         return result
       }
-    } catch {}
+    } catch (e) { console.warn('[reactions] getAllReactions select', e) }
   }
 
   const all = getItem<PhotoReaction[]>(REACTIONS_KEY, [])
@@ -85,7 +85,7 @@ export async function getUserReactions(): Promise<Record<string, ReactionType[]>
         }
         return grouped
       }
-    } catch {}
+    } catch (e) { console.warn('[reactions] getUserReactions select', e) }
   }
 
   const all = getItem<PhotoReaction[]>(REACTIONS_KEY, [])
@@ -112,7 +112,7 @@ export async function toggleReaction(photoId: string, type: ReactionType): Promi
           .eq('photo_id', photoId)
           .eq('pass_number', pass)
           .eq('type', type)
-      } catch {}
+      } catch (e) { console.warn('[reactions] toggleReaction delete/insert', e) }
     }
     setItem(REACTIONS_KEY, all.filter(r => r.id !== existing.id))
     return false
@@ -123,7 +123,7 @@ export async function toggleReaction(photoId: string, type: ReactionType): Promi
       await supabase
         .from('reactions')
         .insert({ id: crypto.randomUUID(), photo_id: photoId, pass_number: pass, type })
-    } catch {}
+    } catch (e) { console.warn('[reactions] toggleReaction insert', e) }
   }
 
   const reaction: PhotoReaction = {

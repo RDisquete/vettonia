@@ -13,7 +13,7 @@ vi.mock('../../components/Reveal', () => ({
 }))
 
 const mockUnlockAlbum = vi.fn()
-vi.mock('../../lib/storage', () => ({
+vi.mock('../../services/album', () => ({
   unlockAlbum: (...args: any[]) => mockUnlockAlbum(...args),
 }))
 

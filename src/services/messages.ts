@@ -23,7 +23,7 @@ export async function getMessages(): Promise<WallMessage[]> {
         setItem(MESSAGES_KEY, mapped)
         return mapped
       }
-    } catch {}
+    } catch (e) { console.warn('[messages] getMessages select', e) }
   }
   return getItem<WallMessage[]>(MESSAGES_KEY, [])
 }
@@ -51,7 +51,7 @@ export async function addMessage(text: string, author: string): Promise<WallMess
         setItem(MESSAGES_KEY, all)
         return msg
       }
-    } catch {}
+    } catch (e) { console.warn('[messages] addMessage insert', e) }
   }
 
   const all = getItem<WallMessage[]>(MESSAGES_KEY, [])
@@ -65,7 +65,7 @@ export async function deleteMessage(id: string): Promise<void> {
   if (HAS_SUPABASE && supabase) {
     try {
       await supabase.from('messages').delete().eq('id', id)
-    } catch {}
+    } catch (e) { console.warn('[messages] deleteMessage delete', e) }
   }
   const all = getItem<WallMessage[]>(MESSAGES_KEY, []).filter(m => m.id !== id)
   setItem(MESSAGES_KEY, all)

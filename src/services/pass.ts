@@ -4,6 +4,19 @@ import { compressImage, blobToDataUrl } from '../lib/image'
 import { getItem, setItem, getRaw, setRaw } from '../lib/persistence'
 import type { PassInfo } from '../types'
 
+async function sha256(message: string): Promise<string> {
+  const msgBuffer = new TextEncoder().encode(message)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer)
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
+const HASH_REGEX = /^[a-f0-9]{64}$/
+
+function isHashed(value: string | null): boolean {
+  return value !== null && HASH_REGEX.test(value)
+}
+
 const INFO_KEY = 'pass_info'
 const PHOTO_KEY = 'pass_photo'
 const COUNTER_KEY = 'pass_counter'
@@ -41,7 +54,7 @@ export async function initPassInfo(): Promise<void> {
         created_at: info.createdAt,
         photo_url: null,
       }, { onConflict: 'number' })
-    } catch {}
+    } catch (e) { console.warn('[pass] initPassInfo upsert', e) }
   }
 }
 
@@ -64,7 +77,7 @@ export async function getPassInfo(): Promise<PassInfo> {
         setItem(INFO_KEY, info)
         return info
       }
-    } catch {}
+    } catch (e) { console.warn('[pass] getPassInfo select', e) }
   }
 
   return local
@@ -81,7 +94,7 @@ export async function setPassName(name: string): Promise<void> {
         number: info.number,
         name,
       }, { onConflict: 'number' })
-    } catch {}
+    } catch (e) { console.warn('[pass] setPassName upsert', e) }
   }
 }
 
@@ -103,7 +116,7 @@ export async function getPassPhoto(): Promise<string | null> {
           return data.photo_url
         }
       }
-    } catch {}
+    } catch (e) { console.warn('[pass] getPassPhoto select', e) }
   }
 
   return null
@@ -137,6 +150,7 @@ export async function setPassPhoto(file: File): Promise<string> {
             }, { onConflict: 'number' })
           }
         })
+        .catch((e) => { console.warn('[pass] photo upload failed', e) })
     }
   }
 
@@ -148,34 +162,43 @@ export function getPassPin(): string | null {
 }
 
 export async function setPassPin(pin: string): Promise<void> {
-  setRaw(PIN_KEY, pin)
+  const hashed = await sha256(pin)
+  setRaw(PIN_KEY, hashed)
   const info = getItem<PassInfo>(INFO_KEY, { name: '', number: '', createdAt: '' })
   if (HAS_SUPABASE && supabase && info.number) {
     try {
       await supabase.from('passes').upsert({
         number: info.number,
-        pin,
+        pin: hashed,
       }, { onConflict: 'number' })
-    } catch {}
+    } catch (e) { console.warn('[pass] setPassPin upsert', e) }
   }
 }
 
 export async function verifyPassPin(passNumber: string, pin: string): Promise<boolean> {
+  const hashedInput = await sha256(pin)
+
   if (HAS_SUPABASE && supabase) {
     try {
       const { data } = await supabase
         .from('passes')
         .select('number')
         .eq('number', passNumber)
-        .eq('pin', pin)
+        .eq('pin', hashedInput)
         .maybeSingle()
       if (data) return true
-    } catch {}
+    } catch (e) { console.warn('[pass] verifyPassPin select', e) }
   }
 
   const localPin = getRaw(PIN_KEY)
   const localPass = getItem<PassInfo>(INFO_KEY, { name: '', number: '', createdAt: '' })
-  if (localPass.number === passNumber && localPin === pin) return true
+  if (localPass.number === passNumber) {
+    if (isHashed(localPin)) {
+      if (localPin === hashedInput) return true
+    } else {
+      if (localPin === pin) return true
+    }
+  }
 
   return false
 }

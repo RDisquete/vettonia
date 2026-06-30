@@ -28,34 +28,6 @@ export function getAuthenticatedPass(): string | null {
   return getRaw(AUTH_PASS_KEY)
 }
 
-export async function authenticatePass(passNumber: string): Promise<boolean> {
-  const trimmed = passNumber.toUpperCase().trim()
-  const passRegex = /^VET-\d{6}$/
-  if (!passRegex.test(trimmed)) return false
-
-  if (HAS_SUPABASE && supabase) {
-    try {
-      const { data } = await supabase
-        .from('passes')
-        .select('number')
-        .eq('number', trimmed)
-        .maybeSingle()
-      if (data) {
-        setRaw(AUTH_PASS_KEY, trimmed)
-        return true
-      }
-    } catch {}
-  }
-
-  const local = getItem<PassInfo | null>('pass_info', null)
-  if (local && local.number === trimmed) {
-    setRaw(AUTH_PASS_KEY, trimmed)
-    return true
-  }
-
-  return false
-}
-
 export async function authenticatePassWithPin(passNumber: string, pin: string): Promise<boolean> {
   const trimmed = passNumber.toUpperCase().trim()
   const passRegex = /^VET-\d{6}$/
@@ -113,7 +85,7 @@ export async function getPhotos(status?: 'approved' | 'pending' | 'rejected'): P
         if (status) return mapped.filter(p => (p.status || 'approved') === status)
         return mapped
       }
-    } catch {}
+    } catch (e) { console.warn('[album] getPhotos select', e) }
   }
   const all = getItem<UploadedPhoto[]>(PHOTOS_KEY, [])
   if (status) return all.filter(p => (p.status || 'approved') === status)
@@ -126,7 +98,7 @@ export async function updatePhotoStatus(id: string, status: 'approved' | 'reject
       const update: Record<string, string | null> = { status }
       if (reason !== undefined) update.rejection_reason = reason
       await supabase.from('photos').update(update).eq('id', id)
-    } catch {}
+    } catch (e) { console.warn('[album] updatePhotoStatus update', e) }
   }
   const all = getItem<UploadedPhoto[]>(PHOTOS_KEY, [])
   const photo = all.find(p => p.id === id)
@@ -213,7 +185,7 @@ export async function deletePhoto(id: string): Promise<void> {
     try {
       await supabase.storage.from('photos').remove([`${id}.jpg`])
       await supabase.from('photos').delete().eq('id', id)
-    } catch {}
+    } catch (e) { console.warn('[album] deletePhoto', e) }
   }
   const all = getItem<UploadedPhoto[]>(PHOTOS_KEY, []).filter(p => p.id !== id)
   setItem(PHOTOS_KEY, all)
@@ -238,7 +210,7 @@ export async function getLikedPhotos(): Promise<string[]> {
         setItem(LIKES_KEY, ids)
         return ids
       }
-    } catch {}
+    } catch (e) { console.warn('[album] getLikedPhotos select', e) }
   }
   return getItem<string[]>(LIKES_KEY, [])
 }
@@ -271,7 +243,7 @@ export async function toggleLike(photoId: string): Promise<boolean> {
         setItem(LIKES_KEY, likes)
         return true
       }
-    } catch {}
+    } catch (e) { console.warn('[album] toggleLike select/delete/insert', e) }
   }
 
   const likes = getItem<string[]>(LIKES_KEY, [])

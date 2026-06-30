@@ -20,7 +20,7 @@ describe('PassStats', () => {
     render(
       <MemoryRouter>
         <PassStats
-          stats={{ photosUploaded: 42, totalLikes: 128, uniqueAuthors: 15, joinDate: '2026-06-01' }}
+          stats={{ photosUploaded: 42, totalLikes: 128, uniqueAuthors: 15, joinDate: '2027-06-01' }}
           messageCount={5}
           photos={[]}
           loading={false}

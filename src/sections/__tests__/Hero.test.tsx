@@ -19,12 +19,12 @@ vi.mock('../../components/GreenLayer', () => ({
 describe('Hero', () => {
   it('renders the festival date', () => {
     render(<MemoryRouter><Hero /></MemoryRouter>)
-    expect(screen.getByText('14 · 15 · 16')).toBeInTheDocument()
+    expect(screen.getByText('8 · 9 · 10')).toBeInTheDocument()
   })
 
   it('renders the month', () => {
     render(<MemoryRouter><Hero /></MemoryRouter>)
-    expect(screen.getByText('agosto')).toBeInTheDocument()
+    expect(screen.getByText('octubre')).toBeInTheDocument()
   })
 
   it('renders the location', () => {

@@ -28,9 +28,7 @@ export function DarkModeSwitch({ onClose }: { onClose?: () => void }) {
     >
       <span className="text-xl">{dark ? '☀' : '☾'}</span>
       <span>{dark ? 'Modo claro' : 'Modo oscuro'}</span>
-      <span className="font-ui text-white/40 text-[10px] font-normal tracking-normal ml-1">
-        ¿demasiada luz?
-      </span>
+   
     </button>
   )
 }

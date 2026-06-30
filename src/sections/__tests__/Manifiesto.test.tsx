@@ -30,7 +30,7 @@ describe('Manifiesto', () => {
 
   it('renders the Extremadura location and year', () => {
     render(<MemoryRouter><Manifiesto /></MemoryRouter>)
-    expect(screen.getByText('EXTREMADURA 2026')).toBeInTheDocument()
+    expect(screen.getByText('EXTREMADURA 2027')).toBeInTheDocument()
   })
 
   it('renders the description text', () => {

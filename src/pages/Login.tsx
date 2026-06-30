@@ -32,20 +32,20 @@ export default function Login() {
 
   return (
     <div className="flex flex-col min-h-svh bg-arena">
-      <SEO title="Iniciar sesión" description="Accede a tu cuenta de Vettonia 2026." path="/login" noindex />
+      <SEO title="Iniciar sesión" description="Accede a tu cuenta de Vettonia 2027." path="/login" noindex />
       <HamburgerNav />
       <div className="flex-1 flex items-center justify-center px-5 py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-coral/3"
+        <div className="absolute inset-0 bg-coral/12"
           style={{ clipPath: 'polygon(30% 0, 55% 0, 40% 100%, 20% 100%)' }} />
-        <div className="absolute inset-0 bg-violeta/4"
+        <div className="absolute inset-0 bg-violeta/12"
           style={{ clipPath: 'polygon(70% 0, 90% 0, 80% 100%, 60% 100%)' }} />
 
-        <SolidBox className="w-12 h-12 bg-coral/45 left-[6%] top-[12%] z-30 rotate-15" />
-        <SolidRing className="w-28 h-28 border-violeta/20 right-[-3%] top-[8%] z-30" />
-        <SolidDot className="w-8 h-8 bg-violeta/45 left-[12%] top-[45%] z-30" />
-        <SolidTri className="w-14 h-14 bg-coral/30 right-[10%] bottom-[25%] z-30 rotate-40" />
-        <SolidLine className="w-36 h-0.75 bg-coral/30 right-[12%] top-[50%] z-30 -rotate-2" />
-        <SolidRing className="w-16 h-16 border-violeta/30 left-[45%] bottom-[12%] z-30" />
+        <SolidBox className="w-12 h-12 bg-coral/80 left-[6%] top-[12%] z-30 rotate-15" />
+        <SolidRing className="w-28 h-28 border-violeta/40 right-[-3%] top-[8%] z-30" />
+        <SolidDot className="w-8 h-8 bg-violeta/80 left-[12%] top-[45%] z-30" />
+        <SolidTri className="w-14 h-14 bg-coral/60 right-[10%] bottom-[25%] z-30 rotate-40" />
+        <SolidLine className="w-36 h-0.75 bg-coral/60 right-[12%] top-[50%] z-30 -rotate-2" />
+        <SolidRing className="w-16 h-16 border-violeta/60 left-[45%] bottom-[12%] z-30" />
 
         <div className="relative z-10 w-full max-w-md">
           <h1 className="font-heading text-violeta text-[clamp(2.5rem,6vw,4rem)] font-extrabold leading-none tracking-[-0.08em] [text-shadow:4px_4px_0_#e85d6f]">

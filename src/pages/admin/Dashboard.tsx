@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { getPhotos, getPublishedArtists } from '../../lib/storage'
+import { getPhotos } from '../../services/album'
+import { getPublishedArtists } from '../../services/lineup'
 import { getAlerts } from '../../services/alerts'
 import type { UploadedPhoto } from '../../types'
 import SEO from '../../components/SEO'
@@ -78,7 +79,7 @@ export default function Dashboard() {
     <div>
       <SEO title="Panel de control" description="Panel de administración de Vettonia." noindex />
       <p className="font-heading text-violeta text-2xl font-bold tracking-[-0.04em]">Panel de control</p>
-      <p className="font-ui text-texto-suave text-xs mt-1">Vettonia 2026 — {new Date().toLocaleDateString('es', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+      <p className="font-ui text-texto-suave text-xs mt-1">Vettonia 2027 — {new Date().toLocaleDateString('es', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
         {stats.map((s) => (
@@ -105,7 +106,7 @@ export default function Dashboard() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {recentPhotos.map((photo) => (
               <div key={photo.id} className="border border-violeta/10 bg-white overflow-hidden">
-                <img src={photo.dataUrl} alt="" loading="lazy" decoding="async" className="w-full aspect-square object-cover" />
+                <img src={photo.dataUrl} alt={`Foto de ${photo.author || 'usuario'}`} loading="lazy" decoding="async" className="w-full aspect-square object-cover" />
                 <div className="p-2">
                   <p className="font-mono text-violeta text-[7px] tracking-[0.2em] uppercase truncate">{photo.author}</p>
                   {photo.caption && (

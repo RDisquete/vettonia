@@ -34,20 +34,20 @@ export default function Register() {
 
   return (
     <div className="flex flex-col min-h-svh bg-arena">
-      <SEO title="Registro" description="Crea tu cuenta en Vettonia 2026." path="/register" noindex />
+      <SEO title="Registro" description="Crea tu cuenta en Vettonia 2027." path="/register" noindex />
       <HamburgerNav />
       <div className="flex-1 flex items-center justify-center px-5 py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-violeta/3"
+        <div className="absolute inset-0 bg-violeta/12"
           style={{ clipPath: 'polygon(30% 0, 55% 0, 40% 100%, 20% 100%)' }} />
-        <div className="absolute inset-0 bg-coral/4"
+        <div className="absolute inset-0 bg-coral/12"
           style={{ clipPath: 'polygon(70% 0, 90% 0, 80% 100%, 60% 100%)' }} />
 
-        <SolidBox className="w-16 h-16 bg-coral/40 left-[5%] top-[10%] z-30 rotate-20" />
-        <SolidRing className="w-32 h-32 border-violeta/20 right-[-4%] top-[5%] z-30" />
-        <SolidDot className="w-10 h-10 bg-violeta/40 left-[8%] top-[50%] z-30" />
-        <SolidTri className="w-16 h-16 bg-coral/25 right-[8%] bottom-[20%] z-30 rotate-35" />
-        <SolidLine className="w-40 h-0.75 bg-coral/25 right-[15%] top-[45%] z-30 rotate-2" />
-        <SolidRing className="w-20 h-20 border-violeta/25 left-[50%] bottom-[10%] z-30" />
+        <SolidBox className="w-16 h-16 bg-coral/70 left-[5%] top-[10%] z-30 rotate-20" />
+        <SolidRing className="w-32 h-32 border-violeta/40 right-[-4%] top-[5%] z-30" />
+        <SolidDot className="w-10 h-10 bg-violeta/70 left-[8%] top-[50%] z-30" />
+        <SolidTri className="w-16 h-16 bg-coral/50 right-[8%] bottom-[20%] z-30 rotate-35" />
+        <SolidLine className="w-40 h-0.75 bg-coral/50 right-[15%] top-[45%] z-30 rotate-2" />
+        <SolidRing className="w-20 h-20 border-violeta/50 left-[50%] bottom-[10%] z-30" />
 
         <div className="relative z-10 w-full max-w-md">
           <h1 className="font-heading text-violeta text-[clamp(2.5rem,6vw,4rem)] font-extrabold leading-none tracking-[-0.08em] [text-shadow:4px_4px_0_#e85d6f]">

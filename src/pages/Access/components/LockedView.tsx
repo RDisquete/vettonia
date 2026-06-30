@@ -27,31 +27,31 @@ export default function LockedView({ code, error, inputRef, onCodeChange, onSubm
             <div className="absolute inset-0 bg-linear-to-t from-violeta/30 via-transparent to-coral/15" />
           </div>
 
-          <div className="absolute inset-0 opacity-[0.04]"
+          <div className="absolute inset-0 opacity-[0.08]"
             style={{
               backgroundImage: 'radial-gradient(circle, #3a1a4a 1px, transparent 1px)',
               backgroundSize: '24px 24px',
             }} />
 
-          <div className="absolute inset-0 bg-coral/6"
+          <div className="absolute inset-0 bg-coral/15"
             style={{ clipPath: 'polygon(80% 0, 100% 0, 100% 100%, 60% 100%)' }} />
-          <div className="absolute inset-0 bg-violeta/5"
+          <div className="absolute inset-0 bg-violeta/15"
             style={{ clipPath: 'polygon(0 0, 20% 0, 35% 100%, 0 100%)' }} />
 
-          <span className="absolute font-heading text-[clamp(14rem,40vw,35rem)] font-extrabold text-violeta/3 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-8%] right-[-5%] rotate-12">
+          <span className="absolute font-heading text-[clamp(14rem,40vw,35rem)] font-extrabold text-violeta/6 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-8%] right-[-5%] rotate-12">
             ACCESO
           </span>
 
-          <SolidBox className="w-16 h-16 bg-coral/40 left-[3%] top-[5%] z-30 rotate-25" />
-          <SolidTri className="w-20 h-20 bg-violeta/25 right-[8%] top-[6%] z-30 rotate-[-15deg]" />
-          <SolidRing className="w-36 h-36 border-coral/25 left-[-4%] top-[35%] z-30" />
-          <SolidDot className="w-10 h-10 bg-violeta/45 right-[4%] top-[42%] z-30" />
-          <SolidLine className="w-56 h-0.75 bg-coral/35 left-[10%] top-[52%] z-30 -rotate-3" />
-          <SolidTri className="w-14 h-14 bg-coral/30 left-[50%] bottom-[18%] z-30 rotate-30" />
-          <SolidBox className="w-12 h-12 bg-violeta/30 right-[15%] bottom-[10%] z-30 rotate-[-20deg]" />
-          <SolidDot className="w-7 h-7 bg-coral/45 left-[25%] bottom-[5%] z-30" />
-          <SolidRing className="w-18 h-18 border-violeta/25 right-[35%] top-[70%] z-30" />
-          <SolidLine className="w-32 h-0.5 bg-coral/25 right-[20%] top-[80%] z-30 rotate-8" />
+          <SolidBox className="w-16 h-16 bg-coral/70 left-[3%] top-[5%] z-30 rotate-25" />
+          <SolidTri className="w-20 h-20 bg-violeta/45 right-[8%] top-[6%] z-30 rotate-[-15deg]" />
+          <SolidRing className="w-36 h-36 border-coral/45 left-[-4%] top-[35%] z-30" />
+          <SolidDot className="w-10 h-10 bg-violeta/70 right-[4%] top-[42%] z-30" />
+          <SolidLine className="w-56 h-0.75 bg-coral/60 left-[10%] top-[52%] z-30 -rotate-3" />
+          <SolidTri className="w-14 h-14 bg-coral/55 left-[50%] bottom-[18%] z-30 rotate-30" />
+          <SolidBox className="w-12 h-12 bg-violeta/55 right-[15%] bottom-[10%] z-30 rotate-[-20deg]" />
+          <SolidDot className="w-7 h-7 bg-coral/70 left-[25%] bottom-[5%] z-30" />
+          <SolidRing className="w-18 h-18 border-violeta/45 right-[35%] top-[70%] z-30" />
+          <SolidLine className="w-32 h-0.5 bg-coral/45 right-[20%] top-[80%] z-30 rotate-8" />
 
           <div className="relative z-10 w-full px-5">
             <Reveal as="rise" className="max-w-5xl mx-auto">
@@ -78,6 +78,9 @@ export default function LockedView({ code, error, inputRef, onCodeChange, onSubm
                       {error && (
                         <p className="font-mono text-coral text-[8px] tracking-[0.2em] uppercase mt-2 text-center">Código incorrecto</p>
                       )}
+                      <p className="font-mono text-texto-suave text-[7px] tracking-[0.3em] uppercase mt-3 text-center">
+                        Demo: escribe <span className="text-coral font-bold">V4CC3SS25</span>
+                      </p>
 
                       <div className="border-2 border-violeta/10 p-5 bg-white/80 flex justify-center mt-4">
                         <div className="grid grid-cols-5 gap-1">
@@ -101,7 +104,7 @@ export default function LockedView({ code, error, inputRef, onCodeChange, onSubm
                   <Reveal as="pop" delay={500}>
                     <span className="font-heading text-[clamp(10rem,18vw,18rem)] font-extrabold text-violeta leading-[0.7] tracking-[-0.08em] select-none block"
                           style={{ textShadow: '8px 8px 0 #e85d6f' }}>
-                      2026
+                      2027
                     </span>
                     <span className="font-mono text-texto-suave text-[10px] tracking-[0.6em] uppercase -mt-1 block text-right">
                       Vettonia

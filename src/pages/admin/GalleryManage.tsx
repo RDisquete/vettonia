@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { getPhotos, deletePhoto, updatePhotoStatus } from '../../lib/storage'
+import { getPhotos, deletePhoto, updatePhotoStatus } from '../../services/album'
 import type { UploadedPhoto } from '../../types'
 import SEO from '../../components/SEO'
 import { GalleryManageSkeleton } from '../../components/Skeleton'

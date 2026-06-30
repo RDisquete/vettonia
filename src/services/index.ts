@@ -8,7 +8,6 @@ export {
   updatePhotoStatus,
   getLikedPhotos,
   toggleLike,
-  authenticatePass,
   authenticatePassWithPin,
   getAuthenticatedPass,
 } from './album'

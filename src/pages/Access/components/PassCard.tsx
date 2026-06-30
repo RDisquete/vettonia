@@ -71,7 +71,7 @@ const PassCard = forwardRef<HTMLDivElement, Props>(function PassCard({ passPhoto
                  style={{ clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)' }}>
               <img
                 src={passPhoto || 'https://images.unsplash.com/photo-1768054180300-ab772bd09d0e?w=400&h=600&fit=crop&auto=format'}
-                alt=""
+                alt="Foto de perfil del pase"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover"
@@ -93,7 +93,7 @@ const PassCard = forwardRef<HTMLDivElement, Props>(function PassCard({ passPhoto
                     style={{ textShadow: '4px 4px 0 #3a1a4a' }}>
                 VETTONIA
               </span>
-              <span className="font-mono text-[8px] tracking-[0.5em] uppercase text-white/80 block mt-1">2026</span>
+              <span className="font-mono text-[8px] tracking-[0.5em] uppercase text-white/80 block mt-1">2027</span>
             </div>
             <div className="-mt-1">
               <PassQR passName={passName} passNumber={passNumber} />

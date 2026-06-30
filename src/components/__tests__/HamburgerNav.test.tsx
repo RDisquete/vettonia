@@ -1,7 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import HamburgerNav from '../HamburgerNav'
+
+async function flushEffects() {
+  await act(async () => {})
+}
 
 const mockGetCurrentUser = vi.fn()
 const mockSignOut = vi.fn()
@@ -33,6 +37,7 @@ describe('HamburgerNav', () => {
   it('opens the menu on hamburger click', async () => {
     mockGetCurrentUser.mockResolvedValue(null)
     renderNav()
+    await flushEffects()
     fireEvent.click(screen.getByLabelText('Menú'))
     expect(screen.getByText('Inicio')).toBeInTheDocument()
     expect(screen.getByText('Cartel')).toBeInTheDocument()
@@ -42,6 +47,7 @@ describe('HamburgerNav', () => {
   it('shows Acceder when user is not logged in', async () => {
     mockGetCurrentUser.mockResolvedValue(null)
     renderNav()
+    await flushEffects()
     fireEvent.click(screen.getByLabelText('Menú'))
     expect(screen.getByText('Acceder')).toBeInTheDocument()
   })
@@ -49,6 +55,7 @@ describe('HamburgerNav', () => {
   it('shows Cerrar sesión when user is logged in', async () => {
     mockGetCurrentUser.mockResolvedValue({ id: 'user-1' })
     renderNav()
+    await flushEffects()
     fireEvent.click(screen.getByLabelText('Menú'))
     expect(await screen.findByText('Cerrar sesión')).toBeInTheDocument()
     expect(screen.queryByText('Acceder')).not.toBeInTheDocument()
@@ -57,6 +64,7 @@ describe('HamburgerNav', () => {
   it('has a close button inside the menu', async () => {
     mockGetCurrentUser.mockResolvedValue(null)
     renderNav()
+    await flushEffects()
     fireEvent.click(screen.getByLabelText('Menú'))
     expect(screen.getByLabelText('Cerrar menú')).toBeInTheDocument()
   })
@@ -64,6 +72,7 @@ describe('HamburgerNav', () => {
   it('renders the logo inside the menu', async () => {
     mockGetCurrentUser.mockResolvedValue(null)
     renderNav()
+    await flushEffects()
     fireEvent.click(screen.getByLabelText('Menú'))
     const logo = screen.getByAltText('Vettonia')
     expect(logo).toBeInTheDocument()

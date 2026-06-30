@@ -45,27 +45,27 @@ export default function Contact() {
     <div className="flex flex-col min-h-svh bg-arena">
       <SEO
         title="Contacto"
-        description="Ponte en contacto con el equipo de Vettonia 2026. Escríbenos para cualquier duda o sugerencia."
+        description="Ponte en contacto con el equipo de Vettonia 2027. Escríbenos para cualquier duda o sugerencia."
         path="/contact"
       />
       <HamburgerNav />
       <div className="flex-1">
         <section className="px-5 py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-violeta/4"
+          <div className="absolute inset-0 bg-violeta/12"
             style={{ clipPath: 'polygon(50% 0, 75% 0, 60% 100%, 30% 100%)' }} />
-          <div className="absolute inset-0 bg-coral/3"
+          <div className="absolute inset-0 bg-coral/12"
             style={{ clipPath: 'polygon(85% 0, 100% 0, 90% 100%, 65% 100%)' }} />
 
-          <span className="absolute font-heading text-[clamp(8rem,28vw,24rem)] font-extrabold text-violeta/3 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-3%] right-[-5%]">
+          <span className="absolute font-heading text-[clamp(8rem,28vw,24rem)] font-extrabold text-violeta/6 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-3%] right-[-5%]">
             CONTACTO
           </span>
 
-          <SolidBox className="w-14 h-14 bg-coral/40 left-[4%] top-[5%] z-30 rotate-18" />
-          <SolidRing className="w-26 h-26 border-violeta/20 right-[-3%] top-[8%] z-30" />
-          <SolidDot className="w-7 h-7 bg-violeta/45 right-[12%] top-[38%] z-30" />
-          <SolidLine className="w-36 h-0.5 bg-coral/30 left-[8%] top-[42%] z-30" />
-          <SolidDot className="w-5 h-5 bg-coral/50 right-[30%] bottom-[15%] z-30" />
-          <SolidBox className="w-10 h-10 bg-violeta/30 left-[45%] bottom-[8%] z-30 rotate-25" />
+          <SolidBox className="w-14 h-14 bg-coral/60 left-[4%] top-[5%] z-30 rotate-18" />
+          <SolidRing className="w-26 h-26 border-violeta/40 right-[-3%] top-[8%] z-30" />
+          <SolidDot className="w-7 h-7 bg-violeta/60 right-[12%] top-[38%] z-30" />
+          <SolidLine className="w-36 h-0.5 bg-coral/50 left-[8%] top-[42%] z-30" />
+          <SolidDot className="w-5 h-5 bg-coral/70 right-[30%] bottom-[15%] z-30" />
+          <SolidBox className="w-10 h-10 bg-violeta/50 left-[45%] bottom-[8%] z-30 rotate-25" />
 
             <h1 className="font-heading text-violeta text-[clamp(3rem,8vw,6rem)] font-extrabold leading-none tracking-[-0.08em] [text-shadow:5px_5px_0_#e85d6f]">
               CONTACTO

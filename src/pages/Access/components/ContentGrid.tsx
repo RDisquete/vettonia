@@ -1,7 +1,7 @@
 const contentItems = [
   {
     title: 'Playlist Oficial',
-    desc: 'Lo que sonó en Vettonia 2026. Una colección curada de los artistas que pasaron por los 3 escenarios.',
+    desc: 'Lo que sonó en Vettonia 2027. Una colección curada de los artistas que pasaron por los 3 escenarios.',
     link: 'https://open.spotify.com/playlist/37i9dQZF1DX4JAvHpjipBk',
     icon: '♫',
     color: 'coral',
@@ -19,7 +19,7 @@ const contentItems = [
   },
   {
     title: 'Cartel Oficial',
-    desc: 'El póster de Vettonia 2026 para que lo imprimas, lo enmarques y lo tengas donde merece.',
+    desc: 'El póster de Vettonia 2027 para que lo imprimas, lo enmarques y lo tengas donde merece.',
     link: '#',
     icon: '⊞',
     color: 'coral',
@@ -39,14 +39,14 @@ const contentItems = [
 
 const colorStyles = {
   coral: {
-    bg: 'bg-coral/8',
+    bg: 'bg-coral/15',
     text: 'text-coral',
     border: 'border-coral/50',
     hoverBg: 'hover:bg-coral',
     hoverBorder: 'hover:border-coral',
   },
   violeta: {
-    bg: 'bg-violeta/8',
+    bg: 'bg-violeta/15',
     text: 'text-violeta',
     border: 'border-violeta/50',
     hoverBg: 'hover:bg-violeta',

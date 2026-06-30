@@ -13,7 +13,7 @@ export default function Manifiesto() {
   const line1 = c?.line1 ?? 'ESTO NO ES'
   const line2 = c?.line2 ?? 'UN FESTIVAL.'
   const line3 = c?.line3 ?? 'ES UN PLAN.'
-  const line4 = c?.line4 ?? 'EXTREMADURA 2026'
+  const line4 = c?.line4 ?? 'EXTREMADURA 2027'
   const subtext = c?.subtext ?? 'Tres días sin cobertura, 3 escenarios, +48 artistas y una sola misión: vivir el momento. Tú eres el protagonista.'
   const stat1 = c?.stat1 ?? '3'
   const stat1Label = c?.stat1Label ?? 'Escenarios'
@@ -35,39 +35,39 @@ export default function Manifiesto() {
         style={{ clipPath: 'polygon(65% 0, 100% 0, 80% 100%, 45% 100%)' }} />
       <div className="absolute inset-0 bg-violeta/10"
         style={{ clipPath: 'polygon(0 30%, 25% 0, 45% 100%, 20% 100%)' }} />
-      <div className="absolute inset-0 bg-coral-oscuro/8"
+      <div className="absolute inset-0 bg-coral-oscuro/15"
         style={{ clipPath: 'polygon(30% 60%, 55% 40%, 70% 80%, 40% 100%)' }} />
-      <div className="absolute inset-0 bg-violeta-claro/6"
+      <div className="absolute inset-0 bg-violeta-claro/12"
         style={{ clipPath: 'polygon(80% 20%, 100% 30%, 90% 60%, 70% 50%)' }} />
 
-      <div className="absolute inset-0 opacity-[0.06]"
+      <div className="absolute inset-0 opacity-[0.1]"
         style={{
           backgroundImage: 'radial-gradient(circle, #e85d6f 1px, transparent 1px)',
           backgroundSize: '28px 28px',
         }} />
 
-      <span className="absolute font-heading text-[clamp(10rem,40vw,35rem)] font-bold text-white/4 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-5%] right-[-5%]">
-        2026
+      <span className="absolute font-heading text-[clamp(10rem,40vw,35rem)] font-bold text-white/8 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-5%] right-[-5%]">
+        2027
       </span>
-      <span className="absolute font-heading text-[clamp(6rem,20vw,18rem)] font-bold text-coral/4 leading-none tracking-[-0.08em] select-none pointer-events-none top-[8%] left-[-2%] -rotate-6">
+      <span className="absolute font-heading text-[clamp(6rem,20vw,18rem)] font-bold text-coral/8 leading-none tracking-[-0.08em] select-none pointer-events-none top-[8%] left-[-2%] -rotate-6">
         +48
       </span>
 
-      <SolidBox className="w-20 h-20 bg-white/15 left-[18%] top-[8%] z-40 rotate-25" />
-      <SolidRing className="w-44 h-44 border-white/20 right-[-10%] top-[-8%] z-40" />
-      <SolidDot className="w-10 h-10 bg-coral/55 left-[4%] top-[42%] z-40" />
-      <SolidLine className="w-48 h-1 bg-white/20 right-[12%] top-[50%] z-40 rotate-1" />
-      <SolidTri className="w-20 h-20 bg-white/10 left-[55%] top-[12%] z-40 rotate-35" />
-      <SolidBox className="w-12 h-12 bg-white/15 right-[22%] bottom-[18%] z-40 rotate[-40deg]" />
-      <SolidRing className="w-28 h-28 border-coral/40 left-[38%] bottom-[3%] z-40" />
-      <SolidDot className="w-5 h-5 bg-white/50 left-[30%] top-[26%] z-40" />
-      <SolidLine className="w-60 h-1 bg-white/10 left-[6%] top-[35%] z-30" />
-      <SolidDot className="w-7 h-7 bg-white/30 right-[12%] bottom-[28%] z-30" />
-      <SolidBox className="w-8 h-8 bg-coral-oscuro/25 left-[12%] bottom-[6%] z-30 rotate-15" />
-      <SolidRing className="w-16 h-16 border-white/15 right-[35%] top-[62%] z-30" />
+      <SolidBox className="w-20 h-20 bg-white/25 left-[18%] top-[8%] z-40 rotate-25" />
+      <SolidRing className="w-44 h-44 border-white/35 right-[-10%] top-[-8%] z-40" />
+      <SolidDot className="w-10 h-10 bg-coral/80 left-[4%] top-[42%] z-40" />
+      <SolidLine className="w-48 h-1 bg-white/35 right-[12%] top-[50%] z-40 rotate-1" />
+      <SolidTri className="w-20 h-20 bg-white/20 left-[55%] top-[12%] z-40 rotate-35" />
+      <SolidBox className="w-12 h-12 bg-white/25 right-[22%] bottom-[18%] z-40 rotate[-40deg]" />
+      <SolidRing className="w-28 h-28 border-coral/70 left-[38%] bottom-[3%] z-40" />
+      <SolidDot className="w-5 h-5 bg-white/80 left-[30%] top-[26%] z-40" />
+      <SolidLine className="w-60 h-1 bg-white/20 left-[6%] top-[35%] z-30" />
+      <SolidDot className="w-7 h-7 bg-white/55 right-[12%] bottom-[28%] z-30" />
+      <SolidBox className="w-8 h-8 bg-coral-oscuro/45 left-[12%] bottom-[6%] z-30 rotate-15" />
+      <SolidRing className="w-16 h-16 border-white/25 right-[35%] top-[62%] z-30" />
 
-      <div className="absolute inset-y-[15%] left-[8%] w-px bg-white/15 z-10" />
-      <div className="absolute inset-y-[15%] left-[calc(8%+8px)] w-px bg-white/8 z-10" />
+      <div className="absolute inset-y-[15%] left-[8%] w-px bg-white/30 z-10" />
+      <div className="absolute inset-y-[15%] left-[calc(8%+8px)] w-px bg-white/15 z-10" />
 
       <div className="absolute top-[12%] left-[5%] z-20">
         <p className="font-heading text-white text-6xl sm:text-8xl font-bold leading-none drop-shadow-lg">{stat1}</p>

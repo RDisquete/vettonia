@@ -52,7 +52,7 @@ export default function Artists() {
     <div className="flex flex-col min-h-svh bg-arena">
       <SEO
         title="Artistas"
-        description="Conoce a los +48 artistas que actuarán en Vettonia 2026. Electrónica, indie, flamenco, rock y mucho más."
+        description="Conoce a los +48 artistas que actuarán en Vettonia 2027. Electrónica, indie, flamenco, rock y mucho más."
         path="/artists"
       />
       <HamburgerNav />
@@ -60,38 +60,38 @@ export default function Artists() {
         <section className="px-5 pt-20 pb-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-linear-to-b from-coral/2 via-transparent to-violeta/2" />
 
-          <div className="absolute inset-0 bg-violeta/8"
+          <div className="absolute inset-0 bg-violeta/15"
             style={{ clipPath: 'polygon(35% 0, 55% 0, 50% 100%, 30% 100%)' }} />
-          <div className="absolute inset-0 bg-coral/6"
+          <div className="absolute inset-0 bg-coral/15"
             style={{ clipPath: 'polygon(70% 0, 90% 0, 80% 100%, 60% 100%)' }} />
-          <div className="absolute inset-0 bg-violeta/4"
+          <div className="absolute inset-0 bg-violeta/12"
             style={{ clipPath: 'polygon(0 50%, 15% 35%, 25% 75%, 0 90%)' }} />
 
-          <div className="absolute inset-0 opacity-[0.03]"
+          <div className="absolute inset-0 opacity-[0.08]"
             style={{
               backgroundImage: 'radial-gradient(circle, #3a1a4a 1px, transparent 1px)',
               backgroundSize: '28px 28px',
             }} />
 
-          <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/5 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-2%] left-[-5%]">
+          <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/10 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-2%] left-[-5%]">
             ARTISTAS
           </span>
-          <span className="absolute font-heading text-[clamp(6rem,20vw,18rem)] font-extrabold text-coral/3 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[8%] right-[-5%] -rotate-12">
+          <span className="absolute font-heading text-[clamp(6rem,20vw,18rem)] font-extrabold text-coral/6 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[8%] right-[-5%] -rotate-12">
             +48
           </span>
 
-          <SolidBox className="w-20 h-20 bg-coral/40 left-[4%] top-[5%] z-30 rotate-12" />
-          <SolidRing className="w-40 h-40 border-violeta/20 right-[-8%] top-[2%] z-30" />
-          <SolidDot className="w-12 h-12 bg-violeta/35 right-[12%] top-[28%] z-30" />
-          <SolidLine className="w-64 h-0.75 bg-coral/30 left-[6%] top-[48%] z-30 rotate-2" />
-          <SolidTri className="w-24 h-24 bg-coral/30 left-[62%] top-[10%] z-30 rotate-45" />
-          <SolidBox className="w-14 h-14 bg-violeta/35 left-[40%] bottom-[22%] z-30 rotate-[-20deg]" />
-          <SolidRing className="w-24 h-24 border-coral/20 left-[2%] bottom-[30%] z-30" />
-          <SolidLine className="w-44 h-0.75 bg-coral/25 right-[5%] top-[55%] z-30 rotate-3" />
-          <SolidDot className="w-8 h-8 bg-coral/40 left-[22%] bottom-[8%] z-30" />
-          <SolidBox className="w-16 h-16 bg-coral/30 right-[12%] bottom-[8%] z-30 rotate-35" />
-          <SolidRing className="w-16 h-16 border-violeta/20 right-[6%] top-[45%] z-30" />
-          <SolidLine className="w-28 h-0.5 bg-violeta/20 left-[45%] top-[75%] z-30 rotate-[-4deg]" />
+          <SolidBox className="w-20 h-20 bg-coral/60 left-[4%] top-[5%] z-30 rotate-12" />
+          <SolidRing className="w-40 h-40 border-violeta/40 right-[-8%] top-[2%] z-30" />
+          <SolidDot className="w-12 h-12 bg-violeta/55 right-[12%] top-[28%] z-30" />
+          <SolidLine className="w-64 h-0.75 bg-coral/50 left-[6%] top-[48%] z-30 rotate-2" />
+          <SolidTri className="w-24 h-24 bg-coral/50 left-[62%] top-[10%] z-30 rotate-45" />
+          <SolidBox className="w-14 h-14 bg-violeta/55 left-[40%] bottom-[22%] z-30 rotate-[-20deg]" />
+          <SolidRing className="w-24 h-24 border-coral/40 left-[2%] bottom-[30%] z-30" />
+          <SolidLine className="w-44 h-0.75 bg-coral/50 right-[5%] top-[55%] z-30 rotate-3" />
+          <SolidDot className="w-8 h-8 bg-coral/60 left-[22%] bottom-[8%] z-30" />
+          <SolidBox className="w-16 h-16 bg-coral/50 right-[12%] bottom-[8%] z-30 rotate-35" />
+          <SolidRing className="w-16 h-16 border-violeta/40 right-[6%] top-[45%] z-30" />
+          <SolidLine className="w-28 h-0.5 bg-violeta/40 left-[45%] top-[75%] z-30 rotate-[-4deg]" />
 
             <h1 className="font-heading text-violeta text-[clamp(3rem,8vw,6rem)] font-extrabold leading-none tracking-[-0.08em] [text-shadow:5px_5px_0_#e85d6f]">
               ARTISTAS

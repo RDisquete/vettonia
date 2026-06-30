@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import HamburgerNav from '../components/HamburgerNav'
 import Footer from '../sections/Footer'
 import SEO from '../components/SEO'
-import { uploadPhoto, isAlbumUnlocked, unlockAlbum } from '../lib/storage'
+import { uploadPhoto, isAlbumUnlocked, unlockAlbum } from '../services/album'
 import { getCurrentUser } from '../services/auth'
 import { toast } from 'sonner'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
@@ -127,14 +127,14 @@ export default function Upload() {
 
   return (
     <div className="flex flex-col min-h-svh bg-arena">
-      <SEO title="Sube tus fotos" description="Sube tus fotos de Vettonia 2026 y comparte tus mejores momentos." path="/upload" noindex />
+      <SEO title="Sube tus fotos" description="Sube tus fotos de Vettonia 2027 y comparte tus mejores momentos." path="/upload" noindex />
       <HamburgerNav />
       <div className="flex-1">
         <section className="relative overflow-hidden min-h-[80vh] flex items-center px-5 py-20">
           <div className="absolute inset-0">
             <img
               src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&h=1000&fit=crop&auto=format"
-              alt=""
+                alt="Vista previa de la foto"
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover opacity-[0.15]"
@@ -142,41 +142,41 @@ export default function Upload() {
             <div className="absolute inset-0 bg-linear-to-b from-arena/95 via-arena/85 to-arena/95" />
           </div>
 
-          <div className="absolute inset-0 bg-coral/8"
+          <div className="absolute inset-0 bg-coral/15"
             style={{ clipPath: 'polygon(55% 0, 100% 0, 80% 100%, 35% 100%)' }} />
-          <div className="absolute inset-0 bg-violeta/6"
+          <div className="absolute inset-0 bg-violeta/15"
             style={{ clipPath: 'polygon(0 20%, 30% 0, 45% 60%, 0 80%)' }} />
-          <div className="absolute inset-0 bg-violeta-claro/5"
+          <div className="absolute inset-0 bg-violeta-claro/12"
             style={{ clipPath: 'polygon(80% 0, 100% 10%, 90% 100%, 60% 100%)' }} />
 
-          <div className="absolute inset-0 opacity-[0.04]"
+          <div className="absolute inset-0 opacity-[0.08]"
             style={{
               backgroundImage: 'radial-gradient(circle, #3a1a4a 1px, transparent 1px)',
               backgroundSize: '24px 24px',
             }} />
 
-          <span className="absolute font-heading text-[clamp(12rem,40vw,34rem)] font-extrabold text-violeta/4 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-4%] right-[-6%]">
+          <span className="absolute font-heading text-[clamp(12rem,40vw,34rem)] font-extrabold text-violeta/8 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-4%] right-[-6%]">
             SUBIR
           </span>
-          <span className="absolute font-heading text-[clamp(6rem,18vw,16rem)] font-extrabold text-coral/3 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[3%] left-[-4%] rotate-8">
+          <span className="absolute font-heading text-[clamp(6rem,18vw,16rem)] font-extrabold text-coral/6 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[3%] left-[-4%] rotate-8">
             +FOTOS
           </span>
-          <span className="absolute font-heading text-[clamp(3rem,10vw,8rem)] font-extrabold text-white/3 leading-none tracking-[-0.08em] select-none pointer-events-none top-[35%] left-[25%] -rotate-12">
+          <span className="absolute font-heading text-[clamp(3rem,10vw,8rem)] font-extrabold text-white/6 leading-none tracking-[-0.08em] select-none pointer-events-none top-[35%] left-[25%] -rotate-12">
             MEMORIA
           </span>
 
-          <SolidBox className="w-16 h-16 bg-coral/45 left-[3%] top-[8%] z-30 rotate-15" />
-          <SolidRing className="w-32 h-32 border-violeta/25 right-[-4%] top-[6%] z-30" />
-          <SolidTri className="w-20 h-20 bg-coral/25 left-[58%] top-[14%] z-30 rotate-35" />
-          <SolidDot className="w-9 h-9 bg-violeta/50 left-[12%] top-[55%] z-30" />
-          <SolidLine className="w-52 h-0.75 bg-coral/35 right-[5%] top-[52%] z-30 rotate-2" />
-          <SolidDot className="w-7 h-7 bg-coral/60 right-[18%] bottom-[20%] z-30" />
-          <SolidBox className="w-11 h-11 bg-violeta/40 left-[48%] bottom-[12%] z-30 rotate-[-25deg]" />
-          <SolidRing className="w-20 h-20 border-coral/35 left-[6%] bottom-[6%] z-30" />
-          <SolidLine className="w-40 h-0.75 bg-violeta/25 left-[25%] top-[75%] z-30 -rotate-3" />
-          <SolidTri className="w-14 h-14 bg-coral-oscuro/25 right-[30%] bottom-[8%] z-30 rotate-60" />
-          <SolidRing className="w-14 h-14 border-white/20 left-[38%] top-[40%] z-30" />
-          <SolidDot className="w-5 h-5 bg-white/40 right-[8%] top-[38%] z-30" />
+          <SolidBox className="w-16 h-16 bg-coral/80 left-[3%] top-[8%] z-30 rotate-15" />
+          <SolidRing className="w-32 h-32 border-violeta/50 right-[-4%] top-[6%] z-30" />
+          <SolidTri className="w-20 h-20 bg-coral/50 left-[58%] top-[14%] z-30 rotate-35" />
+          <SolidDot className="w-9 h-9 bg-violeta/90 left-[12%] top-[55%] z-30" />
+          <SolidLine className="w-52 h-0.75 bg-coral/70 right-[5%] top-[52%] z-30 rotate-2" />
+          <SolidDot className="w-7 h-7 bg-coral/90 right-[18%] bottom-[20%] z-30" />
+          <SolidBox className="w-11 h-11 bg-violeta/70 left-[48%] bottom-[12%] z-30 rotate-[-25deg]" />
+          <SolidRing className="w-20 h-20 border-coral/70 left-[6%] bottom-[6%] z-30" />
+          <SolidLine className="w-40 h-0.75 bg-violeta/50 left-[25%] top-[75%] z-30 -rotate-3" />
+          <SolidTri className="w-14 h-14 bg-coral-oscuro/50 right-[30%] bottom-[8%] z-30 rotate-60" />
+          <SolidRing className="w-14 h-14 border-white/40 left-[38%] top-[40%] z-30" />
+          <SolidDot className="w-5 h-5 bg-white/70 right-[8%] top-[38%] z-30" />
 
           <div className="relative z-10 w-full max-w-5xl mx-auto">
             {showCode ? (
@@ -254,7 +254,7 @@ export default function Upload() {
                         <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-3">
                           {previews.map((src, i) => (
                             <div key={i} className="relative group aspect-square overflow-hidden border border-violeta/10">
-                              <img src={src} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                              <img src={src} alt="Foto subida por el usuario" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                               <button onClick={() => removeFile(i)}
                                 className="absolute top-1 right-1 bg-coral text-white text-[10px] px-2 py-0.5 cursor-pointer hover:bg-coral/80 transition-colors opacity-0 group-hover:opacity-100">
                                 &#10005;

@@ -49,10 +49,10 @@ describe('SEO', () => {
   it('sets article published time', () => {
     render(
       <HelmetProvider>
-        <SEO title="Test" description="Desc" publishedAt="2026-06-01" type="article" />
+        <SEO title="Test" description="Desc" publishedAt="2027-06-01" type="article" />
       </HelmetProvider>
     )
     const time = document.querySelector('meta[property="article:published_time"]')
-    expect(time?.getAttribute('content')).toBe('2026-06-01')
+    expect(time?.getAttribute('content')).toBe('2027-06-01')
   })
 })

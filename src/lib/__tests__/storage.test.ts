@@ -6,10 +6,9 @@ vi.mock('../persistence', () => ({
   removeItem: vi.fn(),
 }))
 
-// Re-export barrel — only test that it exports expected keys
-describe('storage (barrel)', () => {
+describe('services barrel', () => {
   it('re-exports from services without error', async () => {
-    const mod = await import('../storage')
+    const mod = await import('../../services')
     expect(mod).toBeDefined()
     expect(typeof mod.unlockAlbum).toBe('function')
     expect(typeof mod.getPhotos).toBe('function')

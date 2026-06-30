@@ -69,15 +69,15 @@ export default function HamburgerNav() {
           animate={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' }}
           transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-50 bg-violeta flex flex-col items-center justify-center">
-          <div className="absolute inset-0 bg-coral/8"
+          <div className="absolute inset-0 bg-coral/15"
             style={{ clipPath: 'polygon(65% 0, 100% 0, 80% 100%, 45% 100%)' }} />
-          <div className="absolute inset-0 bg-white/3"
+          <div className="absolute inset-0 bg-white/12"
             style={{ clipPath: 'polygon(0 30%, 25% 0, 45% 100%, 20% 100%)' }} />
 
-          <SolidDot className="w-5 h-5 bg-coral/55 left-[12%] top-[15%] z-30" />
-          <SolidBox className="w-7 h-7 bg-white/8 right-[8%] top-[10%] z-30 rotate-25" />
-          <SolidDot className="w-3 h-3 bg-white/20 right-[20%] bottom-[25%] z-30" />
-          <SolidBox className="w-5 h-5 bg-coral/40 left-[45%] bottom-[15%] z-30 rotate-40" />
+          <SolidDot className="w-5 h-5 bg-coral/70 left-[12%] top-[15%] z-30" />
+          <SolidBox className="w-7 h-7 bg-white/15 right-[8%] top-[10%] z-30 rotate-25" />
+          <SolidDot className="w-3 h-3 bg-white/35 right-[20%] bottom-[25%] z-30" />
+          <SolidBox className="w-5 h-5 bg-coral/55 left-[45%] bottom-[15%] z-30 rotate-40" />
 
           <button
             onClick={() => setOpen(false)}

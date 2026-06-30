@@ -5,7 +5,7 @@ import {
   getPassInfo, setPassName, getPassPhoto, setPassPhoto,
   getMessages, addMessage, deleteMessage,
   getPassStats, getPhotos, getPassPin, setPassPin,
-} from '../../lib/storage'
+} from '../../services'
 import type { PassInfo, WallMessage, UploadedPhoto } from '../../types'
 import type { PassStats } from '../../services/stats'
 

@@ -6,7 +6,7 @@ import StoriesFeed from '../components/StoriesFeed'
 import Footer from '../sections/Footer'
 import SEO from '../components/SEO'
 import { SolidBox, SolidDot, SolidLine, SolidRing, SolidTri } from '../components/Solids'
-import { getPhotos, isAlbumUnlocked, lockAlbum, authenticatePass, authenticatePassWithPin } from '../lib/storage'
+import { getPhotos, isAlbumUnlocked, lockAlbum, authenticatePassWithPin } from '../services/album'
 import { getAllReactions, getUserReactions, toggleReaction } from '../services/reactions'
 import { subscribeToNewPhotos } from '../services/realtime'
 import type { UploadedPhoto, ReactionType, PhotoReactionCount } from '../types'
@@ -17,16 +17,16 @@ import { GallerySkeleton } from '../components/Skeleton'
 const publicPhotos = [
   { src: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80', rotate: '1deg', clip: '', obj: 'center' },
   { src: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80', rotate: '-2deg', clip: 'polygon(0 0, 100% 5%, 95% 95%, 0 100%)', obj: 'center 30%' },
-  { src: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&q=80', rotate: '2deg', clip: 'polygon(5% 0, 100% 0, 95% 100%, 0 95%)', obj: 'center 20%' },
+  { src: 'https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?w=600&q=80', rotate: '2deg', clip: 'polygon(5% 0, 100% 0, 95% 100%, 0 95%)', obj: 'center 20%' },
   { src: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=600&q=80', rotate: '-1.5deg', clip: '', obj: 'center' },
   { src: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&q=80', rotate: '1deg', clip: 'polygon(0 2%, 100% 0, 100% 100%, 0 98%)', obj: 'center 60%' },
-  { src: 'https://images.unsplash.com/photo-1429962714451-bb934ecec4ec?w=600&q=80', rotate: '-1deg', clip: '', obj: 'center 40%' },
+  { src: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=600&q=80', rotate: '-1deg', clip: '', obj: 'center 40%' },
   { src: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80', rotate: '2.5deg', clip: 'polygon(0 0, 100% 3%, 100% 97%, 0 100%)', obj: 'center' },
-  { src: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80', rotate: '-2deg', clip: 'polygon(3% 0, 100% 0, 97% 100%, 0 100%)', obj: 'center 70%' },
-  { src: 'https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=600&q=80', rotate: '0.5deg', clip: '', obj: 'center' },
+  { src: 'https://images.unsplash.com/photo-1453090927415-5f45085b65c0?w=600&q=80', rotate: '-2deg', clip: 'polygon(3% 0, 100% 0, 97% 100%, 0 100%)', obj: 'center 70%' },
+  { src: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80', rotate: '0.5deg', clip: '', obj: 'center' },
   { src: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&q=80', rotate: '-1deg', clip: 'polygon(0 3%, 100% 0, 100% 97%, 0 100%)', obj: 'center' },
   { src: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80', rotate: '1.5deg', clip: '', obj: 'center 30%' },
-  { src: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=600&q=80', rotate: '-0.5deg', clip: 'polygon(0 0, 100% 2%, 95% 98%, 0 100%)', obj: 'center' },
+  { src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80', rotate: '-0.5deg', clip: 'polygon(0 0, 100% 2%, 95% 98%, 0 100%)', obj: 'center' },
 ]
 
 type Tab = 'publico' | 'privado'
@@ -118,12 +118,7 @@ export default function Gallery() {
 
   const handleUnlock = async () => {
     setPassLoading(true)
-    let ok = false
-    if (pinInput.trim()) {
-      ok = await authenticatePassWithPin(passInput, pinInput.trim())
-    } else {
-      ok = await authenticatePass(passInput)
-    }
+    const ok = await authenticatePassWithPin(passInput, pinInput.trim())
     setPassLoading(false)
     if (ok) {
       setUnlocked(true)
@@ -141,42 +136,42 @@ export default function Gallery() {
     <div className="flex flex-col min-h-svh bg-arena">
       <SEO
         title="Galería"
-        description="Fotos y momentos de Vettonia 2026. Sube tus fotos y descubre las mejores instantáneas del festival."
+        description="Fotos y momentos de Vettonia 2027. Sube tus fotos y descubre las mejores instantáneas del festival."
         path="/gallery"
       />
       <HamburgerNav />
       <div className="flex-1">
         <section className="px-5 pt-20 pb-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-coral/4"
+          <div className="absolute inset-0 bg-coral/15"
             style={{ clipPath: 'polygon(0 0, 25% 0, 40% 100%, 15% 100%)' }} />
-          <div className="absolute inset-0 bg-violeta/4"
+          <div className="absolute inset-0 bg-violeta/12"
             style={{ clipPath: 'polygon(80% 0, 100% 0, 95% 100%, 60% 100%)' }} />
-          <div className="absolute inset-0 bg-violeta-claro/3"
+          <div className="absolute inset-0 bg-violeta-claro/10"
             style={{ clipPath: 'polygon(40% 0, 55% 0, 50% 100%, 35% 100%)' }} />
 
-          <div className="absolute inset-0 opacity-[0.03]"
+          <div className="absolute inset-0 opacity-[0.08]"
             style={{
               backgroundImage: 'radial-gradient(circle, #e85d6f 1px, transparent 1px)',
               backgroundSize: '28px 28px',
             }} />
 
-          <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/3 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-2%] left-[-3%]">
+          <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/6 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-2%] left-[-3%]">
             FOTOS
           </span>
-          <span className="absolute font-heading text-[clamp(5rem,18vw,15rem)] font-extrabold text-coral/2 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[5%] right-[-4%] rotate-12">
+          <span className="absolute font-heading text-[clamp(5rem,18vw,15rem)] font-extrabold text-coral/5 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[5%] right-[-4%] rotate-12">
             LO NUESTRO
           </span>
 
-          <SolidBox className="w-16 h-16 bg-coral/45 left-[4%] top-[4%] z-30 rotate-12" />
-          <SolidRing className="w-36 h-36 border-violeta/20 right-[-4%] top-[2%] z-30" />
-          <SolidDot className="w-10 h-10 bg-violeta/40 left-[32%] top-[26%] z-30" />
-          <SolidLine className="w-56 h-0.75 bg-coral/35 right-[6%] top-[42%] z-30 rotate-1" />
-          <SolidTri className="w-18 h-18 bg-coral/30 left-[55%] top-[10%] z-30 rotate-25" />
-          <SolidRing className="w-22 h-22 border-coral/25 right-[4%] top-[60%] z-30" />
-          <SolidBox className="w-14 h-14 bg-violeta/35 right-[22%] bottom-[20%] z-30 rotate-50" />
-          <SolidLine className="w-36 h-0.75 bg-violeta/25 left-[5%] top-[65%] z-30 -rotate-2" />
-          <SolidDot className="w-8 h-8 bg-coral/50 left-[8%] bottom-[8%] z-30" />
-          <SolidBox className="w-8 h-8 bg-violeta/40 left-[45%] bottom-[5%] z-30 rotate-30" />
+          <SolidBox className="w-20 h-20 bg-coral/60 left-[4%] top-[4%] z-30 rotate-12" />
+          <SolidRing className="w-44 h-44 border-violeta/30 right-[-4%] top-[2%] z-30" />
+          <SolidDot className="w-12 h-12 bg-violeta/55 left-[32%] top-[26%] z-30" />
+          <SolidLine className="w-64 h-1 bg-coral/45 right-[6%] top-[42%] z-30 rotate-1" />
+          <SolidTri className="w-20 h-20 bg-coral/45 left-[55%] top-[10%] z-30 rotate-25" />
+          <SolidRing className="w-28 h-28 border-coral/40 right-[4%] top-[60%] z-30" />
+          <SolidBox className="w-16 h-16 bg-violeta/50 right-[22%] bottom-[20%] z-30 rotate-50" />
+          <SolidLine className="w-44 h-1 bg-violeta/35 left-[5%] top-[65%] z-30 -rotate-2" />
+          <SolidDot className="w-10 h-10 bg-coral/65 left-[8%] bottom-[8%] z-30" />
+          <SolidBox className="w-10 h-10 bg-violeta/55 left-[45%] bottom-[5%] z-30 rotate-30" />
 
           <div className="relative z-10 max-w-5xl mx-auto">
             <h1 className="font-heading text-violeta text-[clamp(3rem,8vw,6rem)] font-extrabold leading-none tracking-[-0.08em] [text-shadow:5px_5px_0_#e85d6f]">
@@ -225,7 +220,7 @@ export default function Gallery() {
                       style={{ transform: `rotate(${p.rotate})`, clipPath: p.clip || undefined }}>
                       <img
                         src={p.src}
-                        alt=""
+                        alt="Foto del festival"
                         loading="lazy"
                         decoding="async"
                         className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
@@ -285,7 +280,7 @@ export default function Gallery() {
                     </Link>
                   </div>
                 ) : (
-                  <div className="mt-4 -mx-5 sm:-mx-0">
+                  <div className="mt-4 -mx-5 sm:mx-0">
                     <StoriesFeed
                       photos={uploaded}
                       userReactions={userReactions}
@@ -343,7 +338,7 @@ export default function Gallery() {
               <input type="password" value={pinInput} onChange={(e) => { setPinInput(e.target.value); setPassError(false) }}
                 onKeyDown={(e) => e.key === 'Enter' && !passLoading && handleUnlock()}
                 className="font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-[0.3em] placeholder:text-black/30 transition-colors border-violeta/20 focus:border-coral/50"
-                placeholder="PIN (opcional)" />
+                placeholder="PIN" />
               {passError && (
                 <p className="font-mono text-coral text-[8px] tracking-[0.2em] uppercase mt-2 text-center animate-pulse">Datos incorrectos</p>
               )}

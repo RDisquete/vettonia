@@ -25,7 +25,7 @@ export async function getAlerts(userId: string): Promise<Alert[]> {
         setItem(ALERTS_KEY, mapped)
         return mapped
       }
-    } catch {}
+    } catch (e) { console.warn('[alerts] getAlerts select', e) }
   }
   const all = getItem<Alert[]>(ALERTS_KEY, [])
   return all.filter(a => a.userId === userId)
@@ -61,7 +61,7 @@ export async function addAlert(
         setItem(ALERTS_KEY, all)
         return alert
       }
-    } catch {}
+    } catch (e) { console.warn('[alerts] addAlert insert', e) }
   }
 
   const all = getItem<Alert[]>(ALERTS_KEY, [])
@@ -74,7 +74,7 @@ export async function markAlertRead(id: string): Promise<void> {
   if (HAS_SUPABASE && supabase) {
     try {
       await supabase.from('alerts').update({ read: true }).eq('id', id)
-    } catch {}
+    } catch (e) { console.warn('[alerts] markAlertRead update', e) }
   }
   const all = getItem<Alert[]>(ALERTS_KEY, [])
   const alert = all.find(a => a.id === id)
@@ -88,7 +88,7 @@ export async function deleteAlert(id: string): Promise<void> {
   if (HAS_SUPABASE && supabase) {
     try {
       await supabase.from('alerts').delete().eq('id', id)
-    } catch {}
+    } catch (e) { console.warn('[alerts] deleteAlert delete', e) }
   }
   const all = getItem<Alert[]>(ALERTS_KEY, []).filter(a => a.id !== id)
   setItem(ALERTS_KEY, all)

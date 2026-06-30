@@ -20,7 +20,7 @@ export function setItem<T>(key: string, value: T): void {
 export function removeItem(key: string): void {
   try {
     localStorage.removeItem(STORAGE_PREFIX + key)
-  } catch {}
+      } catch (e) { console.warn('[persistence] localStorage remove error', e) }
 }
 
 export function getRaw(key: string): string | null {

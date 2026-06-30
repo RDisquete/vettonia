@@ -26,12 +26,12 @@ describe('getPassStats (localStorage fallback)', () => {
       { id: '3', dataUrl: 'u3', caption: '', author: 'Alice', createdAt: '', status: 'approved' },
     ]))
     localStorage.setItem('vettonia_liked_photos', JSON.stringify(['1', '2']))
-    localStorage.setItem('vettonia_pass_info', JSON.stringify({ name: 'Test', number: 'VET-000001ABC', createdAt: '2026-01-15' }))
+    localStorage.setItem('vettonia_pass_info', JSON.stringify({ name: 'Test', number: 'VET-000001ABC', createdAt: '2027-01-15' }))
 
     const stats = await getPassStats()
     expect(stats.photosUploaded).toBe(3)
     expect(stats.totalLikes).toBe(2)
     expect(stats.uniqueAuthors).toBe(2)
-    expect(stats.joinDate).toBe('2026-01-15')
+    expect(stats.joinDate).toBe('2027-01-15')
   })
 })

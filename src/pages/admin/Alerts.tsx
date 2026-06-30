@@ -28,9 +28,9 @@ function saveAlerts(alerts: Alert[]) {
 }
 
 const defaults: Alert[] = [
-  { id: '1', title: 'TORMENTA', desc: 'Pinta mal el viernes por la tarde. Mejor prepararse.', type: 'warning', active: true, createdAt: '2026-06-01' },
-  { id: '2', title: 'CAMBIO DE HORARIO', desc: 'El Escenario B abre 30 min más tarde el sábado.', type: 'info', active: true, createdAt: '2026-06-05' },
-  { id: '3', title: 'AGOTADO', desc: 'Los abonos de día para el domingo vuelan. Quedan pocos.', type: 'warning', active: false, createdAt: '2026-06-10' },
+  { id: '1', title: 'TORMENTA', desc: 'Pinta mal el viernes por la tarde. Mejor prepararse.', type: 'warning', active: true, createdAt: '2027-06-01' },
+  { id: '2', title: 'CAMBIO DE HORARIO', desc: 'El Escenario B abre 30 min más tarde el sábado.', type: 'info', active: true, createdAt: '2027-06-05' },
+  { id: '3', title: 'AGOTADO', desc: 'Los abonos de día para el domingo vuelan. Quedan pocos.', type: 'warning', active: false, createdAt: '2027-06-10' },
 ]
 
 export default function Alerts() {

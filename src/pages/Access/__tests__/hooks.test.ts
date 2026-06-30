@@ -2,8 +2,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { useAccess, usePass } from '../hooks'
 
-vi.mock('../../../lib/storage', () => ({
-  unlockAlbum: vi.fn((code: string) => code.toUpperCase() === 'VETTONIA'),
+vi.mock('../../../services', () => ({
+  unlockAlbum: vi.fn((code: string) => code.toUpperCase() === 'V4CC3SS25'),
   isAlbumUnlocked: vi.fn(() => false),
   lockAlbum: vi.fn(),
   getPassInfo: vi.fn(() => Promise.resolve({ name: '', number: '', createdAt: '' })),
@@ -36,7 +36,7 @@ describe('useAccess', () => {
 
   it('unlocks with correct code', () => {
     const { result } = renderHook(() => useAccess())
-    act(() => { result.current.setCode('VETTONIA') })
+    act(() => { result.current.setCode('V4CC3SS25') })
     act(() => { result.current.handleSubmit() })
     expect(result.current.unlocked).toBe(true)
     expect(result.current.codeError).toBe(false)

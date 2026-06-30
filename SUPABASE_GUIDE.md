@@ -114,7 +114,7 @@ create policy "Delete by id" on alerts for delete using (true);
 
 -- Actualización (WITH CHECK necesario para upsert funcione con anon key)
 create policy "Update by id" on passes for update using (true) with check (true);
-create policy "Update by id" on photos for update using (true);
+create policy "Update by id" on photos for update using (true) with check (true);
 ```
 
 ## Paso 5: Crear bucket de Storage
@@ -346,7 +346,8 @@ Esta tabla almacena los textos editables del homepage (Hero y Manifiesto). Cada 
 | page | key | value |
 |------|-----|-------|
 | hero | title1 | Vett |
-| hero | dates | 14 · 15 · 16 |
+| hero | dates | 8 · 9 · 10 |
+| hero | month | octubre |
 | manifiesto | line1 | ESTO NO ES |
 | manifiesto | subtext | Tres días sin cobertura... |
 

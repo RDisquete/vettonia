@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const FESTIVAL = new Date('2026-08-14T18:00:00+02:00')
+const FESTIVAL = new Date('2027-10-08T18:00:00+02:00')
 
 function calc() {
   const diff = FESTIVAL.getTime() - Date.now()

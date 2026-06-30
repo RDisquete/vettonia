@@ -37,7 +37,7 @@ export default function ReminderManager() {
 
         const minutesUntil = getMinutesUntil(artist.time)
         if (minutesUntil > 0 && minutesUntil <= WINDOW_MINUTES) {
-          new Notification('Vettonia 2026', {
+          new Notification('Vettonia 2027', {
             body: `${artist.name} empieza en ${Math.round(minutesUntil)} min en ${artist.stage}`,
             icon: '/vettonia-logo.png',
             tag: artist.slug,

@@ -66,7 +66,7 @@ export default function ContentManage() {
         { key: 'line1', label: 'Línea 1', hint: 'Ej. "ESTO NO ES"' },
         { key: 'line2', label: 'Línea 2', hint: 'Ej. "UN FESTIVAL."' },
         { key: 'line3', label: 'Línea 3', hint: 'Ej. "ES UN PLAN."' },
-        { key: 'line4', label: 'Línea 4', hint: 'Ej. "EXTREMADURA 2026"' },
+        { key: 'line4', label: 'Línea 4', hint: 'Ej. "EXTREMADURA 2027"' },
         { key: 'subtext', label: 'Texto descriptivo', hint: 'Párrafo bajo el título' },
         { key: 'stat1', label: 'Estadística 1', hint: 'Ej. "3"' },
         { key: 'stat1Label', label: 'Etiqueta estadística 1', hint: 'Ej. "Escenarios"' },

@@ -18,23 +18,23 @@ const tabs: { key: Tab; label: string }[] = [
 export default function PassHeader({ tab, onTabChange, onLogout }: Props) {
   return (
     <section className="relative overflow-hidden px-5 pt-20 pb-0">
-      <div className="absolute inset-0 bg-coral/4"
+      <div className="absolute inset-0 bg-coral/12"
         style={{ clipPath: 'polygon(0 0, 30% 0, 50% 100%, 0 100%)' }} />
-      <div className="absolute inset-0 bg-violeta/5"
+      <div className="absolute inset-0 bg-violeta/15"
         style={{ clipPath: 'polygon(70% 0, 100% 0, 100% 100%, 50% 100%)' }} />
-      <div className="absolute inset-0 opacity-[0.03]"
+      <div className="absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage: 'radial-gradient(circle, #e85d6f 1px, transparent 1px)',
           backgroundSize: '28px 28px',
         }} />
 
-      <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/3 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-4%] left-[-3%]">
+      <span className="absolute font-heading text-[clamp(10rem,35vw,30rem)] font-extrabold text-violeta/6 leading-none tracking-[-0.08em] select-none pointer-events-none top-[-4%] left-[-3%]">
         PASE
       </span>
 
-      <SolidDot className="w-8 h-8 bg-coral/40 right-[6%] top-[8%] z-30" />
-      <SolidBox className="w-12 h-12 bg-violeta/25 left-[8%] top-[12%] z-30 rotate-20" />
-      <SolidRing className="w-24 h-24 border-coral/20 right-[3%] top-[20%] z-30" />
+      <SolidDot className="w-8 h-8 bg-coral/70 right-[6%] top-[8%] z-30" />
+      <SolidBox className="w-12 h-12 bg-violeta/45 left-[8%] top-[12%] z-30 rotate-20" />
+      <SolidRing className="w-24 h-24 border-coral/40 right-[3%] top-[20%] z-30" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         <div className="flex items-center justify-between gap-4 flex-wrap">

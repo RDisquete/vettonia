@@ -5,7 +5,7 @@ import Countdown from '../Countdown'
 describe('Countdown', () => {
   beforeEach(() => {
     vi.useFakeTimers()
-    vi.setSystemTime(new Date('2026-06-01T12:00:00'))
+    vi.setSystemTime(new Date('2027-09-01T12:00:00'))
   })
 
   afterEach(() => {
@@ -21,7 +21,7 @@ describe('Countdown', () => {
   })
 
   it('returns null when festival is over', () => {
-    vi.setSystemTime(new Date('2026-08-20T12:00:00'))
+    vi.setSystemTime(new Date('2027-10-20T12:00:00'))
     const { container } = render(<Countdown />)
     expect(container.innerHTML).toBe('')
   })

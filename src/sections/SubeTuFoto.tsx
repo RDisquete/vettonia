@@ -20,33 +20,33 @@ export default function SubeTuFoto() {
         style={{ clipPath: 'polygon(70% 0, 100% 0, 85% 100%, 50% 100%)' }} />
       <div className="absolute inset-0 bg-violeta/10"
         style={{ clipPath: 'polygon(0 40%, 20% 20%, 35% 80%, 0 100%)' }} />
-      <div className="absolute inset-0 bg-violeta-claro/6"
+      <div className="absolute inset-0 bg-violeta-claro/12"
         style={{ clipPath: 'polygon(40% 0, 55% 0, 50% 100%, 35% 100%)' }} />
 
-      <div className="absolute inset-0 opacity-[0.04]"
+      <div className="absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage: 'radial-gradient(circle, #e85d6f 1px, transparent 1px)',
           backgroundSize: '30px 30px',
         }} />
 
-      <span className="absolute font-heading text-[clamp(12rem,40vw,34rem)] font-extrabold text-white/4 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-10%] right-[-6%] rotate-15">
+      <span className="absolute font-heading text-[clamp(12rem,40vw,34rem)] font-extrabold text-white/8 leading-none tracking-[-0.08em] select-none pointer-events-none bottom-[-10%] right-[-6%] rotate-15">
         SUBIR
       </span>
-      <span className="absolute font-heading text-[clamp(6rem,18vw,15rem)] font-extrabold text-coral/4 leading-none tracking-[-0.08em] select-none pointer-events-none top-[3%] left-[-4%] -rotate-8">
+      <span className="absolute font-heading text-[clamp(6rem,18vw,15rem)] font-extrabold text-coral/8 leading-none tracking-[-0.08em] select-none pointer-events-none top-[3%] left-[-4%] -rotate-8">
         +FOTOS
       </span>
 
-      <SolidBox className="w-24 h-24 bg-white/20 left-[6%] top-[6%] z-30 rotate-25" />
-      <SolidRing className="w-48 h-48 border-white/20 right-[-12%] top-[-10%] z-30" />
-      <SolidDot className="w-12 h-12 bg-coral/60 left-[2%] top-[48%] z-30" />
-      <SolidLine className="w-64 h-1 bg-white/25 right-[8%] top-[52%] z-30 rotate-2" />
-      <SolidTri className="w-28 h-28 bg-white/12 left-[52%] top-[8%] z-30 rotate-40" />
-      <SolidBox className="w-14 h-14 bg-white/15 right-[15%] bottom-[15%] z-30 rotate-[-35deg]" />
-      <SolidRing className="w-32 h-32 border-coral/45 left-[32%] bottom-[2%] z-30" />
-      <SolidDot className="w-8 h-8 bg-white/60 left-[25%] top-[20%] z-30" />
-      <SolidLine className="w-48 h-0.75 bg-coral-oscuro/30 left-[5%] top-[68%] z-30 -rotate-3" />
-      <SolidRing className="w-20 h-20 border-white/25 right-[30%] top-[58%] z-30" />
-      <SolidDot className="w-6 h-6 bg-coral/50 right-[20%] top-[30%] z-30" />
+      <SolidBox className="w-24 h-24 bg-white/35 left-[6%] top-[6%] z-30 rotate-25" />
+      <SolidRing className="w-48 h-48 border-white/35 right-[-12%] top-[-10%] z-30" />
+      <SolidDot className="w-12 h-12 bg-coral/85 left-[2%] top-[48%] z-30" />
+      <SolidLine className="w-64 h-1 bg-white/45 right-[8%] top-[52%] z-30 rotate-2" />
+      <SolidTri className="w-28 h-28 bg-white/20 left-[52%] top-[8%] z-30 rotate-40" />
+      <SolidBox className="w-14 h-14 bg-white/25 right-[15%] bottom-[15%] z-30 rotate-[-35deg]" />
+      <SolidRing className="w-32 h-32 border-coral/75 left-[32%] bottom-[2%] z-30" />
+      <SolidDot className="w-8 h-8 bg-white/85 left-[25%] top-[20%] z-30" />
+      <SolidLine className="w-48 h-0.75 bg-coral-oscuro/50 left-[5%] top-[68%] z-30 -rotate-3" />
+      <SolidRing className="w-20 h-20 border-white/40 right-[30%] top-[58%] z-30" />
+      <SolidDot className="w-6 h-6 bg-coral/80 right-[20%] top-[30%] z-30" />
 
       <div className="relative z-10 w-full px-5 py-16 sm:py-20">
         <Reveal as="pop">

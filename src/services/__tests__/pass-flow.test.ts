@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { nextPassNumber, setPassName, getPassPin, setPassPin, verifyPassPin } from '../pass'
 
+const HASH_REGEX = /^[a-f0-9]{64}$/
+
 vi.mock('../env', () => ({
   HAS_SUPABASE: false,
   supabase: null,
@@ -54,15 +56,19 @@ describe('pass flow integration', () => {
   })
 
   describe('setPassPin / getPassPin', () => {
-    it('stores a PIN in localStorage', async () => {
+    it('stores a hashed PIN in localStorage', async () => {
       await setPassPin('1234')
-      expect(getPassPin()).toBe('1234')
+      const stored = getPassPin()
+      expect(stored).toMatch(HASH_REGEX)
+      expect(stored).not.toBe('1234')
     })
 
-    it('overwrites the existing PIN', async () => {
+    it('overwrites the existing PIN with a new hash', async () => {
       await setPassPin('0000')
       await setPassPin('5678')
-      expect(getPassPin()).toBe('5678')
+      const stored = getPassPin()
+      expect(stored).toMatch(HASH_REGEX)
+      expect(stored).not.toBe('5678')
     })
 
     it('returns null when no PIN is set', () => {
@@ -100,7 +106,9 @@ describe('pass flow integration', () => {
       expect(info.name).toBe('María García')
 
       await setPassPin('7890')
-      expect(getPassPin()).toBe('7890')
+      const stored = getPassPin()
+      expect(stored).toMatch(HASH_REGEX)
+      expect(stored).not.toBe('7890')
 
       const verified = await verifyPassPin(passNumber, '7890')
       expect(verified).toBe(true)

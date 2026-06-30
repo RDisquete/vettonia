@@ -43,7 +43,7 @@ export default function Access() {
     try {
       const dataUrl = await toPng(cardRef.current, { quality: 1, pixelRatio: 3, skipFonts: true })
       const link = document.createElement('a')
-      link.download = `Vettonia2026-${pass.passInfo.number || 'pase'}.png`
+      link.download = `Vettonia2027-${pass.passInfo.number || 'pase'}.png`
       link.href = dataUrl
       link.click()
     } catch {
@@ -59,13 +59,15 @@ export default function Access() {
     try {
       const blob = await toBlob(cardRef.current, { quality: 0.9, pixelRatio: 2, skipFonts: true })
       if (!blob) return
-      const file = new File([blob], `Vettonia2026-${pass.passInfo.number || 'pase'}.png`, { type: 'image/png' })
+      const file = new File([blob], `Vettonia2027-${pass.passInfo.number || 'pase'}.png`, { type: 'image/png' })
 
       if (navigator.canShare?.({ files: [file] })) {
-        await navigator.share({ files: [file], title: 'Mi pase Vettonia 2026', text: '¡Este es mi pase!' })
-      } else {
+        await navigator.share({ files: [file], title: 'Mi pase Vettonia 2027', text: '¡Este es mi pase!' })
+      } else if (navigator.clipboard?.write) {
         await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
         toast.success('Pase copiado al portapapeles')
+      } else {
+        toast.error('Compartir no está disponible en este navegador')
       }
     } catch {
       toast.error('No se pudo compartir el pase')
@@ -86,7 +88,7 @@ export default function Access() {
   if (!unlocked) {
     return (
       <div className="flex flex-col min-h-svh bg-arena">
-        <SEO title="Acceso" description="Accede al área privada de Vettonia 2026 con tu pase." noindex />
+        <SEO title="Acceso" description="Accede al área privada de Vettonia 2027 con tu pase." noindex />
         <HamburgerNav />
         <LockedView
           code={code}
@@ -102,7 +104,7 @@ export default function Access() {
 
   return (
     <div className="flex flex-col min-h-svh bg-arena">
-      <SEO title="Mi pase" description="Tu pase personal de Vettonia 2026." noindex />
+      <SEO title="Mi pase" description="Tu pase personal de Vettonia 2027." noindex />
       <HamburgerNav />
       <div className="flex-1">
         <PassHeader tab={tab} onTabChange={setTab} onLogout={handleLogout} />

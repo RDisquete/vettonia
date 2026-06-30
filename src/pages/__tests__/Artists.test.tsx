@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
 vi.mock('../../components/HamburgerNav', () => ({ default: () => <nav>Nav</nav> }))
@@ -25,8 +25,10 @@ vi.mock('../../data/lineup', () => ({
 import Artists from '../Artists'
 
 describe('Artists', () => {
-  it('renders artist grid', () => {
+  it('renders artist grid', async () => {
     render(<MemoryRouter><Artists /></MemoryRouter>)
-    expect(screen.getAllByText('ARTISTAS').length).toBeGreaterThanOrEqual(1)
+    await waitFor(() => {
+      expect(screen.getAllByText('ARTISTAS').length).toBeGreaterThanOrEqual(1)
+    })
   })
 })

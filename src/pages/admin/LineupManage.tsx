@@ -174,7 +174,7 @@ export default function LineupManage() {
               </div>
             )}
             {!adding && (
-              <img src={form.image || artists.find(a => a.slug === selected)?.image || ''} alt="" loading="lazy" decoding="async"
+              <img src={form.image || artists.find(a => a.slug === selected)?.image || ''} alt="Foto del artista" loading="lazy" decoding="async"
                 className="w-20 h-28 object-cover shrink-0 border border-violeta/10" />
             )}
 
@@ -271,7 +271,7 @@ export default function LineupManage() {
             <div key={a.slug}
               className={`flex items-center gap-3 px-4 py-2.5 border-b border-violeta/5 last:border-0 hover:bg-violeta/5 transition-colors ${selected === a.slug || adding ? 'bg-violeta/10' : ''} ${preview && !a.published ? 'opacity-30' : ''}`}>
               <span className="font-mono text-black/30 text-[7px] w-5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
-              <img src={a.image} alt="" loading="lazy" decoding="async" className="w-7 h-9 object-cover shrink-0 border border-violeta/5" />
+              <img src={a.image} alt={`Foto de ${a.name}`} loading="lazy" decoding="async" className="w-7 h-9 object-cover shrink-0 border border-violeta/5" />
               <span className="font-heading text-violeta text-xs font-bold flex-1 truncate">{a.name}</span>
               <span className={`font-mono text-[6px] tracking-[0.15em] uppercase px-1.5 py-0.5 border ${a.published ? 'border-oliva/30 text-oliva' : 'border-coral/30 text-coral'}`}>
                 {a.published ? 'Publicado' : 'Borrador'}

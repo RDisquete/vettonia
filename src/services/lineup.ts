@@ -16,7 +16,7 @@ function getOverrides(): OverrideMap {
 }
 
 function saveOverrides(overrides: OverrideMap) {
-  try { localStorage.setItem('vettonia_' + OVERRIDES_KEY, JSON.stringify(overrides)) } catch {}
+  try { localStorage.setItem('vettonia_' + OVERRIDES_KEY, JSON.stringify(overrides)) } catch (e) { console.warn('[lineup] localStorage set', e) }
 }
 
 function staticWithOverrides(): Stage[] {
@@ -37,7 +37,7 @@ export async function getPublishedArtists(): Promise<Artist[]> {
         .order('stage')
         .order('time')
       if (data && data.length > 0) return data as Artist[]
-    } catch {}
+    } catch (e) { console.warn('[lineup] getPublishedArtists select', e) }
   }
   return staticWithOverrides().flatMap(s => s.artists)
 }
@@ -68,7 +68,7 @@ export async function getAllArtists(): Promise<(Artist & { published: boolean; u
           published: a.published, updatedAt: a.updated_at,
         }))
       }
-    } catch {}
+    } catch (e) { console.warn('[lineup] getAllArtists select', e) }
   }
   const overrides = getOverrides()
   const staticMapped = staticArtists.map(a => ({
@@ -123,7 +123,7 @@ export async function upsertArtist(artist: Artist & { published?: boolean }): Pr
         .from('lineup_artists')
         .upsert(payload, { onConflict: 'slug' })
       if (!error) return
-    } catch {}
+    } catch (e) { console.warn('[lineup] upsertArtist upsert', e) }
   }
   const overrides = getOverrides()
   const existing = staticArtists.find(a => a.slug === artist.slug)
@@ -156,7 +156,7 @@ export async function publishArtist(slug: string, publish: boolean): Promise<voi
         .update({ published: publish, updated_at: new Date().toISOString() })
         .eq('slug', slug)
       return
-    } catch {}
+    } catch (e) { console.warn('[lineup] publishArtist update', e) }
   }
   const overrides = getOverrides()
   overrides[slug] = { ...(overrides[slug] || {}), published: publish } as Partial<Artist>
@@ -172,7 +172,7 @@ export async function publishAllArtists(): Promise<number> {
         .eq('published', false)
         .select('slug')
       return data?.length ?? 0
-    } catch {}
+    } catch (e) { console.warn('[lineup] publishAllArtists upsert', e) }
   }
   const all = await getAllArtists()
   const unpublished = all.filter(a => !a.published)
@@ -204,7 +204,7 @@ export async function seedFromStatic(): Promise<number> {
           updated_at: new Date().toISOString(),
         }, { onConflict: 'slug', ignoreDuplicates: true })
       if (!error) count++
-    } catch {}
+    } catch (e) { console.warn('[lineup] seedFromStatic upsert', e) }
   }
   return count
 }
@@ -219,7 +219,7 @@ export async function getArtistBySlugFromService(slug: string): Promise<Artist |
         .eq('published', true)
         .maybeSingle()
       if (data) return data as Artist
-    } catch {}
+    } catch (e) { console.warn('[lineup] getArtistBySlug select', e) }
   }
   const a = staticArtists.find(x => x.slug === slug)
   const overrides = getOverrides()

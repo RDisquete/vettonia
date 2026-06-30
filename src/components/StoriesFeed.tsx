@@ -84,7 +84,7 @@ function StoryCard({ photo, userReactions, reactionCounts, onToggleReaction, isN
           <button
             onClick={async () => {
               const blob = await (await fetch(photo.dataUrl)).blob()
-              if (blob) shareImage(blob, `vettonia-${photo.id}.jpg`, photo.caption || 'Foto en Vettonia 2026')
+              if (blob) shareImage(blob, `vettonia-${photo.id}.jpg`, photo.caption || 'Foto en Vettonia 2027')
             }}
             className="ml-auto opacity-60 hover:opacity-100 transition-all cursor-pointer"
             aria-label="Compartir foto"

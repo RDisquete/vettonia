@@ -6,7 +6,7 @@ const VOTES_KEY = 'poll_votes'
 const RESULTS_KEY = 'poll_results'
 const POLLS_KEY = 'polls'
 
-const MEJOR_ACTUACION_POLL_ID = 'mejor-actuacion-2026'
+const MEJOR_ACTUACION_POLL_ID = 'mejor-actuacion-2027'
 
 const DEFAULT_OPTIONS: PollOption[] = [
   { id: 'sor', pollId: MEJOR_ACTUACION_POLL_ID, text: 'SÔR' },

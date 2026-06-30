@@ -4,4 +4,4 @@ Disallow: /access
 Disallow: /upload
 Disallow: /admin
 
-Sitemap: https://vettoniafestival.com/sitemap.xml
+Sitemap: https://vettonia.netlify.app/sitemap.xml
