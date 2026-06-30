@@ -86,7 +86,7 @@ export default function Acceso() {
             <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed mt-3 max-w-md">
               20.000 almas, un valle y tres días de locura. Para acceder a la zona privada, introduce tu clave personal.
               <span className="block mt-2 text-xs italic opacity-60">
-                (Usa "V4CC3SS25" para acceder a la demo)
+                (Usa "VET2027" para acceder a la demo)
               </span>
               ¿Sin código? <Link to="/contact" className="text-coral underline underline-offset-4 hover:text-violeta transition-colors">escríbenos</Link>.
             </p>
