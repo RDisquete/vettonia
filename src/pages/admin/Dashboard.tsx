@@ -134,13 +134,13 @@ export default function Dashboard() {
           className="border-l-4 border-t-2 border-r-2 border-b-2 border-violeta/30 pl-6 pr-4 pt-4 pb-4 hover:bg-violeta hover:border-violeta transition-all group"
           style={{ clipPath: 'polygon(3% 0, 100% 0, 97% 100%, 0 100%)' }}>
           <span className="font-heading text-violeta text-lg font-extrabold tracking-[-0.04em] block group-hover:text-white">Galería</span>
-          <span className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase group-hover:text-white/60">Gestionar fotos</span>
+          <span className="font-mono text-texto-suave text-[7px] tracking-[0.3em] uppercase group-hover:text-white/60">Gestionar fotos</span>
         </Link>
         <Link to="/admin/lineup"
           className="border-l-4 border-t-2 border-r-2 border-b-2 border-coral/30 pl-6 pr-4 pt-4 pb-4 hover:bg-coral hover:border-coral transition-all group"
           style={{ clipPath: 'polygon(3% 0, 100% 0, 97% 100%, 0 100%)' }}>
           <span className="font-heading text-coral text-lg font-extrabold tracking-[-0.04em] block group-hover:text-white">Cartel</span>
-          <span className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase group-hover:text-white/60">{artistCount} artistas</span>
+          <span className="font-mono text-texto-suave text-[7px] tracking-[0.3em] uppercase group-hover:text-white/60">{artistCount} artistas</span>
         </Link>
       </div>
     </div>

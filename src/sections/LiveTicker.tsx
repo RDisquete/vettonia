@@ -35,7 +35,7 @@ export default function LiveTicker() {
         <div className="overflow-hidden flex-1 flex items-center px-4">
           <div className="flex gap-16 animate-marquee">
             {[...items, ...items].map((item, i) => (
-              <span key={i} className="font-mono text-white/50 text-[10px] tracking-[0.2em] uppercase whitespace-nowrap shrink-0">
+              <span key={i} className="font-mono text-white/70 text-[10px] tracking-[0.2em] uppercase whitespace-nowrap shrink-0">
                 {item}
               </span>
             ))}

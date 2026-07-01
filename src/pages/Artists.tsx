@@ -106,7 +106,7 @@ export default function Artists() {
                 style={{ clipPath: 'polygon(0 0, 100% 0, 97% 100%, 0 100%)' }}
               >
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-black/70 text-[9px] tracking-[0.4em] uppercase group-hover:text-white transition-colors">Filtrar</span>
+                  <span className="font-mono text-texto text-[9px] tracking-[0.4em] uppercase group-hover:text-white transition-colors">Filtrar</span>
                   <span className={`font-heading text-sm font-bold tracking-[-0.02em] ${genre ? 'text-violeta group-hover:text-white' : 'text-texto group-hover:text-white/70'}`}>
                     {genre || 'Todas las categorías'}
                   </span>

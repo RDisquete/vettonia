@@ -103,7 +103,7 @@ const GalleryModal = memo(function GalleryModal({ images, initialIndex = 0, open
         DESCARGAR
       </a>
 
-      <span className="absolute bottom-6 font-mono text-white/40 text-[9px] tracking-[0.3em] uppercase" aria-live="polite" aria-atomic="true">
+      <span className="absolute bottom-6 font-mono text-white/60 text-[9px] tracking-[0.3em] uppercase" aria-live="polite" aria-atomic="true">
         {current + 1} / {images.length}
       </span>
     </div>

@@ -9,12 +9,11 @@ vi.mock('framer-motion', () => ({
 }))
 
 describe('Footer', () => {
-  it('renders VETTONIA text and the credit link', () => {
+  it('renders VETTONIA text and the credit line', () => {
     render(<MemoryRouter><Footer /></MemoryRouter>)
     expect(screen.getByText('VETTONIA')).toBeInTheDocument()
-    const link = screen.getByText(/@rdisquete/)
-    expect(link).toBeInTheDocument()
-    expect(link.closest('a')).toHaveAttribute('href', 'https://rdisquete.es')
+    expect(screen.getByText(/rdisquete/)).toBeInTheDocument()
+    expect(screen.getByText(/rdisquete/).closest('a')).toHaveAttribute('href', 'https://rdisquete.es')
   })
 
   it('renders the logo image', () => {

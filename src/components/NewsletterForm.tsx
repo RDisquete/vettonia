@@ -31,7 +31,7 @@ export default function NewsletterForm() {
     <form onSubmit={handleSubmit} className="flex gap-2">
       <input type="email" name="email" value={email} onChange={(e) => { setEmail(e.target.value); setError(false) }}
         required placeholder="tu@email.com"
-        className="font-ui text-white/80 text-xs bg-white/10 border border-white/20 px-3 py-2 outline-none flex-1 min-w-0 placeholder:text-white/30 focus:border-coral/50 transition-colors"
+        className="font-ui text-white/95 text-xs bg-white/20 border border-white/30 px-3 py-2 outline-none flex-1 min-w-0 placeholder:text-white/50 focus:border-coral/50 transition-colors"
       />
       <button type="submit"
         className="font-mono text-[8px] tracking-[0.2em] uppercase px-3 py-2 bg-coral text-white hover:bg-coral/80 transition-colors cursor-pointer shrink-0">

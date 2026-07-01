@@ -204,7 +204,7 @@ export default function MapPage() {
             <div className="mt-8 space-y-8">
               <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 lg:gap-12 items-start">
                 {/* Leaflet map */}
-                <div className="aspect-4/3 border-2 border-black/10 relative overflow-hidden rounded-none z-20">
+                <div className="aspect-4/3 border-2 border-black/20 relative overflow-hidden rounded-none z-20">
                   <MapContainer center={CENTER} zoom={15} scrollWheelZoom={true}
                     className="w-full h-full" zoomControl={false}>
                     <TileLayer
@@ -280,7 +280,7 @@ export default function MapPage() {
                           <span className="font-mono text-texto text-[9px] tracking-widest block mt-1">{coords}</span>
                         </div>
                         <button onClick={handleReset}
-                          className="font-mono text-black/40 text-[8px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer w-full text-center block">
+                          className="font-mono text-texto-suave text-[8px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer w-full text-center block">
                           Buscar de nuevo
                         </button>
                       </div>
@@ -293,7 +293,7 @@ export default function MapPage() {
                       <span className="font-mono text-coral text-[8px] tracking-[0.4em] uppercase block">Destino</span>
                       <span className="font-heading text-violeta text-xl font-extrabold tracking-[-0.04em] block mt-1">{destinoSel.icon} {destinoSel.label}</span>
                       <div className="mt-2 space-y-1">
-                        <span className="font-mono text-black/70 text-[9px] tracking-[0.2em] uppercase block">📍 {distanciaTexto(dist)}</span>
+                        <span className="font-mono text-texto text-[9px] tracking-[0.2em] uppercase block">📍 {distanciaTexto(dist)}</span>
                         <span className="font-mono text-coral text-[9px] tracking-[0.2em] uppercase block">⏱ {tiempoTexto(dist)}</span>
                       </div>
                     </div>
@@ -314,7 +314,7 @@ export default function MapPage() {
                       <div className="mt-2 space-y-1.5 max-h-40 overflow-y-auto">
                         {stageData.artists.slice(0, 8).map((a) => (
                           <div key={a.slug} className="flex justify-between items-center border-b border-violeta/5 pb-1">
-                            <span className="font-mono text-black/70 text-[8px] tracking-wider truncate mr-2">{a.name}</span>
+                            <span className="font-mono text-texto text-[8px] tracking-wider truncate mr-2">{a.name}</span>
                             <span className="font-mono text-coral text-[7px] tracking-[0.2em] uppercase shrink-0">{a.time}</span>
                           </div>
                         ))}
@@ -344,11 +344,11 @@ export default function MapPage() {
                         style={{ clipPath: 'polygon(0 0, 100% 0, 97% 100%, 3% 100%)' }}
                       >
                         <span className="text-lg block">{d.icon}</span>
-                        <span className={`font-mono text-[8px] tracking-[0.2em] uppercase block mt-1 ${isSelected ? 'text-coral' : 'text-black/70'}`}>
+                        <span className={`font-mono text-[8px] tracking-[0.2em] uppercase block mt-1 ${isSelected ? 'text-coral' : 'text-texto'}`}>
                           {d.label}
                         </span>
                         {d.desc && (
-                          <span className="font-ui text-black/40 text-[10px] block mt-0.5">{d.desc}</span>
+                          <span className="font-ui text-texto-suave text-[10px] block mt-0.5">{d.desc}</span>
                         )}
                         {isSelected && located && dist !== null && (
                           <span className="font-mono text-coral text-[7px] tracking-[0.15em] uppercase block mt-1">

@@ -246,11 +246,11 @@ export default function Gallery() {
                   </p>
                   <div className="flex gap-3 shrink-0 mt-1">
                     <button onClick={() => { Object.keys(localStorage).filter(k => k.startsWith('vettonia_') && k !== 'vettonia_album_unlocked' && k !== 'vettonia_auth_pass').forEach(k => localStorage.removeItem(k)); loadPhotos(); toast.success('Caché limpiada') }}
-                      className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer">
+                      className="font-mono text-texto-suave text-[7px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer">
                       Limpiar caché
                     </button>
                     <button onClick={lockAlbum}
-                      className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer">
+                      className="font-mono text-texto-suave text-[7px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer">
                       Cerrar álbum
                     </button>
                   </div>
@@ -331,13 +331,13 @@ export default function Gallery() {
             <div className="mt-4 space-y-3">
               <input ref={codeInputRef} type="text" value={passInput} onChange={(e) => { setPassInput(e.target.value); setPassError(false) }}
                 onKeyDown={(e) => e.key === 'Enter' && !passLoading && handleUnlock()}
-                className={`font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-[0.3em] uppercase placeholder:text-black/30 transition-colors ${
+                className={`font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-[0.3em] uppercase placeholder:text-texto-suave/50 transition-colors ${
                   passError ? 'border-coral' : 'border-violeta/20 focus:border-coral/50'
                 }`}
                 placeholder="VET-000000" />
               <input type="password" value={pinInput} onChange={(e) => { setPinInput(e.target.value); setPassError(false) }}
                 onKeyDown={(e) => e.key === 'Enter' && !passLoading && handleUnlock()}
-                className="font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-[0.3em] placeholder:text-black/30 transition-colors border-violeta/20 focus:border-coral/50"
+                className="font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-[0.3em] placeholder:text-texto-suave/50 transition-colors border-violeta/20 focus:border-coral/50"
                 placeholder="PIN" />
               {passError && (
                 <p className="font-mono text-coral text-[8px] tracking-[0.2em] uppercase mt-2 text-center animate-pulse">Datos incorrectos</p>

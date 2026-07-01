@@ -137,8 +137,8 @@ export default function GalleryManage() {
                   <span className={`font-mono text-[6px] tracking-[0.15em] uppercase px-1 py-0.5 border ${(photo.status || 'approved') === 'approved' ? 'border-oliva/30 text-oliva' : photo.status === 'pending' ? 'border-arena/40 text-arena' : 'border-coral/30 text-coral'}`}>
                     {photo.status || 'approved'}
                   </span>
-                  <span className="text-black/20 text-[8px]">·</span>
-                  <span className="font-mono text-black/40 text-[7px] tracking-[0.15em]">
+                  <span className="text-texto-suave/50 text-[8px]">·</span>
+                  <span className="font-mono text-texto-suave text-[7px] tracking-[0.15em]">
                     {new Date(photo.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </span>
                 </div>
@@ -166,13 +166,13 @@ export default function GalleryManage() {
                       Sí, quitar
                     </button>
                     <button onClick={() => setConfirmId(null)}
-                      className="font-mono text-black/40 text-[8px] tracking-[0.2em] uppercase underline underline-offset-4 hover:text-violeta transition-colors cursor-pointer">
+                      className="font-mono text-texto-suave text-[8px] tracking-[0.2em] uppercase underline underline-offset-4 hover:text-violeta transition-colors cursor-pointer">
                       No
                     </button>
                   </div>
                 ) : (
                   <button onClick={() => setConfirmId(photo.id)}
-                    className="font-mono text-black/40 text-[8px] tracking-[0.2em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer">
+                    className="font-mono text-texto-suave text-[8px] tracking-[0.2em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer">
                     Quitar
                   </button>
                 )}

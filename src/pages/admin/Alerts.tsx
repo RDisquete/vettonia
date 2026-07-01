@@ -108,10 +108,10 @@ export default function Alerts() {
             {editing ? 'Editar alerta' : 'Nueva alerta'}
           </p>
           <input value={title} onChange={(e) => setTitle(e.target.value)}
-            className="font-heading text-violeta text-sm font-bold tracking-[-0.02em] bg-transparent border-2 border-violeta/20 px-3 py-2 w-full outline-none placeholder:text-black/30 mb-3"
+            className="font-heading text-violeta text-sm font-bold tracking-[-0.02em] bg-transparent border-2 border-violeta/20 px-3 py-2 w-full outline-none placeholder:text-texto-suave/50 mb-3"
             placeholder="Título (ej: TORMENTA)" />
           <textarea value={desc} onChange={(e) => setDesc(e.target.value)}
-            className="font-ui text-texto text-sm bg-transparent border-2 border-violeta/20 px-3 py-2 w-full outline-none placeholder:text-black/30 resize-none h-16"
+            className="font-ui text-texto text-sm bg-transparent border-2 border-violeta/20 px-3 py-2 w-full outline-none placeholder:text-texto-suave/50 resize-none h-16"
             placeholder="Descripción de la alerta..." />
           <div className="flex gap-3 mt-3">
             {(['info', 'warning', 'emergency'] as AlertType[]).map(t => (
@@ -130,7 +130,7 @@ export default function Alerts() {
               {editing ? 'Guardar' : 'Crear'}
             </button>
             <button onClick={() => { setShowForm(false); setEditing(null) }}
-              className="font-mono text-black/40 text-[8px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-violeta transition-colors cursor-pointer">
+              className="font-mono text-texto-suave text-[8px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-violeta transition-colors cursor-pointer">
               Cancelar
             </button>
           </div>
@@ -155,22 +155,22 @@ export default function Alerts() {
                     a.type === 'warning' ? 'bg-amber-100 text-amber-700' :
                     'bg-violeta/10 text-violeta'
                   }`}>{a.type}</span>
-                  <span className={`font-mono text-[7px] tracking-[0.3em] uppercase ${a.active ? 'text-coral' : 'text-black/40'}`}>
+                  <span className={`font-mono text-[7px] tracking-[0.3em] uppercase ${a.active ? 'text-coral' : 'text-texto-suave'}`}>
                     {a.active ? 'Activa' : 'Inactiva'}
                   </span>
                 </div>
                 <p className="font-ui text-texto text-xs mt-1">{a.desc}</p>
-                <span className="font-mono text-black/30 text-[6px] tracking-[0.15em] mt-1 block">
+                <span className="font-mono text-texto-suave/70 text-[6px] tracking-[0.15em] mt-1 block">
                   {new Date(a.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short', year: 'numeric' })}
                 </span>
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <button onClick={() => handleToggle(a.id)}
-                  className={`font-mono text-[7px] tracking-[0.2em] uppercase cursor-pointer transition-colors ${a.active ? 'text-black/40 hover:text-violeta' : 'text-coral hover:text-coral'}`}>
+                  className={`font-mono text-[7px] tracking-[0.2em] uppercase cursor-pointer transition-colors ${a.active ? 'text-texto-suave hover:text-violeta' : 'text-coral hover:text-coral'}`}>
                   {a.active ? 'Desactivar' : 'Activar'}
                 </button>
                 <button onClick={() => handleEdit(a)}
-                  className="font-mono text-black/30 text-[7px] tracking-[0.2em] uppercase underline underline-offset-4 hover:text-violeta transition-colors cursor-pointer">
+                  className="font-mono text-texto-suave/70 text-[7px] tracking-[0.2em] uppercase underline underline-offset-4 hover:text-violeta transition-colors cursor-pointer">
                   Editar
                 </button>
                 <button onClick={() => handleDelete(a.id)}

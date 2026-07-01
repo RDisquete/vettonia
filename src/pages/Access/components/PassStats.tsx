@@ -105,7 +105,7 @@ export default function PassStats({ stats, messageCount, photos, loading }: Prop
           <span className="font-heading text-violeta text-lg font-extrabold tracking-[-0.04em] block">
             Tus fotos recientes
           </span>
-          <span className="font-mono text-black/40 text-[8px] tracking-[0.3em] uppercase block mb-4">Las últimas que has soltado en el álbum</span>
+          <span className="font-mono text-texto-suave text-[8px] tracking-[0.3em] uppercase block mb-4">Las últimas que has soltado en el álbum</span>
           {photos.length === 0 ? (
             <EmptyState
               icon=":)"

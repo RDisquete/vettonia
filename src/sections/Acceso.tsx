@@ -83,7 +83,7 @@ export default function Acceso() {
             <p className="font-heading text-violeta text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.85] tracking-[-0.06em]">
               TIENES <span className="text-coral">PASE</span>?
             </p>
-            <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed mt-3 max-w-md">
+            <p className="font-ui text-texto text-sm sm:text-base leading-relaxed mt-3 max-w-md">
               20.000 almas, un valle y tres días de locura. Para acceder a la zona privada, introduce tu clave personal.
               <span className="block mt-2 text-xs italic opacity-60">
                 (Usa "VET2027" para acceder a la demo)
@@ -118,7 +118,7 @@ export default function Acceso() {
                   <input type="text" value={code}
                     onChange={(e) => { setCode(e.target.value); setError(false) }}
                     onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                    className={`font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none placeholder:text-black/40 text-center tracking-[0.3em] transition-colors uppercase ${error ? 'border-coral' : 'border-violeta/20 focus:border-coral/50'}`}
+                    className={`font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none placeholder:text-texto-suave/60 text-center tracking-[0.3em] transition-colors uppercase ${error ? 'border-coral' : 'border-violeta/20 focus:border-coral/50'}`}
                     placeholder="TU CÓDIGO SECRETO"
                   />
                   {error && (

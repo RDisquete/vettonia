@@ -53,16 +53,16 @@ export default function MessageWall({ messages, msgText, msgAuthor, loading, onM
         <div className="border-2 border-violeta/10 p-5 bg-white/70 mb-8"
              style={{ clipPath: 'polygon(0 0, 100% 0, 99% 100%, 1% 100%)' }}>
           <textarea value={msgText} onChange={(e) => onMsgTextChange(e.target.value)}
-            className="font-mono text-violeta text-sm bg-transparent border-2 border-violeta/10 px-4 py-3 w-full outline-none placeholder:text-black/40 resize-none h-20 focus:border-coral/50 transition-colors"
+            className="font-mono text-violeta text-sm bg-transparent border-2 border-violeta/10 px-4 py-3 w-full outline-none placeholder:text-texto-suave/60 resize-none h-20 focus:border-coral/50 transition-colors"
             placeholder="Escribe algo. Una sensación, un grito, una dedicatoria..." />
           <div className="flex items-center gap-3 mt-3 flex-wrap">
             <input value={msgAuthor} onChange={(e) => onMsgAuthorChange(e.target.value)}
-              className="font-mono text-violeta text-xs bg-transparent border-2 border-violeta/10 px-3 py-2 outline-none placeholder:text-black/40 tracking-[0.2em] uppercase focus:border-coral/50 transition-colors flex-1 min-w-30"
+              className="font-mono text-violeta text-xs bg-transparent border-2 border-violeta/10 px-3 py-2 outline-none placeholder:text-texto-suave/60 tracking-[0.2em] uppercase focus:border-coral/50 transition-colors flex-1 min-w-30"
               placeholder="Tu nombre o apodo" />
             <button onClick={onAdd} disabled={!msgText.trim()}
               className={`border-l-4 border-t-2 border-r-2 border-b-2 px-6 py-2 cursor-pointer transition-all group ${
                 !msgText.trim()
-                  ? 'border-black/10 text-black/30 pointer-events-none'
+                  ? 'border-black/20 text-texto-suave/70 pointer-events-none'
                   : 'border-violeta/40 hover:bg-violeta hover:border-violeta'
               }`}
               style={{ clipPath: 'polygon(4% 0, 100% 0, 96% 100%, 0 100%)' }}>
@@ -97,13 +97,13 @@ export default function MessageWall({ messages, msgText, msgAuthor, loading, onM
                 <div className="flex items-center justify-between mt-2">
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-coral text-[9px] tracking-[0.2em] uppercase">{msg.author}</span>
-                    <span className="text-black/30 text-[5px]">·</span>
-                    <span className="font-mono text-black/40 text-[7px] tracking-widest">
+                    <span className="text-texto-suave/70 text-[5px]">·</span>
+                    <span className="font-mono text-texto-suave text-[7px] tracking-widest">
                       {new Date(msg.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
                   <button onClick={() => onDelete(msg.id)}
-                    className="font-mono text-black/20 text-[7px] tracking-[0.2em] uppercase hover:text-coral transition-colors cursor-pointer opacity-0 group-hover:opacity-100">
+                    className="font-mono text-texto-suave/50 text-[7px] tracking-[0.2em] uppercase hover:text-coral transition-colors cursor-pointer opacity-0 group-hover:opacity-100">
                     Borrar
                   </button>
                 </div>

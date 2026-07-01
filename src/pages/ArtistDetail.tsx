@@ -101,7 +101,7 @@ export default function ArtistDetail() {
                     {artist.name}
                   </h1>
 
-                  <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed mt-6 max-w-lg">
+                  <p className="font-ui text-texto text-sm sm:text-base leading-relaxed mt-6 max-w-lg">
                     {artist.bio}
                   </p>
                 </div>

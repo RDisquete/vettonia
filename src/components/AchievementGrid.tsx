@@ -30,7 +30,7 @@ export default function AchievementGrid() {
         <h2 className="font-heading text-violeta text-3xl font-extrabold leading-[0.9] tracking-tighter mt-2">
           Tus insignias
         </h2>
-        <p className="font-mono text-[10px] tracking-[0.3em] text-black/40 mt-3">
+        <p className="font-mono text-[10px] tracking-[0.3em] text-texto-suave mt-3">
           {unlockedCount}/{achievements.length} desbloqueados
         </p>
       </motion.div>
@@ -63,12 +63,12 @@ export default function AchievementGrid() {
                 {a.icon}
               </span>
               <span className={`font-heading text-xs font-bold tracking-[-0.01em] leading-tight ${
-                a.unlocked ? 'text-violeta' : 'text-black/40'
+                a.unlocked ? 'text-violeta' : 'text-texto-suave'
               }`}>
                 {a.label}
               </span>
               <span className={`font-mono text-[7px] tracking-[0.2em] uppercase mt-1 ${
-                a.unlocked ? 'text-black/50' : 'text-black/30'
+                a.unlocked ? 'text-texto' : 'text-texto-suave/70'
               }`}>
                 {a.description}
               </span>
@@ -83,7 +83,7 @@ export default function AchievementGrid() {
                     />
                   </div>
                   <span className={`font-mono text-[7px] tracking-[0.15em] mt-1 block ${
-                    a.unlocked ? 'text-violeta/60' : 'text-black/30'
+                    a.unlocked ? 'text-texto' : 'text-texto-suave/70'
                   }`}>
                     {Math.min(a.progress, a.target)}/{a.target}
                   </span>

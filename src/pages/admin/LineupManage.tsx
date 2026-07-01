@@ -163,7 +163,7 @@ export default function LineupManage() {
       {(selected || adding) && (
         <div className="border-2 border-coral/30 p-4 mb-6 bg-white relative">
           <button onClick={closeEditor}
-            className="absolute top-2 right-2 font-mono text-black/30 text-[8px] cursor-pointer hover:text-coral transition-colors">
+            className="absolute top-2 right-2 font-mono text-texto-suave/70 text-[8px] cursor-pointer hover:text-coral transition-colors">
             ✕
           </button>
 
@@ -181,7 +181,7 @@ export default function LineupManage() {
             <div className="flex-1 space-y-3 min-w-0">
               {fields.map(({ key, label, multiline, type }) => (
                 <div key={key}>
-                  <label className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase block mb-1">{label}</label>
+                  <label className="font-mono text-texto-suave text-[7px] tracking-[0.3em] uppercase block mb-1">{label}</label>
                   {multiline ? (
                     <textarea value={form[key] as string || ''} rows={3}
                       onChange={(e) => { setForm(f => ({ ...f, [key]: e.target.value })); setDirty(true) }}
@@ -222,7 +222,7 @@ export default function LineupManage() {
 
               <div className="flex gap-3 pt-2">
                 <button onClick={handleSave} disabled={!dirty && !adding}
-                  className={`font-mono text-[9px] tracking-[0.3em] uppercase px-6 py-2 border-2 transition-all cursor-pointer ${dirty || adding ? 'border-coral text-coral hover:bg-coral hover:text-white' : 'border-violeta/10 text-black/20'}`}
+                  className={`font-mono text-[9px] tracking-[0.3em] uppercase px-6 py-2 border-2 transition-all cursor-pointer ${dirty || adding ? 'border-coral text-coral hover:bg-coral hover:text-white' : 'border-violeta/10 text-texto-suave/50'}`}
                   style={{ clipPath: 'polygon(4% 0, 100% 0, 96% 100%, 0 100%)' }}>
                   {adding ? 'Crear' : 'Guardar'}
                 </button>
@@ -270,7 +270,7 @@ export default function LineupManage() {
           {filtered.map((a, i) => (
             <div key={a.slug}
               className={`flex items-center gap-3 px-4 py-2.5 border-b border-violeta/5 last:border-0 hover:bg-violeta/5 transition-colors ${selected === a.slug || adding ? 'bg-violeta/10' : ''} ${preview && !a.published ? 'opacity-30' : ''}`}>
-              <span className="font-mono text-black/30 text-[7px] w-5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+              <span className="font-mono text-texto-suave/70 text-[7px] w-5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
               <img src={a.image} alt={`Foto de ${a.name}`} loading="lazy" decoding="async" className="w-7 h-9 object-cover shrink-0 border border-violeta/5" />
               <span className="font-heading text-violeta text-xs font-bold flex-1 truncate">{a.name}</span>
               <span className={`font-mono text-[6px] tracking-[0.15em] uppercase px-1.5 py-0.5 border ${a.published ? 'border-oliva/30 text-oliva' : 'border-coral/30 text-coral'}`}>
@@ -278,7 +278,7 @@ export default function LineupManage() {
               </span>
               <span className="font-mono text-texto-suave text-[7px] tracking-[0.15em] uppercase hidden sm:block">{a.stage}</span>
               <span className="font-mono text-texto text-[8px]">{a.time}</span>
-              <span className="font-mono text-black/40 text-[7px] tracking-widest uppercase hidden md:block">{a.genre}</span>
+              <span className="font-mono text-texto-suave text-[7px] tracking-widest uppercase hidden md:block">{a.genre}</span>
               <div className="flex gap-1 shrink-0">
                 <button onClick={() => openEditor(a.slug)}
                   className="font-mono text-[6px] tracking-[0.15em] uppercase px-2 py-1 border border-violeta/15 hover:border-violeta/40 text-texto hover:text-violeta transition-all cursor-pointer">

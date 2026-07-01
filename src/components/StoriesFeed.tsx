@@ -53,8 +53,8 @@ function StoryCard({ photo, userReactions, reactionCounts, onToggleReaction, isN
         )}
         <div className="flex items-center gap-3 mt-1.5">
           <span className="font-mono text-white/60 text-[8px] tracking-[0.2em] uppercase">{photo.author}</span>
-          <span className="text-white/30 text-[6px]">·</span>
-          <span className="font-mono text-white/30 text-[7px] tracking-[0.15em]">
+          <span className="text-white/50 text-[6px]">·</span>
+          <span className="font-mono text-white/50 text-[7px] tracking-[0.15em]">
             {new Date(photo.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short' })}
           </span>
         </div>

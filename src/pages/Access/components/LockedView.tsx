@@ -61,7 +61,7 @@ export default function LockedView({ code, error, inputRef, onCodeChange, onSubm
                   <h1 className="font-heading text-violeta text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.85] tracking-[-0.06em] mt-4">
                     TU <span className="text-coral">PASE</span>
                   </h1>
-                  <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed mt-3 max-w-md">
+                  <p className="font-ui text-texto text-sm sm:text-base leading-relaxed mt-3 max-w-md">
                     Introduce el código que recibiste en tu email. ¿No tienes?
                     <Link to="/contact" className="text-coral underline underline-offset-4 hover:text-violeta transition-colors ml-1">consigue el tuyo</Link>.
                   </p>
@@ -72,7 +72,7 @@ export default function LockedView({ code, error, inputRef, onCodeChange, onSubm
                       <input ref={inputRef} type="text" value={code}
                         onChange={(e) => onCodeChange(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && onSubmit()}
-                        className={`font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none placeholder:text-black/40 text-center tracking-[0.3em] transition-colors uppercase ${error ? 'border-coral' : 'border-violeta/20 focus:border-coral/50'}`}
+                        className={`font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none placeholder:text-texto-suave/60 text-center tracking-[0.3em] transition-colors uppercase ${error ? 'border-coral' : 'border-violeta/20 focus:border-coral/50'}`}
                         placeholder="TU CÓDIGO SECRETO"
                       />
                       {error && (

@@ -59,7 +59,7 @@ function StageBlock({ stage, si, cfg, favorites, overlaps, onToggleFav, onSelect
           <h2 className="font-heading text-violeta text-2xl sm:text-4xl font-extrabold tracking-[-0.06em] leading-tight">
             {stage.name}
           </h2>
-          <span className="font-mono text-black/40 text-[8px] tracking-[0.3em] uppercase">
+          <span className="font-mono text-texto-suave text-[8px] tracking-[0.3em] uppercase">
             {stage.artists.length} artistas
           </span>
         </div>
@@ -108,7 +108,7 @@ function StageBlock({ stage, si, cfg, favorites, overlaps, onToggleFav, onSelect
                 {a.name}
                 <FavoriteButton isFavorite={favorites.has(a.slug)} onToggle={() => onToggleFav(a.slug)} />
               </span>
-              <span className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase group-hover:text-white/60 transition-colors flex items-center gap-2">
+              <span className="font-mono text-texto-suave text-[7px] tracking-[0.3em] uppercase group-hover:text-white/80 transition-colors flex items-center gap-2">
                 {a.genre}
                 {overlaps.has(a.slug) && (
                   <span className="text-coral/80 text-[6px] tracking-[0.2em] font-bold">⚠ SOLAPAMIENTO</span>
@@ -116,7 +116,7 @@ function StageBlock({ stage, si, cfg, favorites, overlaps, onToggleFav, onSelect
               </span>
             </div>
 
-            <span className="font-mono text-black/20 text-lg sm:text-2xl font-extrabold pr-3 sm:pr-4 group-hover:text-white/30 transition-colors hidden sm:block"
+            <span className="font-mono text-texto-suave/50 text-lg sm:text-2xl font-extrabold pr-3 sm:pr-4 group-hover:text-white/50 transition-colors hidden sm:block"
                   style={{ transform: 'rotate(2deg)' }}>
               {String(i + 1).padStart(2, '0')}
             </span>
@@ -220,7 +220,7 @@ export default function Lineup() {
                     <span key={a.slug} className="font-mono text-texto text-[9px] tracking-[0.15em] flex items-center gap-1">
                       <span className="text-coral">★</span>
                       <span>{a.time}</span>
-                      <span className="text-black/50">{a.stage}</span>
+                      <span className="text-texto">{a.stage}</span>
                       <span className="font-bold">{a.name}</span>
                       {overlaps.has(a.slug) && (
                         <span className="text-coral text-[7px] tracking-[0.2em] font-bold ml-1">⚠</span>
@@ -288,7 +288,7 @@ export default function Lineup() {
 
         <section className="relative px-5 md:px-12 lg:px-20 pb-20">
           <Reveal as="pop">
-            <div className="relative border-l-4 border-t-2 border-r-2 border-b-2 border-white/10 p-6 md:p-10"
+            <div className="relative border-l-4 border-t-2 border-r-2 border-b-2 border-white/20 p-6 md:p-10"
               style={{ clipPath: 'polygon(1.5% 0, 100% 0, 98.5% 100%, 0 100%)' }}>
               <div className="absolute inset-0 bg-linear-to-br from-violeta/5 via-transparent to-coral/5 pointer-events-none" />
               <PollWidget />

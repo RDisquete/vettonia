@@ -99,7 +99,7 @@ export default function Info() {
               {sections.map((section) => (
                 <div key={section.label}>
                   <div className="flex items-center gap-4 mb-8">
-                    <span className="font-mono text-violeta/40 text-[8px] tracking-[0.4em] uppercase">{section.label}</span>
+                    <span className="font-mono text-texto-suave text-[8px] tracking-[0.4em] uppercase">{section.label}</span>
                     <span className="h-px flex-1 bg-violeta/10" />
                   </div>
                   <div className="space-y-8">
@@ -110,7 +110,7 @@ export default function Info() {
                         </span>
                         <div>
                           <p className="font-heading text-violeta text-lg sm:text-xl font-bold tracking-[-0.03em]">{item.q}</p>
-                          <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed mt-2">{item.a}</p>
+                          <p className="font-ui text-texto text-sm sm:text-base leading-relaxed mt-2">{item.a}</p>
                         </div>
                       </div>
                     ))}

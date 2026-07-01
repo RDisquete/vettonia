@@ -13,8 +13,8 @@
   --color-coral-oscuro: #cc4a5c;
   --color-carbón: #1a1a1a;
   --color-piedra: #8a8580;
-  --color-texto: #3a3a3a;
-  --color-texto-suave: #555555;
+  --color-texto: #2a2a2a;
+  --color-texto-suave: #4a4a4a;
 
   --animate-marquee: marquee 30s linear infinite;
 }
@@ -31,8 +31,8 @@ html {
 html.dark {
   --color-arena: #1a1a2e;
   --color-arena-oscuro: #16162a;
-  --color-texto: #e0e0e0;
-  --color-texto-suave: #aaaaaa;
+  --color-texto: #e8e8e8;
+  --color-texto-suave: #c0c0c0;
   --color-carbón: #e0e0e0;
   --color-piedra: #a0a0a0;
 }

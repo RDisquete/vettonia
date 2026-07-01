@@ -18,7 +18,7 @@ export default function PassQR({ passName, passNumber }: PassQRProps) {
       <div className="bg-white p-2 rounded-sm shadow-lg">
         <QRCodeSVG value={qrData} size={96} level="M" />
       </div>
-      <span className="font-mono text-white/50 text-[6px] tracking-[0.4em] uppercase">QR Pass</span>
+      <span className="font-mono text-white/70 text-[6px] tracking-[0.4em] uppercase">QR Pass</span>
     </div>
   )
 }

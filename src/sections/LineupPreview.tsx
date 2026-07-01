@@ -83,10 +83,10 @@ export default function LineupPreview() {
               <p className="font-heading text-white text-6xl sm:text-8xl font-extrabold leading-[0.85] tracking-[-0.08em]">
                 +48
               </p>
-              <p className="font-mono text-white/40 text-[9px] tracking-[0.4em] uppercase mt-2">Artistas</p>
+              <p className="font-mono text-white/60 text-[9px] tracking-[0.4em] uppercase mt-2">Artistas</p>
             </div>
-            <div className="relative z-10">
-              <p className="font-mono text-white/40 text-[9px] tracking-[0.4em] uppercase">3 Escenarios</p>
+            <div>
+              <p className="font-mono text-white/60 text-[9px] tracking-[0.4em] uppercase">3 Escenarios</p>
               <div className="h-px bg-white/10 mt-4" />
               <Link to="/lineup"
                     className="border-l-4 border-t-2 border-r-2 border-b-2 border-white/30 pl-8 pr-5 pt-3 pb-3 mt-4 block hover:bg-white/10 transition-all group"

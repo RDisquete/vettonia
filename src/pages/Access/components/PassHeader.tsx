@@ -45,7 +45,7 @@ export default function PassHeader({ tab, onTabChange, onLogout }: Props) {
             </h1>
           </div>
           <button onClick={onLogout}
-            className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer shrink-0">
+            className="font-mono text-texto-suave text-[7px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-coral transition-colors cursor-pointer shrink-0">
             Cerrar sesión
           </button>
         </div>

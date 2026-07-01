@@ -44,10 +44,10 @@ export default function Mapa() {
             <p className="font-mono text-texto-suave text-[10px] tracking-[0.5em] uppercase mb-4">
               ¿Dónde estás?
             </p>
-            <p className="font-heading text-violeta text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.85] tracking-[-0.06em] max-w-lg drop-shadow-sm">
+            <p className="font-heading text-texto text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.85] tracking-[-0.06em] max-w-lg drop-shadow-sm">
               AQUÍ <span className="text-coral">NADA</span> QUEDA LEJOS.
             </p>
-            <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed mt-4 max-w-md">
+            <p className="font-ui text-texto text-sm sm:text-base leading-relaxed mt-4 max-w-md">
               Dinos dónde estás y te guiamos hasta tu escenario favorito.
               Extremadura es grande, pero el finde es tuyo.
             </p>
@@ -55,7 +55,7 @@ export default function Mapa() {
             <Link to="/map"
                   className="border-l-4 border-t-2 border-r-2 border-b-2 border-violeta/70 pl-10 pr-6 pt-4 pb-4 mt-8 inline-block hover:bg-violeta hover:text-white transition-all group"
                   style={{ clipPath: 'polygon(0 0, 85% 0, 100% 30%, 100% 100%, 0 100%)' }}>
-              <span className="font-mono text-violeta text-[11px] tracking-[0.4em] uppercase group-hover:text-white group-hover:tracking-[0.5em] transition-all">
+              <span className="font-mono text-texto text-[11px] tracking-[0.4em] uppercase group-hover:text-white group-hover:tracking-[0.5em] transition-all">
                 Encuéntrame
               </span>
             </Link>

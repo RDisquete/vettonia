@@ -79,7 +79,7 @@ export default function Contact() {
                 <p className="font-heading text-violeta text-3xl sm:text-4xl font-extrabold tracking-[-0.06em] leading-[1.1]">
                   Queremos saber de ti
                 </p>
-                <p className="font-ui text-black/70 text-sm leading-relaxed">
+                <p className="font-ui text-texto text-sm leading-relaxed">
                   Vettonia no sería lo mismo sin la gente que viene, baila, suda y vuelve. 
                   Si tienes una idea loca, una pregunta, ganas de tocar, o simplemente 
                   quieres contarnos algo, este es el sitio.
@@ -124,7 +124,7 @@ export default function Contact() {
                     name="name"
                     type="text"
                     required
-                    className="font-ui text-violeta text-sm bg-transparent border border-violeta/20 px-3 py-3 w-full outline-none placeholder:text-black/40"
+                    className="font-ui text-violeta text-sm bg-transparent border border-violeta/20 px-3 py-3 w-full outline-none placeholder:text-texto-suave/60"
                     placeholder="Tu nombre"
                   />
                 </div>
@@ -135,7 +135,7 @@ export default function Contact() {
                     name="email"
                     type="email"
                     required
-                    className="font-ui text-violeta text-sm bg-transparent border border-violeta/20 px-3 py-3 w-full outline-none placeholder:text-black/40"
+                    className="font-ui text-violeta text-sm bg-transparent border border-violeta/20 px-3 py-3 w-full outline-none placeholder:text-texto-suave/60"
                     placeholder="tu@email.com"
                   />
                 </div>
@@ -145,7 +145,7 @@ export default function Contact() {
                     id="subject"
                     name="subject"
                     type="text"
-                    className="font-ui text-violeta text-sm bg-transparent border border-violeta/20 px-3 py-3 w-full outline-none placeholder:text-black/40"
+                    className="font-ui text-violeta text-sm bg-transparent border border-violeta/20 px-3 py-3 w-full outline-none placeholder:text-texto-suave/60"
                     placeholder="¿De qué va?"
                   />
                 </div>
@@ -156,7 +156,7 @@ export default function Contact() {
                     name="message"
                     required
                     rows={5}
-                    className="font-ui text-violeta text-sm bg-transparent border border-violeta/20 px-3 py-3 w-full outline-none placeholder:text-black/40 resize-none"
+                    className="font-ui text-violeta text-sm bg-transparent border border-violeta/20 px-3 py-3 w-full outline-none placeholder:text-texto-suave/60 resize-none"
                     placeholder="Cuéntanos..."
                   />
                 </div>

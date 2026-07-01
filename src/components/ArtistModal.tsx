@@ -58,7 +58,7 @@ export default function ArtistModal({ artist, onClose, stage, time, isFavorite, 
                 <FavoriteButton isFavorite={!!isFavorite} onToggle={onToggleFav} size="md" />
               )}
             </div>
-            <p className="font-ui text-black/70 text-sm leading-relaxed mt-3">{artist.bio}</p>
+            <p className="font-ui text-texto text-sm leading-relaxed mt-3">{artist.bio}</p>
           </div>
         </div>
       </div>

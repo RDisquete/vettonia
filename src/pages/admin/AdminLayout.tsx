@@ -48,13 +48,13 @@ function Login({ onLogin }: { onLogin: () => void }) {
           <input ref={emailRef} type="email" value={email}
             onChange={(e) => { setEmail(e.target.value); setError(false) }}
             onKeyDown={(e) => e.key === 'Enter' && !loading && handleSubmit()}
-            className="font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-widest placeholder:text-black/30 transition-colors border-violeta/20 focus:border-coral/50"
+            className="font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-widest placeholder:text-texto-suave/50 transition-colors border-violeta/20 focus:border-coral/50"
             placeholder="EMAIL"
             autoComplete="email" />
           <input type="password" value={password}
             onChange={(e) => { setPassword(e.target.value); setError(false) }}
             onKeyDown={(e) => e.key === 'Enter' && !loading && handleSubmit()}
-            className={`font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-[0.3em] uppercase placeholder:text-black/30 transition-colors mt-3 ${error ? 'border-coral' : 'border-violeta/20 focus:border-coral/50'}`}
+            className={`font-mono text-violeta text-sm bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-[0.3em] uppercase placeholder:text-texto-suave/50 transition-colors mt-3 ${error ? 'border-coral' : 'border-violeta/20 focus:border-coral/50'}`}
             placeholder="CONTRASEÑA"
             autoComplete="current-password" />
           {error && (
@@ -68,7 +68,7 @@ function Login({ onLogin }: { onLogin: () => void }) {
             </span>
           </button>
         </div>
-        <Link to="/" className="font-mono text-black/40 text-[7px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-violeta transition-colors mt-4 block">
+        <Link to="/" className="font-mono text-texto-suave text-[7px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-violeta transition-colors mt-4 block">
           Volver a la web
         </Link>
       </div>
@@ -114,11 +114,11 @@ export default function AdminLayout() {
         <SolidBox className="w-3 h-3 bg-white/15 right-[5%] top-[20%] z-30" />
         <div className="flex items-center gap-4 relative z-10">
           <Link to="/" className="font-mono text-coral text-[8px] tracking-[0.3em] uppercase hover:text-white/60 transition-colors">VETTONIA</Link>
-          <span className="text-white/10 text-[8px]">/</span>
+          <span className="text-white/30 text-[8px]">/</span>
           <span className="font-mono text-coral text-[8px] tracking-[0.3em] uppercase  hover:text-white/60 transition-colors">Admin</span>
         </div>
         <button onClick={handleLogout}
-          className="font-mono text-white/20 text-[7px] tracking-[0.3em] uppercase hover:text-white/40 transition-colors relative z-10 cursor-pointer">
+          className="font-mono text-white/40 text-[7px] tracking-[0.3em] uppercase hover:text-white/60 transition-colors relative z-10 cursor-pointer">
           Cerrar sesión
         </button>
       </div>

@@ -17,10 +17,9 @@ export default function Footer() {
           <span className="font-heading text-white text-sm font-bold tracking-[-0.04em]">VETTONIA</span>
         </Link>
         <div className="text-right">
-          <span className="font-mono text-white/30 text-[7px] tracking-[0.3em] uppercase block">
-            Creado por <a href="https://rdisquete.es" target="_blank" rel="noopener noreferrer" className="text-coral hover:text-white transition-colors">@rdisquete</a>
-          </span>
-          <span className="font-mono text-white/20 text-[6px] tracking-[0.2em] block mt-0.5">© 2027</span>
+          <a href="https://rdisquete.es" target="_blank" rel="noopener noreferrer" className="font-mono text-white/50 text-[7px] tracking-[0.3em] uppercase block hover:text-white transition-colors">
+            Desarrollado por rdisquete
+          </a>
         </div>
       </div>
     </footer>

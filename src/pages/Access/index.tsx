@@ -186,7 +186,7 @@ export default function Access() {
                           <input type="password" value={pass.pinInput}
                             onChange={(e) => pass.setPinInput(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && pass.handleSetPin()}
-                            className="font-mono text-violeta text-sm bg-transparent border-2 border-violeta/20 px-4 py-2 w-full outline-none text-center tracking-[0.3em] placeholder:text-black/30 focus:border-coral/50 transition-colors"
+                            className="font-mono text-violeta text-sm bg-transparent border-2 border-violeta/20 px-4 py-2 w-full outline-none text-center tracking-[0.3em] placeholder:text-texto-suave/50 focus:border-coral/50 transition-colors"
                             placeholder="NUEVO PIN"
                             autoFocus
                             maxLength={10} />

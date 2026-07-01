@@ -100,16 +100,16 @@ const PassCard = forwardRef<HTMLDivElement, Props>(function PassCard({ passPhoto
             </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-sm border-l-4 border-coral pl-4 pr-4 pt-3 pb-3 mt-3">
+          <div className="bg-white/20 backdrop-blur-sm border-l-4 border-coral pl-4 pr-4 pt-3 pb-3 mt-3">
             <div className="flex items-end justify-between">
               <div>
-                <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/60">Titular</span>
+                <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/80">Titular</span>
                 <p className="font-heading text-xl font-extrabold tracking-[-0.04em] leading-tight text-white">
                   {passName || 'Sin nombre'}
                 </p>
               </div>
               <div className="text-right">
-                <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/60">Nº de pase</span>
+                <span className="font-mono text-[8px] tracking-[0.3em] uppercase text-white/80">Nº de pase</span>
                 <p className="font-heading text-base font-bold tracking-[-0.02em] text-white">{passNumber || '---'}</p>
               </div>
             </div>

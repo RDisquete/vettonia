@@ -190,7 +190,7 @@ export default function Upload() {
                   <input type="text" value={code}
                     onChange={(e) => { setCode(e.target.value); setCodeError(false) }}
                     onKeyDown={(e) => e.key === 'Enter' && handleUnlock()}
-                    className={`font-mono text-violeta text-base bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-[0.3em] uppercase placeholder:text-black/30 transition-colors ${codeError ? 'border-coral' : 'border-violeta/20 focus:border-coral/50'}`}
+                    className={`font-mono text-violeta text-base bg-transparent border-2 px-4 py-3 w-full outline-none text-center tracking-[0.3em] uppercase placeholder:text-texto-suave/50 transition-colors ${codeError ? 'border-coral' : 'border-violeta/20 focus:border-coral/50'}`}
                     placeholder="CÓDIGO" />
                   {codeError && (
                     <p className="font-mono text-coral text-[9px] tracking-[0.2em] uppercase mt-3 animate-pulse">Código incorrecto</p>
@@ -200,11 +200,11 @@ export default function Upload() {
                     style={{ clipPath: 'polygon(4% 0, 100% 0, 96% 100%, 0 100%)' }}>
                     <span className="font-mono text-coral text-[11px] tracking-[0.4em] uppercase group-hover:text-white group-hover:tracking-[0.6em] transition-all block">Entrar</span>
                   </button>
-                  <Link to="/gallery" className="font-mono text-black/40 text-[8px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-violeta transition-colors mt-5 block">
+                  <Link to="/gallery" className="font-mono text-texto-suave text-[8px] tracking-[0.3em] uppercase underline underline-offset-4 hover:text-violeta transition-colors mt-5 block">
                     Volver a la galería
                   </Link>
                   <SolidLine className="w-24 h-0.5 bg-coral/30 mx-auto mt-5" />
-                  <p className="font-ui text-black/40 text-xs mt-4 leading-relaxed max-w-64 mx-auto">
+                  <p className="font-ui text-texto-suave text-xs mt-4 leading-relaxed max-w-64 mx-auto">
                     El código lo tienes si has venido de verdad. Si no, busca bien.
                   </p>
                 </div>
@@ -225,11 +225,11 @@ export default function Upload() {
                   </h1>
 
                   <div className="mt-8 border-l-4 border-violeta/30 pl-5 max-w-md">
-                    <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed">
+                    <p className="font-ui text-texto text-sm sm:text-base leading-relaxed">
                       Esto no es un festival al uso. Esto es un plan de tres días sin cobertura,
                       con el polvo en la ropa y la música metida en los huesos.
                     </p>
-                    <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed mt-4">
+                    <p className="font-ui text-texto text-sm sm:text-base leading-relaxed mt-4">
                       Cada foto que subes es un trozo de la historia que estamos escribiendo juntos.
                       El momento que solo tú viste. Esa mirada. Ese baile. Esa locura.
                     </p>
@@ -237,7 +237,7 @@ export default function Upload() {
                       Queremos que este álbum sea tuyo. De todos. Un recuerdo conjunto
                       de tres días que no se olvidan.
                     </p>
-                    <p className="font-ui text-black/70 text-sm sm:text-base leading-relaxed mt-4">
+                    <p className="font-ui text-texto text-sm sm:text-base leading-relaxed mt-4">
                       Así que suelta esas fotos. No las guardes en el carrete.
                       Aquí es donde tienen que estar.
                     </p>
@@ -271,7 +271,7 @@ export default function Upload() {
                       <div onClick={() => inputRef.current?.click()}
                         className="border-2 border-dashed border-violeta/20 p-10 sm:p-14 text-center cursor-pointer hover:border-coral/50 hover:bg-coral/5 transition-all group">
                         <span className="font-heading text-violeta/30 text-5xl block leading-none mb-2 group-hover:scale-110 transition-transform">+</span>
-                        <span className="font-mono text-black/40 text-[9px] tracking-[0.2em] uppercase">Selecciona una o varias fotos</span>
+                        <span className="font-mono text-texto-suave text-[9px] tracking-[0.2em] uppercase">Selecciona una o varias fotos</span>
                       </div>
                     )}
                   </div>
@@ -279,19 +279,19 @@ export default function Upload() {
                   <div>
                     <label className="font-mono text-texto-suave text-[8px] tracking-[0.4em] uppercase block mb-2">Tu nombre</label>
                     <input value={author} onChange={(e) => setAuthor(e.target.value)}
-                      className="font-mono text-violeta text-sm bg-transparent border-2 border-violeta/10 px-3 py-3 w-full outline-none placeholder:text-black/40 tracking-[0.2em] focus:border-coral/50 transition-colors"
+                      className="font-mono text-violeta text-sm bg-transparent border-2 border-violeta/10 px-3 py-3 w-full outline-none placeholder:text-texto-suave/60 tracking-[0.2em] focus:border-coral/50 transition-colors"
                       placeholder="Anónimo" />
                   </div>
 
                   <div>
                     <label className="font-mono text-texto-suave text-[8px] tracking-[0.4em] uppercase block mb-2">Pie de foto (para todas)</label>
                     <textarea value={caption} onChange={(e) => setCaption(e.target.value)}
-                      className="font-mono text-violeta text-sm bg-transparent border-2 border-violeta/10 px-3 py-3 w-full outline-none placeholder:text-black/40 tracking-[0.2em] resize-none h-16 focus:border-coral/50 transition-colors"
+                      className="font-mono text-violeta text-sm bg-transparent border-2 border-violeta/10 px-3 py-3 w-full outline-none placeholder:text-texto-suave/60 tracking-[0.2em] resize-none h-16 focus:border-coral/50 transition-colors"
                       placeholder="El momento, la sensación, lo que sea..." />
                   </div>
 
                   <button onClick={handleSubmit} disabled={files.length === 0 || sending}
-                    className={`border-l-4 border-t-2 border-r-2 border-b-2 w-full text-center transition-all group cursor-pointer ${files.length === 0 || sending ? 'border-black/10 text-black/30 pointer-events-none' : 'border-violeta/30 hover:bg-violeta hover:border-violeta'}`}
+                    className={`border-l-4 border-t-2 border-r-2 border-b-2 w-full text-center transition-all group cursor-pointer ${files.length === 0 || sending ? 'border-black/20 text-texto-suave/70 pointer-events-none' : 'border-violeta/30 hover:bg-violeta hover:border-violeta'}`}
                     style={{ clipPath: 'polygon(4% 0, 100% 0, 96% 100%, 0 100%)' }}
                   >
                     <span className={`font-mono text-[11px] tracking-[0.4em] uppercase py-3 block transition-all ${files.length === 0 || sending ? '' : 'text-violeta group-hover:text-white group-hover:tracking-[0.5em]'}`}>
